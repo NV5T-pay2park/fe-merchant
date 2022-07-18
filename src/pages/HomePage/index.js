@@ -1,45 +1,20 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
+import Navbar from "shared/components/NavBar"
 
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import MKBox from "components/MKBox"
+import MKTypography from "components/MKTypography";
+import MKButton from "components/MKButton";
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
-// Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import routes from "routes"
 
-// Material Kit 2 React examples
-// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import Navbar from "shared/components/NavBar";
-// import DefaultFooter from "examples/Footers/DefaultFooter";
-
-// About Us page sections
-import Information from "pages/AboutUs/sections/Information";
-
-// Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
-
-// Images
 import bgImage from "assets/images/bg3.jpg";
+import Information from "./sections/Information";
 
 
-function AboutUs() {
+function HomePage() {
   return (
     <>
       <Navbar
@@ -54,6 +29,7 @@ function AboutUs() {
         light
         brand="Pay2Park"
       />
+
       <MKBox
         minHeight="70vh"
         maxHeight="80vh"
@@ -164,15 +140,10 @@ function AboutUs() {
         }}
       >
         <Information />
-        {/* <Team /> */}
-        {/* <Featuring /> */}
-        {/* <Newsletter /> */}
       </Card>
-      {/* <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox> */}
+
     </>
-  );
+  )
 }
 
-export default AboutUs;
+export default HomePage;

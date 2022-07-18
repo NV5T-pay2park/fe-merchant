@@ -37,9 +37,10 @@ import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 
 // Material Kit 2 React example components
-// import NavbarDropdown from "examples/Navbars/DefaultNavbar/NavbarDropdown";
+import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
+import DefaultNavbarMobile from "./DefaultNavbarMobile";
 import NavbarDropdown from "shared/components/NavBar/NavbarDropdown";
-import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
+import NavbarMobile from "shared/components/NavBar/NavbarMobile";
 
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
@@ -67,7 +68,7 @@ function DefaultNavbar({
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
 
   useEffect(() => {
-    // A function that sets the display state for the DefaultNavbarMobile.
+    // A function that sets the display state for the NavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
         setMobileView(true);
@@ -589,7 +590,7 @@ function DefaultNavbar({
           px={transparent ? 2 : 0}
         >
           {mobileView && (
-            <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
+            <NavbarMobile routes={routes} open={mobileNavbar} />
           )}
         </MKBox>
       </MKBox>
