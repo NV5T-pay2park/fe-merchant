@@ -1,25 +1,68 @@
-import { useState } from "react";
+// https://github.dev/bezkoder/react-redux-hooks-jwt-auth/blob/master/src/reducers/auth.js
+// https://github1s.com/bezkoder/react-redux-login-example/blob/master/src/slices/auth.js
 
-import { Link } from "react-router-dom";
+// https://www.pluralsight.com/guides/how-to-router-redirect-after-login
+import { useState } from "react";
 
 import routes from "routes";
 
 import Navbar from "shared/components/NavBar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
-
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import MuiLink from "@mui/material/Link";
 
-
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Login() {
+import { useNavigate, Navigate } from "react-router-dom";
+
+import { login } from "redux/authSlice";
+
+export default function Login(props) {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  function handlePhoneOnChange(e) {
+    setPhone(e.target.value);
+  }
+
+  function handleUsernameOnChange(e) {
+    setUsername(e.target.value);
+  }
+
+  function handlePasswordOnChange(e) {
+    setPassword(e.target.value);
+  }
+
+  const handleLogin = () => {
+    setLoading(true);
+    dispatch(login({ phone, username, password }))
+      .unwrap()
+      .then(() => {
+        navigate("/home");
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  // if logged in then redirect
+  if (isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
+
   return (
     <>
       <Navbar
@@ -30,9 +73,8 @@ export default function Login() {
           label: "đăng ký",
           color: "info",
         }}
-        
       />
-      <MKBox 
+      <MKBox
         width="100%"
         height="100vh"
         mx="auto"
@@ -62,7 +104,8 @@ export default function Login() {
                 mx={2}
                 mt={-3}
                 mb={1}
-                p={1}
+                py={3}
+                px={1}
               >
                 <MKTypography
                   variant="h4"
@@ -77,7 +120,6 @@ export default function Login() {
                   variant="overline"
                   color="white"
                   fontWeight="regular"
-                  
                   mt={1}
                 >
                   Sử dụng tài khoản đã đăng ký trên ZaloPay Merchant
@@ -86,18 +128,44 @@ export default function Login() {
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
                   <MKBox mb={2}>
-                    <MKInput type="tel" label="Số điện thoại Merchant Admin" placeholder="0123456789" fullWidth />
+                    <MKInput
+                      type="tel"
+                      label="Số điện thoại Merchant Admin"
+                      placeholder="0123456789"
+                      value={phone}
+                      onChange={(e) => handlePhoneOnChange(e)}
+                      fullWidth
+                    />
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput type="text" label="Tên đăng nhập" placeholder="nhaxebigc_nv1" fullWidth />
+                    <MKInput
+                      type="text"
+                      label="Tên đăng nhập"
+                      placeholder="nhaxebigc_nv1"
+                      value={username}
+                      onChange={(e) => handleUsernameOnChange(e)}
+                      fullWidth
+                    />
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput type="password" label="Mật khẩu" placeholder="*******" fullWidth />
-                  </MKBox>  
+                    <MKInput
+                      type="password"
+                      label="Mật khẩu"
+                      placeholder="*******"
+                      value={password}
+                      onChange={(e) => handlePasswordOnChange(e)}
+                      fullWidth
+                    />
+                  </MKBox>
                   {/* login button */}
-                  
+
                   <MKBox textAlign="center" mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fontWeight="medium">
+                    <MKButton
+                      variant="gradient"
+                      color="info"
+                      fontWeight="medium"
+                      onClick={handleLogin}
+                    >
                       Đăng nhập
                     </MKButton>
                   </MKBox>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import PropTypes from "prop-types";
 
@@ -14,6 +14,11 @@ import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 
 import Icon from "@mui/material/Icon";
+
+import { logout } from "redux/authSlice"
+
+import { useDispatch, useSelector } from "react-redux";
+
 
 
 /**
@@ -39,6 +44,11 @@ function Navbar({
 }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
+
+  // for logout
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();  
+
   // once run once to set navbar for mobile or not
   useEffect(() => {
     // set the display state for Navbar on Mobile
@@ -62,6 +72,67 @@ function Navbar({
   }, []);
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
+
+  // logout
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  const renderAction = () => {
+    if (action.type === "external") {
+      return (
+        <MKButton
+          component="a"
+          href={action.route}
+          target="_blank"
+          rel="noreferrer"
+          variant={
+            action.color === "white" || action.color === "default"
+              ? "contained"
+              : "gradient"
+          }
+          color={action.color ? action.color : "info"}
+          size="small"
+        >
+          {action.label}
+        </MKButton>
+      )
+    }
+    // render external link
+
+    // when user have been logged in -> render logout
+    if (action.route === "/login" && currentUser) {
+      return (
+        <MKButton
+          variant={
+            action.color === "white" || action.color === "default"
+              ? "contained"
+              : "gradient"
+          }
+          color={action.color ? action.color : "info"}
+          size="small"
+          onClick={() => logOut()}
+        >
+          Đăng xuất
+        </MKButton>
+      )
+    }
+    return (
+      <MKButton
+        component={Link}
+        to={action.route}
+        variant={
+          action.color === "white" || action.color === "default"
+            ? "contained"
+            : "gradient"
+        }
+        color={action.color ? action.color : "info"}
+        size="small"
+      >
+        {action.label}
+      </MKButton>
+    )
+  }
 
   // render default navbar
   const renderNavbarItems = routes.map(
@@ -163,40 +234,24 @@ function Navbar({
           >
             {renderNavbarItems}
           </MKBox>
+          {/* render merchant name */}
+          {
+            currentUser && 
+            <MKTypography
+              variant="body2"
+              fontWeight="regular"
+              color={light ? "white" : "dark"}
+              sx={{ fontWeight: "bold", ml: 1, mr: 0.25 }}
+              pr={2}
+            >
+              Xin chào, {currentUser.username}
+            </MKTypography>
+          }
+          
+
           {/* show action button to navigate to register*/}
           <MKBox ml={{ xs: "auto", lg: 0 }}>
-            {action &&
-              (action.type === "internal" ? (
-                <MKButton
-                  component={Link}
-                  to={action.route}
-                  variant={
-                    action.color === "white" || action.color === "default"
-                      ? "contained"
-                      : "gradient"
-                  }
-                  color={action.color ? action.color : "info"}
-                  size="small"
-                >
-                  {action.label}
-                </MKButton>
-              ) : (
-                <MKButton
-                  component="a"
-                  href={action.route}
-                  target="_blank"
-                  rel="noreferrer"
-                  variant={
-                    action.color === "white" || action.color === "default"
-                      ? "contained"
-                      : "gradient"
-                  }
-                  color={action.color ? action.color : "info"}
-                  size="small"
-                >
-                  {action.label}
-                </MKButton>
-              ))}
+            {action && renderAction() }
           </MKBox>
           {/* show sandwich bar if mobile view */}
           <MKBox
@@ -229,10 +284,15 @@ Navbar.defaultProps = {
   brand: "Pay2Park",
   transparent: false,
   light: false,
-  action: false,
   relative: false,
   center: false,
   sticky: false,
+  action: {
+    type: "internal",
+    route: "/login",
+    label: "Đăng nhập",
+    color: "default",
+  }
 };
 
 Navbar.propTypes = {

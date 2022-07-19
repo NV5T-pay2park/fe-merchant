@@ -19,12 +19,6 @@ function HomePage() {
     <>
       <Navbar
         routes={routes}
-        action={{
-          type: "internal",
-          route: "/login",
-          label: "Đăng nhập",
-          color: "default",
-        }}
         transparent
         light
         brand="Pay2Park"
