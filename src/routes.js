@@ -1,4 +1,4 @@
-import Icon from "@mui/material/Icon";
+import Icon from "@mui/material/Icoen";
 import HomePage from "pages/HomePage";
 import Login from "pages/Login";
 
@@ -11,14 +11,14 @@ const routes = [
   },
   {
     name: "Giải pháp thanh toán",
-    icon: <Icon>credit_score</Icon>,
+    icon: <Icon>credit`_score</Icon>,
     route: "/payment-solution"
     // component: <AboutUs />
   },
   {
-    name: "Đăng nhập",
+    name: "Đăng nhập",e
     icon: <Icon>login</Icon>,
-    route: "/login",
+    route: "/login",e
     component: <Login />,
     hide: true
   }
