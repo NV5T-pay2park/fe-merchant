@@ -1,0 +1,129 @@
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+
+import routes from "routes";
+
+import Navbar from "shared/components/NavBar";
+import SimpleFooter from "examples/Footers/SimpleFooter";
+
+import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import MuiLink from "@mui/material/Link";
+
+
+import MKTypography from "components/MKTypography";
+import MKInput from "components/MKInput";
+import MKButton from "components/MKButton";
+import MKBox from "components/MKBox";
+
+export default function Login() {
+  return (
+    <>
+      <Navbar
+        routes={routes}
+        action={{
+          type: "external",
+          route: "https://mc.zalopay.vn/mso-v3/register",
+          label: "đăng ký",
+          color: "info",
+        }}
+        
+      />
+      <MKBox 
+        width="100%"
+        height="100vh"
+        mx="auto"
+        position="absolute"
+        top={0}
+        left={0}
+        zIndex={1}
+        px={1}
+        varient="gradient"
+        bgColor="grey[100]"
+      >
+        <Grid
+          container
+          spacing={1}
+          height="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            <Card>
+              <MKBox
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+                textAlign="center"
+                mx={2}
+                mt={-3}
+                mb={1}
+                p={1}
+              >
+                <MKTypography
+                  variant="h4"
+                  fontWeight="medium"
+                  color="white"
+                  mt={1}
+                >
+                  Đăng nhập
+                </MKTypography>
+
+                <MKTypography
+                  variant="overline"
+                  color="white"
+                  fontWeight="regular"
+                  
+                  mt={1}
+                >
+                  Sử dụng tài khoản đã đăng ký trên ZaloPay Merchant
+                </MKTypography>
+              </MKBox>
+              <MKBox pt={4} pb={3} px={3}>
+                <MKBox component="form" role="form">
+                  <MKBox mb={2}>
+                    <MKInput type="tel" label="Số điện thoại Merchant Admin" placeholder="0123456789" fullWidth />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput type="text" label="Tên đăng nhập" placeholder="nhaxebigc_nv1" fullWidth />
+                  </MKBox>
+                  <MKBox mb={2}>
+                    <MKInput type="password" label="Mật khẩu" placeholder="*******" fullWidth />
+                  </MKBox>  
+                  {/* login button */}
+                  
+                  <MKBox textAlign="center" mt={4} mb={1}>
+                    <MKButton variant="gradient" color="info" fontWeight="medium">
+                      Đăng nhập
+                    </MKButton>
+                  </MKBox>
+
+                  {/* sign up button */}
+                  <MKBox mt={3} mb={1} textAlign="center">
+                    <MKTypography variant="button" color="text">
+                      Trở thành đối tác?{" "}
+                      <MKTypography
+                        component={MuiLink}
+                        href="https://mc.zalopay.vn/mso-v3/register"
+                        variant="button"
+                        color="info"
+                        fontWeight="medium"
+                        textGradient
+                      >
+                        Đăng ký
+                      </MKTypography>
+                    </MKTypography>
+                  </MKBox>
+                </MKBox>
+              </MKBox>
+            </Card>
+          </Grid>
+        </Grid>
+      </MKBox>
+    </>
+  );
+}

@@ -39,7 +39,7 @@ function NavbarDropdown({
         display="flex"
         alignItems="baseline"
         color={light ? "white" : "dark"}
-        opacity={light ? 1 : 0.6}
+        opacity={light ? 1 : 0.8}
         sx={{ cursor: "pointer", userSelect: "none" }}
         {...(route && routeComponent)}
         {...(href && linkComponent)}
@@ -58,7 +58,7 @@ function NavbarDropdown({
           fontWeight="regular"
           textTransform="capitalize"
           color={light ? "white" : "dark"}
-          sx={{ fontWeight: "100%", ml: 1, mr: 0.25 }}
+          sx={{ fontWeight: "bold", ml: 1, mr: 0.25 }}
         >
           {name}
         </MKTypography>

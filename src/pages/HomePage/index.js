@@ -21,8 +21,8 @@ function HomePage() {
         routes={routes}
         action={{
           type: "internal",
-          route: "",
-          label: "login",
+          route: "/login",
+          label: "Đăng nhập",
           color: "default",
         }}
         transparent

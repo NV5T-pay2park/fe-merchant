@@ -65,8 +65,10 @@ function Navbar({
 
   // render default navbar
   const renderNavbarItems = routes.map(
-    ({ name, icon, href, route, collapse }) => (
-      <NavbarDropdown
+    ({ name, icon, href, route, collapse, hide }) => (
+      hide 
+      ? null 
+      : <NavbarDropdown
         key={name}
         name={name}
         icon={icon}
@@ -122,13 +124,14 @@ function Navbar({
             component={Link}
             to="/"
             lineHeight={1}
-            paddingY={transparent ? 1.5 : 0.75}
+            paddingY={transparent ? 1.5 : 1.5}
+            my={-1}
             paddingLeft={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
             <MKTypography
               variant="h3"
               fontWeight="bold"
-              color={light ? "success" : "dark"}
+              color={light ? "success" : "success"}
               display="inline"
             >
               Pay
@@ -144,7 +147,7 @@ function Navbar({
             <MKTypography
               variant="h3"
               fontWeight="bold"
-              color={light ? "info" : "dark"}
+              color={light ? "info" : "info"}
               display="inline"
             >
               Park
@@ -199,7 +202,6 @@ function Navbar({
           <MKBox
             display={{ xs: "inline-block", lg: "none" }}
             lineHeight={0}
-            e
             paddingY={1.5}
             paddingLeft={1.5}
             color={transparent ? "white" : "inherit"}
@@ -211,10 +213,10 @@ function Navbar({
         </MKBox>
         {/* show mobile navbar view if small view */}
         <MKBox
-          backgroundColor={transparent ? "white" : "transparent"}
+          bgColor={transparent ? "white" : "transparent"}
           shadow={transparent ? "lg" : "none"}
           borderRadius="xl"
-          paddingX={transparent ? 2 : 0}
+          px={transparent ? 2 : 0}
         >
           {mobileView && <NavbarMobile routes={routes} open={mobileNavbar} />}
         </MKBox>
@@ -225,8 +227,8 @@ function Navbar({
 
 Navbar.defaultProps = {
   brand: "Pay2Park",
-  transparent: true,
-  light: true,
+  transparent: false,
+  light: false,
   action: false,
   relative: false,
   center: false,
