@@ -10,10 +10,12 @@ import { useEffect } from "react";
 import routes from "routes";
 
 import HomePage from "presentation/pages/HomePage";
+import { useSelector } from "react-redux";
 
 export default function App() {
 
   const { pathname } = useLocation();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -28,11 +30,16 @@ export default function App() {
         return getRoutes(route.collapse);
       }
       if (route.route) {
+        if (route.requireLoggedIn && !isLoggedIn) {
+          return null;
+        }
         return <Route exact path={route.route} element={route.component} key={route.route} />;
       }
 
       return null;
     });
+
+  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

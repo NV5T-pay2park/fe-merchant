@@ -21,6 +21,12 @@ const routes = [
     route: "/login",
     component: <Login />,
     hide: true
+  },
+  {
+    name: "Quản lý nhà xe",
+    icon: <Icon>emoji_transportation_sharp</Icon>,
+    route: "/manage",
+    requireLoggedIn: true
   }
 ]
 

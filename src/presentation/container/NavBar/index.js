@@ -139,9 +139,12 @@ function Navbar({
 
   // render default navbar
   const renderNavbarItems = routes.map(
-    ({ name, icon, href, route, collapse, hide }) => (
+    // if hide then don't show, if require logged in show when currentUser available
+    ({ name, icon, href, route, collapse, hide, requireLoggedIn }) => (
       hide 
       ? null 
+      : (requireLoggedIn && !currentUser) 
+      ? null
       : <NavbarDropdown
         key={name}
         name={name}
