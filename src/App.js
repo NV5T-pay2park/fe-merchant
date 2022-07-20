@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 import routes from "routes";
 
-import HomePage from "pages/HomePage";
+import HomePage from "presentation/pages/HomePage";
 
 export default function App() {
 

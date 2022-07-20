@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import NavbarDropdown from "./NavbarDropdown";
 
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "presentation/components/MKBox";
+import MKTypography from "presentation/components/MKTypography";
 
 import { Link } from "react-router-dom";
 

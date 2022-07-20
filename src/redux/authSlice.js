@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+import { useNavigate } from "react-router-dom";
+
 import authService from "services/auth.service";
 
 const user = JSON.parse(localStorage.getItem("user"));

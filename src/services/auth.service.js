@@ -1,7 +1,7 @@
 const mockAccount = {
   userId: '2142001',
   username: 'tienthanh214',
-  roles: ["write", "read"],
+  roles: ["add", "edit", "delete", "export"],
   status: "success",
 }
 

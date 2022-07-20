@@ -1,8 +1,8 @@
-import Navbar from "shared/components/NavBar"
+import Navbar from "presentation/container/NavBar";
 
-import MKBox from "components/MKBox"
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "presentation/components/MKBox"
+import MKTypography from "presentation/components/MKTypography";
+import MKButton from "presentation/components/MKButton";
 
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -63,7 +63,7 @@ function HomePage() {
                 },
               })}
             >
-              Giải pháp đỗ xe thông minh
+              Giải pháp thanh toán đỗ xe thông minh
             </MKTypography>
 
             <MKTypography

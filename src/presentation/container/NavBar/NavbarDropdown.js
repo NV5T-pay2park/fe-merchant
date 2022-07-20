@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "presentation/components/MKBox";
+import MKTypography from "presentation/components/MKTypography";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@mui/material/Icon";

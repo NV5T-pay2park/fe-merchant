@@ -1,6 +1,6 @@
 import Icon from "@mui/material/Icon";
-import HomePage from "pages/HomePage";
-import Login from "pages/Login";
+import HomePage from "presentation/pages/HomePage";
+import Login from "presentation/pages/Login";
 
 const routes = [
   {

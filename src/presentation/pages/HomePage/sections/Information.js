@@ -1,4 +1,4 @@
-import MKBox from "components/MKBox";
+import MKBox from "presentation/components/MKBox";
 
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"

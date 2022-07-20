@@ -2,20 +2,22 @@
 // https://github1s.com/bezkoder/react-redux-login-example/blob/master/src/slices/auth.js
 
 // https://www.pluralsight.com/guides/how-to-router-redirect-after-login
+
 import { useState } from "react";
 
 import routes from "routes";
 
-import Navbar from "shared/components/NavBar";
+import Navbar from "presentation/container/NavBar";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import MuiLink from "@mui/material/Link";
 
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKBox from "components/MKBox";
+import MKTypography from "presentation/components/MKTypography";
+import MKInput from "presentation/components/MKInput";
+import MKButton from "presentation/components/MKButton";
+import MKBox from "presentation/components/MKBox";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, Navigate } from "react-router-dom";
