@@ -21,7 +21,6 @@ import { logout } from "redux/authSlice"
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { useNavigate } from "react-router-dom"
 
 
 /**
@@ -269,7 +268,10 @@ function Navbar({
             sx={{ cursor: "pointer" }}
             onClick={openMobileNavbar}
           >
-            <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
+            <Icon 
+              fontSize="default" 
+              color={relative && transparent ? "action" : "inherit"}
+            >{mobileNavbar ? "close" : "menu"}</Icon>
           </MKBox>
         </MKBox>
         {/* show mobile navbar view if small view */}

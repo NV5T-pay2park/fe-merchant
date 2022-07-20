@@ -36,6 +36,7 @@ function Breadcrumbs({ routes, ...rest }) {
           if (label === "home") {
             return (
               <Icon
+                key={label}
                 fontSize="small"
                 sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
                 component={Link}

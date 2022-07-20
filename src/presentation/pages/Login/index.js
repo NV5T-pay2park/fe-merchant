@@ -24,7 +24,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 import { login } from "redux/authSlice";
 
-export default function Login(props) {
+export default function Login() {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const [password, setPassword] = useState("");

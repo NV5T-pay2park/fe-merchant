@@ -44,4 +44,10 @@ function BaseLayout({ breadcrumb, title, children }) {
   );
 }
 
+BaseLayout.propTypes = {
+  breadcrumb: PropTypes.arrayOf(PropTypes.object).isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+}
+
 export default BaseLayout;
