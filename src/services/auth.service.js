@@ -3,6 +3,8 @@ const mockAccount = {
   username: 'tienthanh214',
   roles: ["add", "edit", "delete", "export"],
   status: "success",
+  expried: "2022/08/30",
+  tokenId: "ahihidongok",
 }
 
 const login = (phone, username, password) => {

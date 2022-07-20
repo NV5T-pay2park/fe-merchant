@@ -12,6 +12,9 @@ import MuiLink from "@mui/material/Link";
 
 import PropTypes from "prop-types";
 
+import { useSelector } from "react-redux";
+
+
 /** Navbar in mobile view
  * input: routes to show nav, open or not
  */
@@ -21,6 +24,9 @@ function NavbarMobile({ routes, open }) {
   const handleSetCollapse = (name) =>
     (collapse === name ? setCollapse(false) : setCollapse(name));
 
+  // for logout
+  const { user: currentUser } = useSelector((state) => state.auth);
+
   const renderNavbarItems = routes.map(
     ({
       name,
@@ -29,8 +35,14 @@ function NavbarMobile({ routes, open }) {
       href,
       route,
       collapse: navCollapse,
+      hide,
+      requireLoggedIn
     }) => (
-      <NavbarDropdown
+      hide
+      ? null
+      : (requireLoggedIn && !currentUser)
+      ? null
+      : <NavbarDropdown
         key={name}
         name={name}
         icon={icon}
