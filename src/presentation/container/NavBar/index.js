@@ -101,7 +101,7 @@ function Navbar({
         </MKButton>
       )
     }
-    // render external link
+    // render internal link
 
     // when user have been logged in -> render logout
     if (action.route === "/login" && currentUser) {
@@ -112,7 +112,7 @@ function Navbar({
               ? "contained"
               : "gradient"
           }
-          color={action.color ? action.color : "info"}
+          color="primary"
           size="small"
           onClick={() => logOut()}
         >
