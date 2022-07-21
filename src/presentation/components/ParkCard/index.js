@@ -8,9 +8,10 @@ import { Link } from "react-router-dom";
 export default function ParkCard({
   image,
   title,
-  description,
+  address,
   actions,
-  infomation,
+  information,
+  time
 }) {
   const renderActions = () => {
     if (!actions || actions.length === 0)
@@ -36,6 +37,16 @@ export default function ParkCard({
       </Stack>
     )
   }
+
+  const renderInformation = (
+    <MKTypography p={-1}
+      variant='button'
+      color={information.color ? information.color : "success"}
+      fontWeight="medium"
+    >
+      {information.label}
+    </MKTypography>
+  )
 
   return (
     <Card>
@@ -73,13 +84,8 @@ export default function ParkCard({
           {title}
         </MKTypography>
 
-        <MKTypography p={-1}
-          variant='button'
-          color='success'
-          fontWeight="medium"
-        >
-          {infomation}
-        </MKTypography>
+        {renderInformation}
+
         <MKBox mt={1} mb={3}>
           
           <MKTypography
@@ -87,7 +93,15 @@ export default function ParkCard({
             component="p"
             color="text"
           >
-            {description}
+            {address}
+          </MKTypography>
+          <MKTypography
+            variant="body2"
+            component="p"
+            color="text"
+            fontWeight="medium"
+          >
+            Giờ mở cửa: {time}
           </MKTypography>
         </MKBox>
         {renderActions()}

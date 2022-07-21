@@ -1,3 +1,7 @@
+// current code using localStorage may be XXS attack
+// https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications#step-3-storing-a-user-token-with-sessionstorage-and-localstorage
+
+
 const mockAccount = {
   userId: '2142001',
   username: 'tienthanh214',
@@ -5,6 +9,10 @@ const mockAccount = {
   status: "success",
   expried: "2022/08/30",
   tokenId: "ahihidongok",
+}
+
+const authentication = () => {
+  return true;
 }
 
 const login = (phone, username, password) => {
