@@ -19,7 +19,7 @@ const parkList = require("data/mock/parks.json");
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
 
-  const [parks, setParks] = useState([]);
+  const [parks, setParks] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
 
   const fetchParks = useCallback(() => {
@@ -102,9 +102,11 @@ export default function ManagePage() {
     >
       <Container>
         <Grid container spacing={3} sx={{ mb: 12 }}>
-          {((parks?.length === 0) && (!isFetching))
+          {parks
+          ? parks.length === 0
           ? renderEmptyParkList
           : renderParkCardList(parks)
+          : null
           }
         </Grid>
       </Container>
