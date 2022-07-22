@@ -50,6 +50,45 @@ export default function ManagePage() {
     </MKBox>
   );
 
+  const renderParkCardList = (parks) => (
+    parks.map((park) => (
+      <Grid key={park.id} item xs={12} md={6} lg={4} sx={{ mb: 6 }}>
+        <ParkCard
+          image={park.image}
+          title={park.name}
+          address={park.address}
+          time={park.timeWorking}
+          information={{
+            label: `Còn lại ${park.numberSlotRemaining} chỗ trống`,
+            color: "success",
+          }}
+          actions={[
+            {
+              route: "https://mc.zalopay.vn/mso-v3/register",
+              color: "info",
+              label: "Cập nhật",
+              icon: "edit",
+            },
+            {
+              route: "https://mc.zalopay.vn/mso-v3/register",
+              color: "error",
+              label: "Xóa",
+              icon: "delete",
+            },
+          ]}
+        />
+      </Grid>
+    ))
+  );
+
+  const renderEmptyParkList = (
+    <Container>
+      <MKTypography variant="h4" textAlign="center">
+        Hiện không có nhà xe nào
+      </MKTypography>
+    </Container>
+  );
+
   const renderParkList = (
     <MKBox
       component="section"
@@ -59,38 +98,14 @@ export default function ManagePage() {
       mx={-2}
       px={{ xs: 2, lg: 0 }}
       // bgColor="dark"
+      
     >
       <Container>
         <Grid container spacing={3} sx={{ mb: 12 }}>
-          {parks.map((park) => (
-            <Grid key={park.id} item xs={12} md={6} lg={4} sx={{ mb: 6 }}>
-              <ParkCard
-              
-                image={park.image}
-                title={park.name}
-                address={park.address}
-                time={park.timeWorking}
-                information={{
-                  label: `Còn lại ${park.numberSlotRemaining} chỗ trống`,
-                  color: "success",
-                }}
-                actions={[
-                  {
-                    route: "https://mc.zalopay.vn/mso-v3/register",
-                    color: "info",
-                    label: "Cập nhật",
-                    icon: "edit",
-                  },
-                  {
-                    route: "https://mc.zalopay.vn/mso-v3/register",
-                    color: "error",
-                    label: "Xóa",
-                    icon: "delete",
-                  },
-                ]}
-              />
-            </Grid>
-          ))}
+          {((parks?.length === 0) && (!isFetching))
+          ? renderEmptyParkList
+          : renderParkCardList(parks)
+          }
         </Grid>
       </Container>
     </MKBox>

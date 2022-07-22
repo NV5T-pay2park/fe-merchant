@@ -11,7 +11,6 @@ import { Container, Grid } from "@mui/material";
 import MKTypography from "presentation/components/MKTypography";
 
 function BaseLayout({ breadcrumb, title, children }) {
-  console.log(children)
   return (
     <MKBox
       display="flex"
