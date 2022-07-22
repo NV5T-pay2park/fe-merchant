@@ -11,42 +11,40 @@ export default function ParkCard({
   address,
   actions,
   information,
-  time
+  time,
 }) {
   const renderActions = () => {
-    if (!actions || actions.length === 0)
-      return null;
-      
+    if (!actions || actions.length === 0) return null;
+
     return (
       <Stack direction="row" spacing={1}>
-        {
-          actions.map((action) => (
-            <MKButton 
-              variant="gradient"
-              size="small"
-              component={Link}
-              to={action.route}
-              color={action.color ? action.color : "dark"}
-              key={action.label}
-            >
-              {action.icon && <Icon sx={{mr:1}}>{action.icon}</Icon>}
-              {action.label}
-            </MKButton>
-          ))
-        }
+        {actions.map((action) => (
+          <MKButton
+            variant="gradient"
+            size="small"
+            component={Link}
+            to={action.route}
+            color={action.color ? action.color : "dark"}
+            key={action.label}
+          >
+            {action.icon && <Icon sx={{ mr: 1 }}>{action.icon}</Icon>}
+            {action.label}
+          </MKButton>
+        ))}
       </Stack>
-    )
-  }
+    );
+  };
 
   const renderInformation = (
-    <MKTypography p={-1}
-      variant='button'
+    <MKTypography
+      p={-1}
+      variant="button"
       color={information.color ? information.color : "success"}
       fontWeight="medium"
     >
       {information.label}
     </MKTypography>
-  )
+  );
 
   return (
     <Card>
@@ -60,6 +58,8 @@ export default function ParkCard({
           width="100%"
           position="relative"
           zIndex={1}
+          minHeight="20vh"
+          maxHeight="25vh"
         />
         {/* just for decorator */}
         <MKBox
@@ -80,19 +80,12 @@ export default function ParkCard({
       </MKBox>
 
       <MKBox p={3} mt={-1}>
-        <MKTypography variant="h5">
-          {title}
-        </MKTypography>
+        <MKTypography variant="h5">{title}</MKTypography>
 
         {renderInformation}
 
         <MKBox mt={1} mb={3}>
-          
-          <MKTypography
-            variant="body2"
-            component="p"
-            color="text"
-          >
+          <MKTypography variant="body2" component="p" color="text">
             {address}
           </MKTypography>
           <MKTypography
@@ -106,7 +99,6 @@ export default function ParkCard({
         </MKBox>
         {renderActions()}
       </MKBox>
-      
     </Card>
   );
 }

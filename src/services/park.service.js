@@ -6,4 +6,4 @@ import parkAPI from "data/parkAPI"
 export const getParks = (user, from, limit) => {
   return parkAPI.getParks(user, from, limit) || []
 }
- 
+

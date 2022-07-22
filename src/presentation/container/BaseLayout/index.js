@@ -11,6 +11,7 @@ import { Container, Grid } from "@mui/material";
 import MKTypography from "presentation/components/MKTypography";
 
 function BaseLayout({ breadcrumb, title, children }) {
+  console.log(children)
   return (
     <MKBox
       display="flex"
@@ -44,6 +45,7 @@ function BaseLayout({ breadcrumb, title, children }) {
   );
 }
 
+// Typechecking props for the BaseLayout
 BaseLayout.propTypes = {
   breadcrumb: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
