@@ -11,11 +11,14 @@ import routes from "routes";
 
 import HomePage from "presentation/pages/HomePage";
 import { useSelector } from "react-redux";
+import Socket from "./services/socket";
 
 export default function App() {
 
   const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const {connect, messages, setMessages} = Socket(1);
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -42,6 +45,7 @@ export default function App() {
   
   return (
     <ThemeProvider theme={theme}>
+      <button onClick={connect}>Connect</button>
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
