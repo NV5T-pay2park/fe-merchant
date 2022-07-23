@@ -16,13 +16,17 @@ const authentication = () => {
 }
 
 const login = (phone, username, password) => {
-  console.log(phone, username, password)
-  if (username === mockAccount.username) {
-    localStorage.setItem("user", JSON.stringify(mockAccount))
-    return mockAccount;
-  } else {
-    return null;
-  }
+  return new Promise(function(resolve, reject) {
+    console.log(phone, username, password)
+    if (username === mockAccount.username) {
+      resolve(mockAccount)
+    } else {
+      reject()
+    }
+  }).then((response) => {
+    localStorage.setItem("user", JSON.stringify(response))
+    return response
+  })
 }
 
 const logout = () => {

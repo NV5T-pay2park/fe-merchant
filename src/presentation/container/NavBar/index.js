@@ -17,7 +17,7 @@ import MKButton from "presentation/components/MKButton";
 
 import Icon from "@mui/material/Icon";
 
-import { logout } from "redux/authSlice"
+import { logout } from "redux/actions/authActions"
 
 import { useDispatch, useSelector } from "react-redux";
 

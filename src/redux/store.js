@@ -1,14 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducers'
 
-import authReducer from "./authSlice"
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
-const reducer = {
-  auth: authReducer,
-};
+// The store now has the ability to accept thunk functions in `dispatch`
+const store = createStore(rootReducer, composedEnhancer)
 
-const store = configureStore({
-  reducer: reducer,
-  devTools: true,
-});
-
-export default store;
+export default store

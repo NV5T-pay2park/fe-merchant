@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { login } from "redux/authSlice";
+import { login } from "redux/actions/authActions";
 
 export default function Login() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -50,8 +50,8 @@ export default function Login() {
 
   const handleLogin = () => {
     setLoading(true);
+    //TODO: validate input
     dispatch(login({ phone, username, password }))
-      .unwrap()
       .then(() => {
         navigate("/home");
       })
