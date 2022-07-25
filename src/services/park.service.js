@@ -10,3 +10,7 @@ export const getParks = (user, from, limit) => {
 export const getAllVehiclesType = () => {
   return parkAPI.getAllVehiclesType() || [];
 }
+
+export const deleteParkById = (id) => {
+  parkAPI.deleteParkById(id);
+}

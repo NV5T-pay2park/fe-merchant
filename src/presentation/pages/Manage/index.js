@@ -54,6 +54,7 @@ export default function ManagePage() {
     parks.map((park) => (
       <Grid key={park.id} item xs={12} md={6} lg={4} sx={{ mb: 6 }}>
         <ParkCard
+          id={park.id}
           image={park.image}
           title={park.name}
           address={park.address}
