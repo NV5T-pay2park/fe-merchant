@@ -1,34 +1,58 @@
-import MKBox from "../MKBox";
-import MKTypography from "../MKTypography";
-import MKButton from "../MKButton";
-import MKInput from "../MKInput";
+import MKBox from "../../MKBox";
+import MKTypography from "../../MKTypography";
+import MKInput from "../../MKInput";
 import MapModal from "./Map";
 
-import MKAvatar from "../MKAvatar";
+import MKAvatar from "../../MKAvatar";
 
-import { Chip, Container, Divider, Grid, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Chip,
+  Container,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
-import CloseIcon from "@mui/icons-material/Close";
-import { AddAPhoto } from "@mui/icons-material";
+import { AddAPhoto, AddCircleOutline } from "@mui/icons-material";
 
 import { useState } from "react";
 
 import { getAllVehiclesType } from "services/park.service";
-
-const handleDeleteVehicle = () => {
-
-}
+import MKButton from "presentation/components/MKButton";
 
 export default function ParkInformation({ data }) {
-  const [vehicles, setVehicles] = useState(getAllVehiclesType)
+  const allVehiclesType = getAllVehiclesType();
+
+  const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([
     "https://thumbs.dreamstime.com/b/parking-lot-856838.jpg",
     "https://media.istockphoto.com/photos/dealer-new-cars-stock-picture-id480652712?k=20&m=480652712&s=612x612&w=0&h=dbyTkQ3-PJJMAlNAR2hGxPWX1ODvSJspuDsdvQmOKlI=",
     "https://www.ledgerinsights.com/wp-content/uploads/2020/05/parking-lot-cars.jpg",
     "https://images.unsplash.com/photo-1589018057745-8c699b3f361c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1wdHklMjBwYXJraW5nJTIwbG90fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
   ]);
+  const [selectedVehicle, setSelectedVehicle] = useState("");
 
-  console.log(vehicles)
+  const handleDeleteVehicle = (e, value) => {
+    setVehicles(vehicles.filter((vehicle) => vehicle.id !== value));
+  };
+
+  const handleChangeSelectedVehicle = (e) => {
+    setSelectedVehicle(e.target.value);
+  };
+
+  const handleAddVehicle = () => {
+    if (!selectedVehicle) return;
+    if (vehicles.find((x) => x.id === selectedVehicle)) {
+      // if already exists
+      return;
+    }
+    let newVehicles = allVehiclesType.find((x) => x.id === selectedVehicle);
+    setVehicles(vehicles.concat({ ...newVehicles }));
+  };
 
   const renderInformation = (
     <Container>
@@ -111,8 +135,8 @@ export default function ParkInformation({ data }) {
           justifyContent="center"
           alignItems="center"
         >
-          <MKBox sx={{ cursor: "pointer" }} >
-            <AddAPhoto  fontSize="large" />
+          <MKBox sx={{ cursor: "pointer" }}>
+            <AddAPhoto fontSize="large" />
             <MKTypography variant="body2">Thêm ảnh</MKTypography>
           </MKBox>
         </Grid>
@@ -124,23 +148,61 @@ export default function ParkInformation({ data }) {
       </Grid>
     </Container>
   );
-        
+
   const renderAvailableVehicles = (
     <Container>
       <MKTypography variant="body">Danh sách phương tiện </MKTypography>
-      <Grid
-        item
-        container
-        xs={12}
-        sx={{mx:1}}
-      >
-      {
-        vehicles.map((vehicle) => (
-          <Grid item key={vehicle.id.toString()} sx={{mb:2}} xs={12} md={4} lg={3}>
-            <Chip label={vehicle.name} onDelete={handleDeleteVehicle}/>
+      <Grid item container xs={12} lg={10} sx={{ mx: "auto" }}>
+        <MKBox width="100%" component="form">
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <FormControl
+                sx={{ m: 1, p: 1, width: "100%", height: "5vh" }}
+                size="large"
+              >
+                <InputLabel>Loại xe</InputLabel>
+                <Select
+                  value={selectedVehicle}
+                  onChange={handleChangeSelectedVehicle}
+                  label="Loại xe"
+                  sx={{ height: "100%" }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {allVehiclesType.map((vehicle) => (
+                    <MenuItem
+                      key={vehicle.id.toString()}
+                      value={vehicle.id.toString()}
+                    >
+                      {vehicle.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <MKButton
+                sx={{ mt: 2, p: 1 }}
+                size="small"
+                color="info"
+                variant="gradient"
+                onClick={handleAddVehicle}
+              >
+                Thêm loại xe
+              </MKButton>
+            </Grid>
           </Grid>
-        ))
-      }
+        </MKBox>
+
+        {vehicles.map((vehicle) => (
+          <Grid item key={vehicle.id.toString()} sx={{ mb: 1, ml: 1 }}>
+            <Chip
+              label={vehicle.name}
+              onDelete={(e) => handleDeleteVehicle(e, vehicle.id)}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
@@ -160,11 +222,5 @@ export default function ParkInformation({ data }) {
     </MKBox>
   );
 
-  return (
-    <>
-      {renderInputForm}
-
-      
-    </>
-  );
+  return <>{renderInputForm}</>;
 }

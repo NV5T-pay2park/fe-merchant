@@ -1,36 +1,21 @@
 import { useState } from "react";
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close";
-import { AddAPhoto } from "@mui/icons-material";
 
 // Material Kit 2 React components
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import {
-  Checkbox,
-  Chip,
-  FormControlLabel,
   Icon,
-  ImageList,
-  Stack,
-  Typography,
 } from "@mui/material";
-import MKInput from "../MKInput";
-import MapModal from "./Map";
-import { CheckBox } from "@mui/icons-material";
-import { Box } from "@mui/system";
-import MKAvatar from "../MKAvatar";
-import { getAllVehiclesType } from "services/park.service";
-import ParkInformation from "./ParkInformation";
+import ParkInformation from "./components/ParkInformation";
 
 export default function EditParkDetail({ action }) {
   const [show, setShow] = useState(false);

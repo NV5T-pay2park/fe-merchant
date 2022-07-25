@@ -17,7 +17,7 @@ import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import { Icon } from "@mui/material";
-import MKInput from "../MKInput";
+import MKInput from "../../MKInput";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 
 export default function MapModal() {
