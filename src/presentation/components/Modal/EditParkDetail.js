@@ -9,6 +9,7 @@ import Slide from "@mui/material/Slide";
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close";
+import { AddAPhoto } from "@mui/icons-material";
 
 // Material Kit 2 React components
 import MKBox from "presentation/components/MKBox";
@@ -106,16 +107,28 @@ export default function EditParkDetail({ action }) {
     <Container>
       <MKTypography variant="body">Hình ảnh minh họa</MKTypography>
       <Grid
+        item
         container
         md={12}
         lg={12}
         xm={12}
         sx={{ mx: 3 }}
-
-    
+        spacing={-1}
+        align="center"
       >
+        <Grid
+          item
+          md={6}
+          lg={3}
+          xs={12}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <AddAPhoto sx={{ cursor: "pointer" }} fontSize="large" />
+        </Grid>
         {images.map((image) => (
-          <Grid item md={6} lg={3} xs={12}>
+          <Grid item md={6} lg={3} xs={12} key={image.toString()}>
             <MKAvatar src={`${image}`} size="xxl" variant="square" />
           </Grid>
         ))}
