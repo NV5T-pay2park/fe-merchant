@@ -62,20 +62,7 @@ export default function ManagePage() {
             label: `Còn lại ${park.numberSlotRemaining} chỗ trống`,
             color: "success",
           }}
-          actions={[
-            {
-              route: "https://mc.zalopay.vn/mso-v3/register",
-              color: "info",
-              label: "Cập nhật",
-              icon: "edit",
-            },
-            {
-              route: "https://mc.zalopay.vn/mso-v3/register",
-              color: "error",
-              label: "Xóa",
-              icon: "delete",
-            },
-          ]}
+          actions={["edit", "delete"]}
         />
       </Grid>
     ))

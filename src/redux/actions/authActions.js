@@ -1,5 +1,5 @@
 import authService from "services/auth.service";
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "shared/constants";
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "shared/constants/constants";
 
 export const login = ({phone, username, password}) => (dispatch) => {
   // try {

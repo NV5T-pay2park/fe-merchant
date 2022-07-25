@@ -4,6 +4,8 @@ import { Card, Stack, Icon } from "@mui/material";
 import MKTypography from "../MKTypography";
 import MKButton from "../MKButton";
 import { Link } from "react-router-dom";
+import EditParkDetail from "../Modal/EditParkDetail";
+import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
 
 export default function ParkCard({
   image,
@@ -19,17 +21,10 @@ export default function ParkCard({
     return (
       <Stack direction="row" spacing={1}>
         {actions.map((action) => (
-          <MKButton
-            variant="gradient"
-            size="small"
-            component={Link}
-            to={action.route}
-            color={action.color ? action.color : "dark"}
-            key={action.label}
-          >
-            {action.icon && <Icon sx={{ mr: 1 }}>{action.icon}</Icon>}
-            {action.label}
-          </MKButton>
+          <EditParkDetail
+            key={action}
+            action={ACTION_BUTTON_STYLE[action]}
+          />
         ))}
       </Stack>
     );

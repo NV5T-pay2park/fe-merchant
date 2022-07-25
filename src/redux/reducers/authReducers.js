@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "shared/constants";
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "shared/constants/constants";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
