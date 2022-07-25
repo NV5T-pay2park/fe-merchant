@@ -1,6 +1,6 @@
 // TODO: using Axios to get data from backend restful api
 const parks = require('./mock/parks.json');
-
+const vehicles = require('./mock/vehicles.json');
 
 const getParks = async (user, from, limit) => {
   let response;
@@ -9,9 +9,13 @@ const getParks = async (user, from, limit) => {
   } else {
     response = parks.slice(from, from + limit);
   }
-  return response || [];
+  return response;
 }
 
-const parkAPI = { getParks }
+const getAllVehiclesType = () => {
+  return vehicles;
+}
+
+const parkAPI = { getParks, getAllVehiclesType }
 
 export default parkAPI;

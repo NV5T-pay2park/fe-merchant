@@ -7,3 +7,6 @@ export const getParks = (user, from, limit) => {
   return parkAPI.getParks(user, from, limit) || []
 }
 
+export const getAllVehiclesType = () => {
+  return parkAPI.getAllVehiclesType() || [];
+}
