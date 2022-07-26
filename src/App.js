@@ -12,6 +12,7 @@ import routes from "routes";
 import HomePage from "presentation/pages/HomePage";
 import { useSelector } from "react-redux";
 import Socket from "./services/socket";
+import SocketTestPage from "./presentation/pages/Socket"
 
 export default function App() {
 
@@ -45,11 +46,11 @@ export default function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <button onClick={connect}>Connect</button>
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage /> } />
+        <Route path="/socket" element={<SocketTestPage socket={{connect, messages, setMessages}} />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </ThemeProvider>
