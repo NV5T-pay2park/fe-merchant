@@ -1,9 +1,7 @@
 import MKBox from "../MKBox";
 
-import { Card, Stack, Icon } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 import MKTypography from "../MKTypography";
-import MKButton from "../MKButton";
-import { Link } from "react-router-dom";
 import EditParkDetail from "../Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
 import DeleteConfirm from "../Modal/DeleteConfirm";
@@ -24,9 +22,19 @@ export default function ParkCard({
       <Stack direction="row" spacing={1}>
         {actions.map((action) =>
           action === "edit" ? (
-            <EditParkDetail key={action} action={ACTION_BUTTON_STYLE[action]} />
+            <EditParkDetail
+              key={action}
+              parkID={id}
+              action={ACTION_BUTTON_STYLE[action]}
+            />
           ) : action === "delete" ? (
-            <DeleteConfirm key={action} parkId={id} title={title} action={ACTION_BUTTON_STYLE[action]} />
+            <DeleteConfirm
+              key={action}
+              parkId={id}
+              title={title}
+              action={ACTION_BUTTON_STYLE[action]}
+
+            />
           ) : null
         )}
       </Stack>

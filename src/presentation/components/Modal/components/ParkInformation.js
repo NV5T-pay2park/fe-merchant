@@ -17,12 +17,13 @@ import {
   MenuItem,
 } from "@mui/material";
 
-import { AddAPhoto, AddCircleOutline } from "@mui/icons-material";
+import { AddAPhoto } from "@mui/icons-material";
 
 import { useState } from "react";
 
 import { getAllVehiclesType } from "services/park.service";
 import MKButton from "presentation/components/MKButton";
+import PriceTable from "./PriceTable";
 
 export default function ParkInformation({ data }) {
   const allVehiclesType = getAllVehiclesType();
@@ -210,6 +211,9 @@ export default function ParkInformation({ data }) {
   const renderPriceTable = (
     <Container>
       <MKTypography variant="body">Bảng giá</MKTypography>
+      <MKBox width="100%" sx={{mx:"auto", p:2}}>
+        <PriceTable vehicles={vehicles}/>
+      </MKBox>
     </Container>
   );
 

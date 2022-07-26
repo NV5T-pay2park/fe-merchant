@@ -14,8 +14,6 @@ import { useSelector } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import MKTypography from "presentation/components/MKTypography";
 
-const parkList = require("data/mock/parks.json");
-
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
 
