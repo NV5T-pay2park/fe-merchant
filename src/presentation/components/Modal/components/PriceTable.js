@@ -1,8 +1,14 @@
 import { Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import MKBox from "presentation/components/MKBox";
+import MKButton from "presentation/components/MKButton";
+import { useState } from "react";
 
 export default function PriceTable({ vehicles, data }) {
+  const [rows, setRows] = useState([{ id: 1, duration: "4", description: "4 giờ đầu", id1: 10, id2: 112.31 },
+  { id: 2, duration: "8", description: "4..8 giờ", id3: 11.11, id2: 112.31 },
+  ])
+  
   const columns = [
     {
       field: "duration",
@@ -34,51 +40,29 @@ export default function PriceTable({ vehicles, data }) {
     }))
   );
 
-  console.log(columns);
-
-  const rows = [
-    { id: 1, duration: "4", description: "4 giờ đầu", id1: 10, id2: 112.31 },
-    { id: 2, duration: "8", description: "4..8 giờ", id3: 11.11, id2: 112.31 },
-    {
-      id: 3,
-      duration: "8",
-      description: "4 giờ tiếp theo",
-      id3: 11.11,
-      id2: 112.31,
-    },
-    {
-      id: 4,
-      duration: "8",
-      description: "4 giờ tiếp theo",
-      id3: 11.11,
-      id2: 112.31,
-    },
-    {
-      id: 5,
-      duration: "8",
-      description: "4 giờ tiếp theo",
-      id3: 11.11,
-      id2: 112.31,
-    },
-    {
-      id: 6,
-      duration: "8",
-      description: "4 giờ tiếp theo",
-      id3: 11.11,
-      id2: 112.31,
-    },
-    {
-      id: 7,
-      duration: "8",
-      description: "4 giờ tiếp theo",
-      id3: 11.11,
-      id2: 112.31,
-    },
-  ];
+  const handleAddNewRow = () => {
+    // TODO: set description
+    setRows(rows.concat({
+      id: rows.at(-1).id + 1,
+      description: "trở đi",
+      duration: 0
+    }))
+  }
 
   return (
     <MKBox>
-      <Grid container sx={{ mx: "auto" }} height="20rem">
+      <MKBox display="flex" justifyContent="flex-start">
+        <MKButton
+          sx={{mb:1}}
+          size="small"
+          color="info"
+          variant="gradient"
+          onClick={handleAddNewRow}
+        >
+          Thêm giờ
+        </MKButton>
+      </MKBox>
+      <Grid container sx={{ mx: "auto" }} height="20rem" color>
         <DataGrid
           rows={rows}
           columns={columns}
