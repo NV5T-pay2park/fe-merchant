@@ -26,7 +26,7 @@ const Socket = (parkingLotID) => {
   }
 
   const onConnected = () => {
-    stompClient.subscribe('/user/' + parkingLotID, onMessageReceived);
+    stompClient.subscribe('/user/' + parkingLotID + "/merchant", onMessageReceived);
     userJoin();
   }
 
