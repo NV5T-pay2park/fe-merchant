@@ -25,13 +25,25 @@ export default function ManagePage() {
     getParks(currentUser, 0).then((parks) => {
       setIsFetching(false);
       setParks(parks);
+      console.log(parks)
     });
   }, [setIsFetching, setParks, currentUser]);
 
   useEffect(() => {
     fetchParks();
   }, [fetchParks]);
-  
+
+  const formatWorkingTime = (timeOpen, timeClose) => {
+    return timeOpen + " - " + timeClose;
+  }
+
+  const formatInformation = (currentServing, status) => {
+    return {
+      label: `Đang phục vụ ${currentServing} xe`,
+      color: status === 0 ? "success" : "warning"
+    }
+  }
+
   const createNewParkButton = (
     <MKBox
       width="100%"
@@ -56,11 +68,8 @@ export default function ManagePage() {
           image={park.image}
           title={park.name}
           address={park.address}
-          time={park.timeWorking}
-          information={{
-            label: `Còn lại ${park.numberSlotRemaining} chỗ trống`,
-            color: "success",
-          }}
+          time={formatWorkingTime(park.timeOpen, park.timeClose)}
+          information={formatInformation(park.currentServing, park.status)}
           actions={["edit", "delete"]}
         />
       </Grid>
