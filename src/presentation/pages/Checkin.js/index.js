@@ -2,7 +2,12 @@ import React from 'react'
 import { QRCode } from 'react-qrcode-logo';
 
 const QrImage = ({data}) => {
-    
+  
+  const obj = {
+    id: 1234
+  }
+
+  const str = JSON.stringify(obj)
   const parkingId = "jj12344"
   
   return (
