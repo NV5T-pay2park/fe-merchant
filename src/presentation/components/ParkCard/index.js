@@ -6,6 +6,8 @@ import EditParkDetail from "../Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
 import DeleteConfirm from "../Modal/DeleteConfirm";
 
+import noImage from "assets/images/no-image-park.png"
+
 export default function ParkCard({
   image,
   id,
@@ -58,7 +60,7 @@ export default function ParkCard({
         {/* image */}
         <MKBox
           component="img"
-          src={image}
+          src={image ? image : noImage}
           alt={title}
           borderRadius="lg"
           width="100%"

@@ -31,7 +31,7 @@ export default function ManagePage() {
   useEffect(() => {
     fetchParks();
   }, [fetchParks]);
-
+  
   const createNewParkButton = (
     <MKBox
       width="100%"
