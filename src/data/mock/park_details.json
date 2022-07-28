@@ -6,22 +6,21 @@
   "lng": 112121.1,
   "timeOpen": "10:30:00",
   "timeClose": "22:30:00",
-
   "priceTable": [
     {
       "vehicleTypeId": 1,
       "prices": [
         {
-          "duration": 4,
+          "duration": 0,
           "price": 10000,
-          "unit": 2,
+          "unit": 2
         },
         {
           "duration": 8,
           "price": 2000,
-          "unit": 1,
-        },
-      ],
+          "unit": 1
+        }
+      ]
     },
     {
       "vehicleTypeId": 2,
@@ -29,14 +28,14 @@
         {
           "duration": 4,
           "price": 10000,
-          "unit": 2,
+          "unit": 2
         },
         {
           "duration": 8,
           "price": 2000,
-          "unit": 1,
-        },
-      ],
-    },
-  ],
-};
+          "unit": 1
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,8 @@ import EditParkDetail from "../Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
 import DeleteConfirm from "../Modal/DeleteConfirm";
 
-import noImage from "assets/images/no-image-park.png"
+import noImage from "assets/images/no-image-park.png";
+import { Link } from "react-router-dom";
 
 export default function ParkCard({
   image,
@@ -35,7 +36,6 @@ export default function ParkCard({
               parkId={id}
               title={title}
               action={ACTION_BUTTON_STYLE[action]}
-
             />
           ) : null
         )}
@@ -56,7 +56,14 @@ export default function ParkCard({
 
   return (
     <Card>
-      <MKBox position="relative" borderRadius="lg" mx={2} mt={-3}>
+      <MKBox 
+        position="relative" 
+        borderRadius="lg" 
+        mx={2} 
+        mt={-3}
+        component={Link}
+        to={`/manage/${id}`}
+      >
         {/* image */}
         <MKBox
           component="img"
