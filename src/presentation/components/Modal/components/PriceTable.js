@@ -2,58 +2,46 @@ import { Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
-import { useState } from "react";
+import MKTypography from "presentation/components/MKTypography";
+import { useCallback, useState } from "react";
+import { deleteRow } from "services/price.service";
+import { createColumns, editRow, createNewRow } from "services/price.service";
 
 export default function PriceTable({ vehicles, data }) {
-  const [rows, setRows] = useState([{ id: 1, duration: "4", description: "4 giờ đầu", id1: 10, id2: 112.31 },
-  { id: 2, duration: "8", description: "4..8 giờ", id3: 11.11, id2: 112.31 },
-  ])
-  
-  const columns = [
-    {
-      field: "duration",
-      headerName: "Khoảng giờ",
-      width: 100,
-      type: "number",
-      editable: true,
-    },
-    { field: "description", headerName: "Mô tả", width: 150 },
-  ].concat(
-    vehicles.map((vehicle) => ({
-      field: `id${vehicle.id}`,
-      headerName: vehicle.name,
-      width: 150,
-      editable: true,
-      valueFormatter: (params) => {
-        if (params.value == null)
-          return '0 VNĐ/1h';
-        let perUnitIndex = params.value.toString().indexOf('/');
-        let unit = 1;
-        if (perUnitIndex > -1 && perUnitIndex < params.value.length - 1) {
-          unit = parseInt(params.value.toString().slice(perUnitIndex + 1))
-        }
-        if (perUnitIndex === -1) {
-          perUnitIndex = params.value.length
-        }
-        return `${params.value.toString().slice(0, perUnitIndex)} VNĐ/${unit}h`
-      }
-    }))
-  );
+  const [rows, setRows] = useState([
+    { id: 1, duration: "", description: "Đồng giá" },
+  ]);
+
+  const [deletedRow, setDeletedRow] = useState(-1);
+
+  const columns = createColumns(vehicles);
 
   const handleAddNewRow = () => {
     // TODO: set description
-    setRows(rows.concat({
-      id: rows.at(-1).id + 1,
-      description: "trở đi",
-      duration: 0
-    }))
+    setRows(createNewRow(rows));
+  };
+
+  const handleRowSelection = useCallback((params) => {
+    setDeletedRow(params.id);
+  }, []);
+
+  const handleDeleteRow = () => {
+    if (rows.length > 1) {
+      setRows(deleteRow(rows, deletedRow));
+    }
+    setDeletedRow(-1);
+  };
+
+  const handleChangeCell = (params, event) => {
+    event.defaultMuiPrevented = true;
+    setRows(editRow(params, rows));
   }
 
   return (
     <MKBox>
       <MKBox display="flex" justifyContent="flex-start">
         <MKButton
-          sx={{mb:1}}
+          sx={{ mb: 1 }}
           size="small"
           color="info"
           variant="gradient"
@@ -61,12 +49,26 @@ export default function PriceTable({ vehicles, data }) {
         >
           Thêm giờ
         </MKButton>
+
+        {deletedRow > -1 && (
+          <MKButton
+            sx={{ mb: 1, mx: 2 }}
+            size="small"
+            color="error"
+            variant="gradient"
+            onClick={handleDeleteRow}
+          >
+            Xóa
+          </MKButton>
+        )}
       </MKBox>
       <Grid container sx={{ mx: "auto" }} height="20rem" color>
         <DataGrid
           rows={rows}
           columns={columns}
-          experimentalFeatures={{ newEditingApi: true }}
+          onCellEditCommit={handleChangeCell}
+          onCellClick={handleRowSelection}
+          // experimentalFeatures={{ newEditingApi: true }}
         />
       </Grid>
     </MKBox>

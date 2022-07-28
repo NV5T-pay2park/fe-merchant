@@ -24,8 +24,9 @@ import {
 } from "@react-google-maps/api";
 import MKInput from "presentation/components/MKInput";
 
+const libraries = ["places"];
+
 export default function MapModal({ location, confirmPosition }) {
-  const libraries = ["places"];
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY_2,
     libraries,
@@ -131,7 +132,7 @@ export default function MapModal({ location, confirmPosition }) {
 
               <Divider sx={{ my: 0 }} />
 
-              {isLoaded && renderMap}
+              {renderMap}
 
               <Divider sx={{ my: 0 }} />
               <MKBox display="flex" justifyContent="flex-end" p={1.5} gap={1}>
