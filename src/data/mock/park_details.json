@@ -1,5 +1,42 @@
-[
-  {
-    "parkingLotName": "Nhà xe Hihi"
-  }
-]
+{
+  "merchantId": 1,
+  "parkingLotName": "Nhà xe Tiến Thành",
+  "address": "2 Trần Hưng Đạo, phường Cầu Kho, Quận 1",
+  "lat": 12.3131,
+  "lng": 112121.1,
+  "timeOpen": "10:30:00",
+  "timeClose": "22:30:00",
+
+  "priceTable": [
+    {
+      "vehicleTypeId": 1,
+      "prices": [
+        {
+          "duration": 4,
+          "price": 10000,
+          "unit": 2,
+        },
+        {
+          "duration": 8,
+          "price": 2000,
+          "unit": 1,
+        },
+      ],
+    },
+    {
+      "vehicleTypeId": 2,
+      "prices": [
+        {
+          "duration": 4,
+          "price": 10000,
+          "unit": 2,
+        },
+        {
+          "duration": 8,
+          "price": 2000,
+          "unit": 1,
+        },
+      ],
+    },
+  ],
+};

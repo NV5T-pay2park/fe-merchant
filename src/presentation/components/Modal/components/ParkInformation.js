@@ -36,6 +36,14 @@ export default function ParkInformation({ data }) {
     "https://images.unsplash.com/photo-1589018057745-8c699b3f361c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1wdHklMjBwYXJraW5nJTIwbG90fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
   ]);
   const [selectedVehicle, setSelectedVehicle] = useState("");
+  const [position, setPosition] = useState({});
+  const [address, setAddress] = useState("345 Tran Hung Dao, phuong Cau Kho, quan 1");
+  const [name, setName] = useState("");
+  const [openTime, setOpenTime] = useState("08:00");
+  const [closeTime, setCloseTime] = useState("22:00");
+  const [phone, setPhone] = useState("");
+  const [numberSlot, setNumberSlot] = useState("");
+  
 
   const handleDeleteVehicle = (e, value) => {
     setVehicles(vehicles.filter((vehicle) => vehicle.id !== value));
@@ -55,6 +63,10 @@ export default function ParkInformation({ data }) {
     setVehicles(vehicles.concat({ ...newVehicles }));
   };
 
+  const handleConfirmPosition = (value) => {
+    setPosition(value);
+  }
+
   const renderInformation = (
     <Container>
       <MKTypography variant="body">Thông tin nhà xe</MKTypography>
@@ -69,7 +81,7 @@ export default function ParkInformation({ data }) {
                 <MKInput variant="outlined" label="Địa chỉ" fullWidth />
               </Grid>
               <Grid item xs={12} md={2}>
-                <MapModal />
+                <MapModal confirmPosition={handleConfirmPosition} location={address}/>
               </Grid>
               <Grid item xs={12} md={6} lg={4}>
                 <MKInput
@@ -100,14 +112,14 @@ export default function ParkInformation({ data }) {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} md={12}>
+              {/* <Grid item xs={12} md={12}>
                 <MKInput
                   type="number"
                   variant="outlined"
                   label="Số chỗ giữ xe ước tính"
                   fullWidth
                 ></MKInput>
-              </Grid>
+              </Grid> */}
             </Grid>
           </MKBox>
         </MKBox>

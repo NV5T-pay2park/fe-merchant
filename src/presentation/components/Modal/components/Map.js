@@ -3,8 +3,6 @@
 import { useState } from "react";
 
 // @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
@@ -17,28 +15,77 @@ import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import { Icon } from "@mui/material";
-import MKInput from "../../MKInput";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
 
-export default function MapModal() {
+import {
+  Autocomplete,
+  GoogleMap,
+  Marker,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+import MKInput from "presentation/components/MKInput";
+
+export default function MapModal({ location, confirmPosition }) {
+  const libraries = ["places"];
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY_2,
+    libraries,
+  });
+
   const [show, setShow] = useState(false);
-  const toggleModal = () => setShow(!show);
-
   const center = {
+    // default center at VNG
     lat: 10.75766401459632,
     lng: 106.74603203425715,
   };
 
+  const toggleModal = () => setShow(!show);
+
+  const [position, setPosition] = useState(center);
+  const request = {
+    query: location.toString(),
+    fields: ["geometry"],
+  };
+
+  const handleChangePosition = (e) => {
+    setPosition(e.latLng);
+  };
+
+  const handleConfirm = () => {
+    confirmPosition({ lat: position.lat(), lng: position.lng() });
+    toggleModal();
+  };
+
+  const renderSearchBox = (
+    <MKBox px={4} py={1} borderRadius="lg" bgColor="white" zIndex={1}>
+      <Autocomplete>
+        <MKInput placeholder="Địa chỉ tìm kiếm" fullWidth />
+      </Autocomplete>
+    </MKBox>
+  );
+
   const renderMap = (
-    <LoadScript googleMapsApiKey="AIzaSyDNI_ZWPqvdS6r6gPVO50I4TlYkfkZdXh8">
+    <>
+      {renderSearchBox}
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "60vh" }}
         zoom={16}
         center={center}
+        onClick={handleChangePosition}
+        onLoad={(map) => {
+          const service = new window.google.maps.places.PlacesService(map);
+          service.findPlaceFromQuery(
+            request, (results, status) => {
+              console.log(status)
+              if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                map.setCenter(results[0].geometry.location);
+              }
+            }
+          )
+        }}
       >
-        <></>
+        <Marker position={position} />
       </GoogleMap>
-    </LoadScript>
+    </>
   );
 
   return (
@@ -52,51 +99,57 @@ export default function MapModal() {
       >
         <Icon fontSize="large">add_location_alt</Icon>
       </MKButton>
-      <Modal
-        open={show}
-        onClose={toggleModal}
-        sx={{ display: "grid", placeItems: "center" }}
-      >
-        <Slide direction="down" in={show} timeout={500}>
-          <MKBox
-            position="relative"
-            width="40%"
-            display="flex"
-            flexDirection="column"
-            borderRadius="xl"
-            bgColor="white"
-            shadow="xl"
-          >
+      {show && (
+        <Modal
+          open={show}
+          onClose={toggleModal}
+          sx={{ display: "grid", placeItems: "center" }}
+        >
+          <Slide direction="down" in={show} timeout={500}>
             <MKBox
+              position="relative"
+              width="40%"
               display="flex"
-              alginItems="center"
-              justifyContent="space-between"
-              p={2}
+              flexDirection="column"
+              borderRadius="xl"
+              bgColor="white"
+              shadow="xl"
             >
-              <MKTypography variant="h5">Chọn vị trí nhà xe</MKTypography>
-              <CloseIcon
-                fontSize="medium"
-                sx={{ cursor: "pointer" }}
-                onClick={toggleModal}
-              />
+              <MKBox
+                display="flex"
+                alginItems="center"
+                justifyContent="space-between"
+                p={2}
+              >
+                <MKTypography variant="h5">Chọn vị trí nhà xe</MKTypography>
+                <CloseIcon
+                  fontSize="medium"
+                  sx={{ cursor: "pointer" }}
+                  onClick={toggleModal}
+                />
+              </MKBox>
+
+              <Divider sx={{ my: 0 }} />
+
+              {isLoaded && renderMap}
+
+              <Divider sx={{ my: 0 }} />
+              <MKBox display="flex" justifyContent="flex-end" p={1.5} gap={1}>
+                <MKButton variant="gradient" color="dark" onClick={toggleModal}>
+                  Đóng
+                </MKButton>
+                <MKButton
+                  variant="gradient"
+                  color="info"
+                  onClick={handleConfirm}
+                >
+                  Xác nhận
+                </MKButton>
+              </MKBox>
             </MKBox>
-
-            <Divider sx={{ my: 0 }} />
-
-            {renderMap}
-
-            <Divider sx={{ my: 0 }} />
-            <MKBox display="flex" justifyContent="flex-end" p={1.5} gap={1}>
-              <MKButton variant="gradient" color="dark" onClick={toggleModal}>
-                Đóng
-              </MKButton>
-              <MKButton variant="gradient" color="info">
-                Xác nhận
-              </MKButton>
-            </MKBox>
-          </MKBox>
-        </Slide>
-      </Modal>
+          </Slide>
+        </Modal>
+      )}
     </>
   );
 }
