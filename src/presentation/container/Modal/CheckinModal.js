@@ -20,7 +20,7 @@ export default function CheckinModal({ parkId }) {
         color="dark"
         onClick={toggleModal}
       >
-        <Icon sx={{ mr: 1 }}>qr_code_scanner</Icon>
+        <Icon sx={{ mr: 1 }}>qr_code</Icon>
         QR checkin
       </MKButton>
       <Modal

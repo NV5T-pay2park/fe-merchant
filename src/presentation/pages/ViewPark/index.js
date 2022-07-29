@@ -8,10 +8,13 @@ import QrModal from "presentation/container/Modal/CheckinModal";
 
 import { useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { getAllAvailableStatus } from "services/manage.service";
 import { changeParkStatus } from "services/manage.service";
+import CheckinBox from "./CheckinBox";
+import CheckoutBox from "./CheckoutBox";
+import TicketTable from "./TicketTable";
 
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
@@ -71,15 +74,31 @@ export default function ViewPark({ title }) {
                     Lưu
                   </MKButton>
                 </Grid>
-
+                {/* checkin show qr code */}
                 <Grid
                   item
                   xs={12}
-                  md={6}
+                  md={4}
+                  sx={{ pr: 2 }}
                   display="flex"
                   justifyContent="flex-end"
                 >
                   <QrModal parkId={parkId} />
+                </Grid>
+                {/* checkout button open new tab*/}
+                <Grid item xs={12} md={2}>
+                  <MKButton
+                    size="large"
+                    variant="gradient"
+                    color="success"
+                    rel="noopener noreferrer"
+                    component={Link}
+                    target="_blank"
+                    to={`/manage/checkout/${parkId}`}
+                  >
+                    <Icon sx={{ mr: 1 }}>qr_code_scanner</Icon>
+                    Checkout
+                  </MKButton>
                 </Grid>
               </Grid>
             </MKBox>
@@ -88,6 +107,22 @@ export default function ViewPark({ title }) {
       </MKBox>
     );
   };
+
+  const renderContent = (
+    <MKBox component="section">
+      <Container>
+        <Grid container spacing={3}>
+          <Grid item xs={12} lg={6}>
+            <TicketTable data={[]} />
+          </Grid>
+          <Grid container item xs={12} lg={6} direction="column">
+            <CheckinBox />
+            <CheckoutBox />
+          </Grid>
+        </Grid>
+      </Container>
+    </MKBox>
+  );
 
   return (
     <BaseLayout
@@ -99,6 +134,7 @@ export default function ViewPark({ title }) {
       ]}
     >
       {renderStatusConfig()}
+      {renderContent}
     </BaseLayout>
   );
 }

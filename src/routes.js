@@ -1,4 +1,5 @@
 import Icon from "@mui/material/Icon";
+import Checkout from "presentation/pages/Checkout";
 import HomePage from "presentation/pages/HomePage";
 import Login from "presentation/pages/Login";
 import ManagePage from "presentation/pages/Manage";
@@ -30,6 +31,12 @@ const routes = [
     requireLoggedIn: true,
     route: "/manage/:parkId",
     component: <ViewPark title="test"/>
+  },
+  {
+    hide: true,
+    requireLoggedIn: true,
+    route: "/manage/checkout/:parkId",
+    component: <Checkout />
   }
 ]
 

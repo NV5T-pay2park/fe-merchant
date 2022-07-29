@@ -1,7 +1,10 @@
 {
   "merchantId": 1,
   "parkingLotName": "Nhà xe Tiến Thành",
-  "address": "2 Trần Hưng Đạo, phường Cầu Kho, Quận 1",
+  "street": "3 Trần Hưng Đạo",
+  "ward": "phường Cầu Kho",
+  "district": "Quận 1",
+  "city": "TP. Hồ Chí Minh",
   "lat": 12.3131,
   "lng": 112121.1,
   "timeOpen": "10:30:00",

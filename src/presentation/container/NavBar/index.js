@@ -193,7 +193,7 @@ function Navbar({
       >
         <MKBox
           display="flex"
-          justifycontent="space-between"
+          justifyContent="space-between"
           alignItems="center"
         >
           <MKBox

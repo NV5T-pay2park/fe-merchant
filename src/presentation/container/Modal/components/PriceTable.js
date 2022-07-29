@@ -62,7 +62,7 @@ export default function PriceTable({ vehicles, data }) {
           </MKButton>
         )}
       </MKBox>
-      <Grid container sx={{ mx: "auto" }} height="20rem" color>
+      <Grid container sx={{ mx: "auto" }} height="20rem">
         <DataGrid
           rows={rows}
           columns={columns}
