@@ -1,19 +1,22 @@
 import {
   Container,
-  FormControl,
   Grid,
   Icon,
-  InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
+
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import BaseLayout from "presentation/container/BaseLayout";
+
 import { useState } from "react";
+
 import { useParams } from "react-router-dom";
+
 import { getAllAvailableStatus } from "services/manage.service";
+import { changeParkStatus } from "services/manage.service";
 
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
@@ -21,6 +24,10 @@ export default function ViewPark({ title }) {
 
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
+  }
+
+  const handleSaveStatus = () => {
+    changeParkStatus(parkStatus);
   }
 
   const renderStatusConfig = () => {
@@ -64,6 +71,7 @@ export default function ViewPark({ title }) {
                     size="small"
                     color="info"
                     sx={{ ml: 3 }}
+                    onClick={handleSaveStatus}
                   >
                     Lưu
                   </MKButton>

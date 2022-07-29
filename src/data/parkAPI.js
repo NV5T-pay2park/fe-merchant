@@ -18,7 +18,6 @@ const getAllVehiclesType = () => {
 
 const deleteParkById = (id) => {
   const index = parks.findIndex(x => x.id === id);
-  console.log(index, id)
   if (index > -1) {
     parks.splice(index, 1);
   }

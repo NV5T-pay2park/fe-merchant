@@ -4,3 +4,7 @@ export const getAllAvailableStatus = () => {
     { status: "1", label: "Hết chỗ" },
   ]);
 };
+
+export const changeParkStatus = (newStatus) => {
+  
+}
