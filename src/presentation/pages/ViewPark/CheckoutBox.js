@@ -1,10 +1,23 @@
+/* eslint-disable no-unused-vars */
 import { Card } from "@mui/material";
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
-import MKInput from "presentation/components/MKInput";
 import MKTypography from "presentation/components/MKTypography";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import store from "services/redux/store";
 
 export default function CheckoutBox() {
+  const {licencePlate: currentLicencePlate} = useSelector((state) => state.checkout);
+  
+  const handleConfirmCheckout = () => {
+    //TODO: call checkout API
+  }
+
+  const handleErrorCheckout = () => {
+    // TODO: handle error
+  }
+
   return (
     <Card
       sx={{
@@ -18,9 +31,7 @@ export default function CheckoutBox() {
         <MKTypography sx={{ pb: 2 }} variant="h4">
           Biển số xe đang checkout
         </MKTypography>
-        <MKTypography variant="body" >
-          121313-31331
-        </MKTypography>
+        <MKTypography variant="body">{currentLicencePlate}</MKTypography>
         <MKBox
           direction="row"
           sx={{ py: 2 }}
@@ -30,10 +41,10 @@ export default function CheckoutBox() {
           p={2}
           alignItems="center"
         >
-          <MKButton variant="gradient" color="success">
+          <MKButton variant="gradient" color="success" onClick={handleConfirmCheckout}>
             Xác nhận
           </MKButton>
-          <MKButton variant="gradient" color="error">
+          <MKButton variant="gradient" color="error" onClick={handleErrorCheckout}>
             Báo lỗi
           </MKButton>
         </MKBox>

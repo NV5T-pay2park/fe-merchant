@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Container, Grid, Icon, MenuItem, Select } from "@mui/material";
 
 import MKBox from "presentation/components/MKBox";
@@ -6,7 +7,7 @@ import MKTypography from "presentation/components/MKTypography";
 import BaseLayout from "presentation/container/BaseLayout";
 import QrModal from "presentation/container/Modal/CheckinModal";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -19,7 +20,7 @@ import TicketTable from "./TicketTable";
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
   const [parkStatus, setParkStatus] = useState(0);
-
+  
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
   };

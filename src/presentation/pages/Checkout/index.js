@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
 import React, { useState } from "react";
@@ -5,20 +6,27 @@ import QrReader from "react-camera-qr";
 import BaseLayout from "presentation/container/BaseLayout";
 import { useParams } from "react-router-dom";
 import MKBox from "presentation/components/MKBox";
+import { useDispatch } from "react-redux";
+import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
+import store from "services/redux/store";
 
 const Checkout = () => {
   const { parkId } = useParams();
   const [facingMode, setFacingMode] = useState("user");
   const [data, setData] = useState();
+  console.log(store.getState())
+
+  const dispatch = useDispatch();
 
   const handleErrorCam = (error) => {
     console.log(error);
   };
 
-  const handleScanCam = (result) => {
+  const handleScanCam = async (result) => {
     if (result) {
       setData(result);
-      console.log(result)
+      // TODO: call prevCheckout API to get lisence
+      dispatch(setCheckoutLicencePlate(result))
     }
   };
 

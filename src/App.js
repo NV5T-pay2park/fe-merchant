@@ -10,18 +10,28 @@ import { useEffect } from "react";
 import routes from "routes";
 
 import HomePage from "presentation/pages/HomePage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
 
 export default function App() {
-
   const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state) => state.auth);
-
+  console.log(localStorage.getItem("licencePlate"));
+  const dispatch = useDispatch();
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
+
+  useEffect(() => {
+    function changeData(e) {
+      const value = localStorage.getItem("licencePlate");
+      dispatch(setCheckoutLicencePlate(value));
+    }
+    window.addEventListener("storage", changeData);
+    return () => window.removeEventListener("storage", changeData);
+  }, [dispatch]);
 
   // recusion all nested row (but current only have non-nested)
   const getRoutes = (allRoutes) =>
@@ -33,13 +43,19 @@ export default function App() {
         if (route.requireLoggedIn && !isLoggedIn) {
           return null;
         }
-        return <Route exact path={route.route} element={route.component} key={route.route} />;
+        return (
+          <Route
+            exact
+            path={route.route}
+            element={route.component}
+            key={route.route}
+          />
+        );
       }
 
       return null;
     });
 
-  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

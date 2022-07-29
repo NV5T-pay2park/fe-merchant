@@ -1,17 +1,17 @@
 [
   {
     "ticketId": 1,
-    "license": "22C1-26852",
+    "licence": "22C1-26852",
     "checkinTime": "2022-07-29 15:43:30" 
   },
   {
     "ticketId": 2,
-    "license": "22C1-26852",
+    "licence": "22C1-26852",
     "checkinTime": "2022-07-29 15:43:30" 
   },
   {
     "ticketId": 3,
-    "license": "22C1-26852",
+    "licence": "22C1-26852",
     "checkinTime": "2022-07-29 15:43:30" 
   }
 ]
