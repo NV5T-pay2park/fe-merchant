@@ -1,15 +1,10 @@
-import {
-  Container,
-  Grid,
-  Icon,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Container, Grid, Icon, MenuItem, Select } from "@mui/material";
 
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import BaseLayout from "presentation/container/BaseLayout";
+import QrModal from "presentation/container/Modal/CheckinModal";
 
 import { useState } from "react";
 
@@ -20,19 +15,19 @@ import { changeParkStatus } from "services/manage.service";
 
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
-  const [parkStatus, setParkStatus] = useState(0)
+  const [parkStatus, setParkStatus] = useState(0);
 
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
-  }
+  };
 
   const handleSaveStatus = () => {
     changeParkStatus(parkStatus);
-  }
+  };
 
   const renderStatusConfig = () => {
     const renderSelection = (
-      <Select 
+      <Select
         sx={{ width: "100%", height: "2.5rem", fontWeight: "medium" }}
         value={parkStatus}
         onChange={handleChangeStatus}
@@ -84,10 +79,7 @@ export default function ViewPark({ title }) {
                   display="flex"
                   justifyContent="flex-end"
                 >
-                  <MKButton size="large" variant="gradient" color="dark">
-                    <Icon sx={{mr:1}}>qr_code_scanner</Icon>
-                    QR checkin
-                  </MKButton>
+                  <QrModal parkId={parkId} />
                 </Grid>
               </Grid>
             </MKBox>

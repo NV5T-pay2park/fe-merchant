@@ -2,9 +2,9 @@ import MKBox from "../MKBox";
 
 import { Card, Stack } from "@mui/material";
 import MKTypography from "../MKTypography";
-import EditParkDetail from "../Modal/EditParkDetail";
+import EditParkDetail from "../../container/Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
-import DeleteConfirm from "../Modal/DeleteConfirm";
+import DeleteConfirm from "../../container/Modal/DeleteConfirm";
 
 import noImage from "assets/images/no-image-park.png";
 import { Link } from "react-router-dom";

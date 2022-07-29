@@ -1,9 +1,9 @@
-import MKBox from "../../MKBox";
-import MKTypography from "../../MKTypography";
-import MKInput from "../../MKInput";
+import MKBox from "../../../components/MKBox";
+import MKTypography from "../../../components/MKTypography";
+import MKInput from "../../../components/MKInput";
 import MapModal from "./Map";
 
-import MKAvatar from "../../MKAvatar";
+import MKAvatar from "../../../components/MKAvatar";
 
 import {
   Chip,
