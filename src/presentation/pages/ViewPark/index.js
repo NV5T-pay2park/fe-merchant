@@ -20,7 +20,8 @@ import TicketTable from "./TicketTable";
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
   const [parkStatus, setParkStatus] = useState(0);
-  
+  const [isEnableCheckin, setIsEnableCheckin] = useState(true);
+
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
   };
@@ -117,7 +118,7 @@ export default function ViewPark({ title }) {
             <TicketTable data={[]} />
           </Grid>
           <Grid container item xs={12} lg={6} direction="column">
-            <CheckinBox />
+            {isEnableCheckin && <CheckinBox />}
             <CheckoutBox />
           </Grid>
         </Grid>
