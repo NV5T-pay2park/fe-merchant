@@ -11,15 +11,25 @@ import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import BaseLayout from "presentation/container/BaseLayout";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllAvailableStatus } from "services/manage.service";
 
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
+  const [parkStatus, setParkStatus] = useState(0)
+
+  const handleChangeStatus = (e) => {
+    setParkStatus(e.target.value);
+  }
 
   const renderStatusConfig = () => {
     const renderSelection = (
-      <Select sx={{ width: "100%", height: "2.5rem", fontWeight: "medium" }}>
+      <Select 
+        sx={{ width: "100%", height: "2.5rem", fontWeight: "medium" }}
+        value={parkStatus}
+        onChange={handleChangeStatus}
+      >
         {getAllAvailableStatus().map((status) => (
           <MenuItem key={status.status} value={status.status}>
             {status.label}
