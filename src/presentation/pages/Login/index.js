@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { login } from "redux/actions/authActions";
+import { login } from "services/redux/actions/authActions";
 
 export default function Login() {
   const { isLoggedIn } = useSelector((state) => state.auth);

@@ -29,7 +29,7 @@ const routes = [
     hide: true,
     requireLoggedIn: true,
     route: "/manage/:parkId",
-    component: <ViewPark title="ahihi dongok"/>
+    component: <ViewPark title="test"/>
   }
 ]
 
