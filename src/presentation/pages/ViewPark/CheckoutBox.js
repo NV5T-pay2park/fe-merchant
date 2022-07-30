@@ -5,17 +5,17 @@ import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { checkOut } from "services/manage.service";
 import store from "services/redux/store";
 
 export default function CheckoutBox() {
-  const {licensePlate: currentLicencePlate} = useSelector((state) => state.checkout);
-  
-  useEffect(() => {
-
-  }, [currentLicencePlate]);
+  const {licensePlate: currentLicencePlate, ticketData} = useSelector((state) => state.checkout);
 
   const handleConfirmCheckout = () => {
-    //TODO: call checkout API
+    // TODO: call checkout API
+    console.log(ticketData);
+    checkOut(ticketData);
+    
   }
 
   const handleErrorCheckout = () => {
@@ -35,7 +35,7 @@ export default function CheckoutBox() {
         <MKTypography sx={{ pb: 2 }} variant="h4">
           Biển số xe đang checkout
         </MKTypography>
-        <MKTypography variant="body">{currentLicencePlate || ""}</MKTypography>
+        <MKTypography variant="body">{currentLicencePlate || "Hiện không có xe checkout"}</MKTypography>
         <MKBox
           direction="row"
           sx={{ py: 2 }}

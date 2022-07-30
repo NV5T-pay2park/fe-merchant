@@ -43,8 +43,11 @@ export const sendInformationCheckIn = (
 };
 
 const isValidTicketData = (ticketData) => {
-  return (ticketData.hasOwnProperty('endUserID') && (ticketData.hasOwnProperty('ticketID')));
-}
+  return (
+    ticketData.hasOwnProperty("endUserID") &&
+    ticketData.hasOwnProperty("ticketID")
+  );
+};
 
 export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
   // validation input
@@ -59,7 +62,7 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
   }
   endUserTicketData = {
     endUserID: endUserTicketData.endUserID,
-    ticketID: endUserTicketData.ticketID
+    ticketID: endUserTicketData.ticketID,
   };
   // call api
   manageAPI
@@ -70,7 +73,7 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
         dispatch(
           setCheckoutLicencePlate(
             JSON.stringify({
-              ...endUserTicketData,
+              ticketData: {...endUserTicketData},
               licensePlate: result.data.data,
             })
           )
@@ -78,11 +81,22 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
       } else {
         dispatch(
           setCheckoutLicencePlate(
-            JSON.stringify({ licensePlate: result.data.message })
+            JSON.stringify({ licensePlate: result.data.message})
           )
         );
       }
     });
 };
 
-export const checkOut = (ticketData) => {};
+export const checkOut = (ticketData) => {
+  manageAPI.checkOut(ticketData)
+  .then((result) => {
+    console.log(result)
+    if (result.data.status === "OK") {
+      // TODO: show alert successful
+      localStorage.removeItem('licensePlate');
+    } else {
+      console.log('error');
+    }
+  });
+};

@@ -7,7 +7,7 @@ try {
   licensePlate = {};
 }
 
-const initialState = licensePlate;
+const initialState = licensePlate || {};
 
 console.log(initialState)
 export default function checkoutReducer(state = initialState, action) {
