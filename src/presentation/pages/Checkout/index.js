@@ -21,7 +21,7 @@ const Checkout = () => {
   };
 
   const handleScanCam = async (result) => {
-    if (result) {
+    if (result && result !== data) {
       setData(result);
       preCheckOut(result, parseInt(parkId), dispatch)
     }
