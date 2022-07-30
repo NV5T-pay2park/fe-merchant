@@ -12,12 +12,16 @@ import routes from "routes";
 import HomePage from "presentation/pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
+import Socket from "./services/socket";
+import SocketTestPage from "./presentation/pages/Socket"
 
 export default function App() {
   const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state) => state.auth);
-  console.log(localStorage.getItem("licencePlate"));
   const dispatch = useDispatch();
+
+  const {connect, messages, setMessages} = Socket(1);
+
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -61,7 +65,8 @@ export default function App() {
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage /> } />
+        <Route path="/socket" element={<SocketTestPage socket={{connect, messages, setMessages}} />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </ThemeProvider>
