@@ -27,7 +27,6 @@ import PriceTable from "./PriceTable";
 
 export default function ParkInformation({ data }) {
   const allVehiclesType = getAllVehiclesType();
-
   const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([
     "https://thumbs.dreamstime.com/b/parking-lot-856838.jpg",
@@ -54,7 +53,7 @@ export default function ParkInformation({ data }) {
   };
 
   const handleAddVehicle = () => {
-    if (!selectedVehicle) return;
+    if (selectedVehicle === "") return;
     if (vehicles.find((x) => x.id === selectedVehicle)) {
       // if already exists
       return;
@@ -112,14 +111,14 @@ export default function ParkInformation({ data }) {
                   fullWidth
                 />
               </Grid>
-              {/* <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={12}>
                 <MKInput
                   type="number"
                   variant="outlined"
                   label="Số chỗ giữ xe ước tính"
                   fullWidth
                 ></MKInput>
-              </Grid> */}
+              </Grid>
             </Grid>
           </MKBox>
         </MKBox>
@@ -185,8 +184,8 @@ export default function ParkInformation({ data }) {
                   </MenuItem>
                   {allVehiclesType.map((vehicle) => (
                     <MenuItem
-                      key={vehicle.id.toString()}
-                      value={vehicle.id.toString()}
+                      key={vehicle.id}
+                      value={vehicle.id}
                     >
                       {vehicle.name}
                     </MenuItem>
@@ -209,7 +208,7 @@ export default function ParkInformation({ data }) {
         </MKBox>
 
         {vehicles.map((vehicle) => (
-          <Grid item key={vehicle.id.toString()} sx={{ mb: 1, ml: 1 }}>
+          <Grid item key={vehicle.id} sx={{ mb: 1, ml: 1 }}>
             <Chip
               label={vehicle.name}
               onDelete={(e) => handleDeleteVehicle(e, vehicle.id)}
