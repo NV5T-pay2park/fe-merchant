@@ -7,11 +7,7 @@ import { useCallback, useState } from "react";
 import { deleteRow } from "services/price.service";
 import { createColumns, editRow, createNewRow } from "services/price.service";
 
-export default function PriceTable({ vehicles, data }) {
-  const [rows, setRows] = useState([
-    { id: 1, duration: "", description: "Đồng giá" },
-  ]);
-
+export default function PriceTable({ vehicles, data, rows, setRows }) {
   const [deletedRow, setDeletedRow] = useState(-1);
 
   const columns = createColumns(vehicles);
@@ -35,7 +31,7 @@ export default function PriceTable({ vehicles, data }) {
   const handleChangeCell = (params, event) => {
     event.defaultMuiPrevented = true;
     setRows(editRow(params, rows));
-  }
+  };
 
   return (
     <MKBox>

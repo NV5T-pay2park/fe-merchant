@@ -25,24 +25,40 @@ import { getAllVehiclesType } from "services/park.service";
 import MKButton from "presentation/components/MKButton";
 import PriceTable from "./PriceTable";
 
-export default function ParkInformation({ data }) {
+export default function ParkInformation({ useParkDetail }) {
   const allVehiclesType = getAllVehiclesType();
-  const [vehicles, setVehicles] = useState([]);
-  const [images, setImages] = useState([
-    "https://thumbs.dreamstime.com/b/parking-lot-856838.jpg",
-    "https://media.istockphoto.com/photos/dealer-new-cars-stock-picture-id480652712?k=20&m=480652712&s=612x612&w=0&h=dbyTkQ3-PJJMAlNAR2hGxPWX1ODvSJspuDsdvQmOKlI=",
-    "https://www.ledgerinsights.com/wp-content/uploads/2020/05/parking-lot-cars.jpg",
-    "https://images.unsplash.com/photo-1589018057745-8c699b3f361c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1wdHklMjBwYXJraW5nJTIwbG90fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  ]);
+
   const [selectedVehicle, setSelectedVehicle] = useState("");
-  const [position, setPosition] = useState({});
-  const [address, setAddress] = useState("345 Tran Hung Dao, phuong Cau Kho, quan 1");
-  const [name, setName] = useState("");
-  const [openTime, setOpenTime] = useState("08:00");
-  const [closeTime, setCloseTime] = useState("22:00");
-  const [phone, setPhone] = useState("");
-  const [numberSlot, setNumberSlot] = useState("");
-  
+  const [isOpenAllDay, setIsOpenAllDay] = useState(false);
+
+  const {
+    vehicles,
+    setVehicles,
+    images,
+    setImages,
+    position,
+    setPosition,
+    street,
+    setStreet,
+    ward,
+    setWard,
+    district,
+    setDistrict,
+    city,
+    setCity,
+    name,
+    setName,
+    openTime,
+    setOpenTime,
+    closeTime,
+    setCloseTime,
+    phone,
+    setPhone,
+    numberSlot,
+    setNumberSlot,
+    rows,
+    setRows,
+  } = useParkDetail;
 
   const handleDeleteVehicle = (e, value) => {
     setVehicles(vehicles.filter((vehicle) => vehicle.id !== value));
@@ -64,7 +80,27 @@ export default function ParkInformation({ data }) {
 
   const handleConfirmPosition = (value) => {
     setPosition(value);
-  }
+  };
+
+  const handleChangeOpenTime = (e) => {
+    if (!isOpenAllDay) {
+      setOpenTime(e.target.value);
+    }
+  };
+
+  const handleChangeCloseTime = (e) => {
+    if (!isOpenAllDay) {
+      setCloseTime(e.target.value);
+    }
+  };
+
+  const handleCheckOpenAllDay = (e) => {
+    setIsOpenAllDay(e.target.checked);
+    if (e.target.checked) {
+      setOpenTime("00:00");
+      setCloseTime("00:00");
+    }
+  };
 
   const renderInformation = (
     <Container>
@@ -74,20 +110,76 @@ export default function ParkInformation({ data }) {
           <MKBox p={3}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <MKInput variant="outlined" label="Tên nhà xe" fullWidth />
+                <MKInput
+                  variant="outlined"
+                  label="Tên nhà xe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  fullWidth
+                />
               </Grid>
-              <Grid item xs={12} md={10}>
-                <MKInput variant="outlined" label="Địa chỉ" fullWidth />
+              <Grid item xs={12} md={6}>
+                <MKInput
+                  variant="outlined"
+                  label="Đường"
+                  fullWidth
+                  value={street}
+                  onChange={(e) => setStreet(e.target.value)}
+                />
               </Grid>
-              <Grid item xs={12} md={2}>
-                <MapModal confirmPosition={handleConfirmPosition} location={address}/>
+              <Grid item xs={12} md={6}>
+                <MKInput
+                  variant="outlined"
+                  label="Phường"
+                  fullWidth
+                  value={ward}
+                  onChange={(e) => setWard(e.target.value)}
+                />
               </Grid>
+              <Grid item xs={12} md={6}>
+                <MKInput
+                  variant="outlined"
+                  label="Quận"
+                  fullWidth
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <MKInput
+                  variant="outlined"
+                  label="Thành phố"
+                  fullWidth
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <MapModal confirmPosition={handleConfirmPosition} />
+              </Grid>
+              <Grid item xs={12} md={8}>
+                {/* <MKInput
+                  variant="outlined"
+                  label="Tọa độ"
+                  disabled
+                  fullWidth
+                  value={JSON.stringify(position)}
+                /> */}
+                <MKTypography variant="body2" mt={1}>
+                  {position
+                    ? `(${position.lat.toFixed(6)}, ${position.lng.toFixed(6)})`
+                    : "Chọn vị trí trên bản đồ"}
+                </MKTypography>
+              </Grid>
+
               <Grid item xs={12} md={6} lg={4}>
                 <MKInput
                   type="time"
                   variant="outlined"
                   label="Giờ mở cửa"
-                  value="08:00"
+                  value={openTime}
+                  onChange={handleChangeOpenTime}
                   fullWidth
                 />
               </Grid>
@@ -96,12 +188,21 @@ export default function ParkInformation({ data }) {
                   type="time"
                   variant="outlined"
                   label="Giờ đóng cửa"
-                  value="22:00"
+                  value={closeTime}
+                  onChange={handleChangeCloseTime}
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12} md={12} lg={3}>
-                <FormControlLabel control={<Checkbox />} label="Cả ngày" />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isOpenAllDay}
+                      onChange={handleCheckOpenAllDay}
+                    />
+                  }
+                  label="Cả ngày"
+                />
               </Grid>
               <Grid item xs={12} md={12}>
                 <MKInput
@@ -109,6 +210,8 @@ export default function ParkInformation({ data }) {
                   variant="outlined"
                   label="Số điện thoại"
                   fullWidth
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} md={12}>
@@ -117,6 +220,8 @@ export default function ParkInformation({ data }) {
                   variant="outlined"
                   label="Số chỗ giữ xe ước tính"
                   fullWidth
+                  value={numberSlot}
+                  onChange={(e) => setNumberSlot(e.target.value)}
                 ></MKInput>
               </Grid>
             </Grid>
@@ -183,10 +288,7 @@ export default function ParkInformation({ data }) {
                     <em>None</em>
                   </MenuItem>
                   {allVehiclesType.map((vehicle) => (
-                    <MenuItem
-                      key={vehicle.id}
-                      value={vehicle.id}
-                    >
+                    <MenuItem key={vehicle.id} value={vehicle.id}>
                       {vehicle.name}
                     </MenuItem>
                   ))}
@@ -222,8 +324,8 @@ export default function ParkInformation({ data }) {
   const renderPriceTable = (
     <Container>
       <MKTypography variant="body">Bảng giá</MKTypography>
-      <MKBox width="100%" sx={{mx:"auto", p:2}}>
-        <PriceTable vehicles={vehicles}/>
+      <MKBox width="100%" sx={{ mx: "auto", p: 2 }}>
+        <PriceTable vehicles={vehicles} rows={rows} setRows={setRows} />
       </MKBox>
     </Container>
   );

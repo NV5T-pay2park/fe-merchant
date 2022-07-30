@@ -43,7 +43,7 @@ export default function MapModal({ location, confirmPosition }) {
 
   const [position, setPosition] = useState(center);
   const request = {
-    query: location.toString(),
+    query: location ? location.toString() : '',
     fields: ["geometry"],
   };
 
@@ -98,7 +98,8 @@ export default function MapModal({ location, confirmPosition }) {
         onClick={toggleModal}
         sx={{ mt: 1 }}
       >
-        <Icon fontSize="large">add_location_alt</Icon>
+        <Icon fontSize="large" sx={{mx:1}}>add_location_alt</Icon>
+        Bản đồ
       </MKButton>
       {show && (
         <Modal

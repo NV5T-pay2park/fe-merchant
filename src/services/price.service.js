@@ -104,3 +104,15 @@ export const deleteRow = (rows, deletedRow) => {
   }
   return newRows;
 };
+
+export const convertRowsToJSON = (rows, vehicles) => {
+  const result = vehicles.map((vehicle) => {
+    const vehicleTypeId = vehicle.id;
+    const prices = rows.map((row) => {
+      const [price, unit = 1] = row[vehicleTypeId] ? row[vehicleTypeId].toString().split('/').map(x => +x) : [0, 0];
+      return { price, unit, duration: row.duration };
+    });
+    return {vehicleTypeId, prices};
+  });
+  return result;
+};

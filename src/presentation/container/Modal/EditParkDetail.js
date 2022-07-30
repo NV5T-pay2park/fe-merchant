@@ -16,11 +16,18 @@ import {
   Icon,
 } from "@mui/material";
 import ParkInformation from "./components/ParkInformation";
+import useParkDetail from "services/hooks/useParkDetail";
 
 export default function EditParkDetail({ action }) {
   const [show, setShow] = useState(false);
 
   const toggleModal = () => setShow(!show);
+
+  const {submitForm, ...details} = useParkDetail(-1);
+
+  const onCreateNewPark = () => {
+    submitForm();
+  }
 
   return (
     <>
@@ -65,14 +72,14 @@ export default function EditParkDetail({ action }) {
             </MKBox>
 
             <Divider sx={{ my: 0 }} />
-            {show && <ParkInformation toggleModal={toggleModal} />}
+            {show && <ParkInformation useParkDetail={details} />}
 
             <Divider sx={{ my: 0 }} />
             <MKBox display="flex" justifyContent="flex-end" p={1.5} gap={1}>
               <MKButton variant="gradient" color="dark" onClick={toggleModal}>
                 Đóng
               </MKButton>
-              <MKButton variant="gradient" color="info">
+              <MKButton variant="gradient" color="info" onClick={onCreateNewPark}>
                 Tạo mới nhà xe
               </MKButton>
             </MKBox>
