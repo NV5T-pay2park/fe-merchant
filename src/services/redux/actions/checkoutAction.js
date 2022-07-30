@@ -4,6 +4,6 @@ export const setCheckoutLicencePlate = (licensePlate) => {
   localStorage.setItem('licensePlate', licensePlate);
   return {
     type: CHECKOUT_SET_LICENCE_PLATE,
-    payload: { licensePlate },
+    payload: JSON.parse(licensePlate),
   };
 };

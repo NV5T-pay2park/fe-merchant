@@ -9,8 +9,16 @@ const sendInformationCheckIn = async (checkInData, vehicleData) => {
   .then(res => {
     console.log(res);
   })
+};
+
+const preCheckOut = (ticketData) => {
+  return Axios.post(`preCheckOut`, ticketData);
 }
 
-const manageAPI = { sendInformationCheckIn };
+const checkOut = (ticketData) => {
+  return Axios.post(`checkOut`, ticketData);
+}
+
+const manageAPI = { sendInformationCheckIn, preCheckOut, checkOut };
 
 export default manageAPI;

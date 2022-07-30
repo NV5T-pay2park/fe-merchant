@@ -10,6 +10,10 @@ import store from "services/redux/store";
 export default function CheckoutBox() {
   const {licensePlate: currentLicencePlate} = useSelector((state) => state.checkout);
   
+  useEffect(() => {
+
+  }, [currentLicencePlate]);
+
   const handleConfirmCheckout = () => {
     //TODO: call checkout API
   }
@@ -31,7 +35,7 @@ export default function CheckoutBox() {
         <MKTypography sx={{ pb: 2 }} variant="h4">
           Biển số xe đang checkout
         </MKTypography>
-        <MKTypography variant="body">{currentLicencePlate}</MKTypography>
+        <MKTypography variant="body">{currentLicencePlate || ""}</MKTypography>
         <MKBox
           direction="row"
           sx={{ py: 2 }}
