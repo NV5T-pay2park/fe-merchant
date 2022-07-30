@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import store from "services/redux/store";
 
 export default function CheckoutBox() {
-  const {licencePlate: currentLicencePlate} = useSelector((state) => state.checkout);
+  const {licensePlate: currentLicencePlate} = useSelector((state) => state.checkout);
   
   const handleConfirmCheckout = () => {
     //TODO: call checkout API

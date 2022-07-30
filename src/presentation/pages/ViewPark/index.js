@@ -10,9 +10,11 @@ import QrModal from "presentation/container/Modal/CheckinModal";
 import { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
+import { handleReceiveMessage } from "services/manage.service";
 
 import { getAllAvailableStatus } from "services/manage.service";
 import { changeParkStatus } from "services/manage.service";
+import Socket from "services/socket";
 import CheckinBox from "./CheckinBox";
 import CheckoutBox from "./CheckoutBox";
 import TicketTable from "./TicketTable";
@@ -20,7 +22,18 @@ import TicketTable from "./TicketTable";
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
   const [parkStatus, setParkStatus] = useState(0);
-  const [isEnableCheckin, setIsEnableCheckin] = useState(true);
+  const [isEnableCheckin, setIsEnableCheckin] = useState(false);
+  const [currentCheckInData, setCurrentCheckInData] = useState();
+
+  const { connect, messages } = Socket(parkId);
+  // reconnect every re-render or connect change
+  useEffect(() => {
+    connect();
+  }, [connect])
+
+  useEffect(() => {
+    handleReceiveMessage(messages, setIsEnableCheckin, setCurrentCheckInData);
+  }, [messages]);
 
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
@@ -118,7 +131,7 @@ export default function ViewPark({ title }) {
             <TicketTable data={[]} />
           </Grid>
           <Grid container item xs={12} lg={6} direction="column">
-            {isEnableCheckin && <CheckinBox />}
+            {isEnableCheckin && <CheckinBox checkInData={currentCheckInData}/>}
             <CheckoutBox />
           </Grid>
         </Grid>

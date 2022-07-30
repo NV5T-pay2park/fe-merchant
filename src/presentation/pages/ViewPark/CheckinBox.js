@@ -1,18 +1,26 @@
-import { Card } from "@mui/material";
+import { Card, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKInput from "presentation/components/MKInput";
 import MKTypography from "presentation/components/MKTypography";
 import { useState } from "react";
+import { sendInformationCheckIn } from "services/manage.service";
+import { getAllVehiclesType } from "services/park.service";
 
-export default function CheckinBox() {
-  const [licencePlate, setLicencePlate] = useState("");
+export default function CheckinBox({ checkInData }) {
+  const [licensePlate, setLicencePlate] = useState("");
+  const [vehicleTypeID, setVehicleType] = useState(1);
+
   const handleConfirm = () => {
-    // TODO: call API checkin
+    sendInformationCheckIn(checkInData, vehicleTypeID, licensePlate);
   };
 
   const handleClear = () => {
     setLicencePlate("");
+  };
+
+  const handleChangeSelectedVehicle = (e) => {
+    setVehicleType(e.target.value);
   };
 
   return (
@@ -24,18 +32,43 @@ export default function CheckinBox() {
         boxShadow: ({ boxShadows: { xxl } }) => xxl,
       }}
     >
-      <MKBox textAlign="center" height="10rem" width="100%" borderRadius="lg">
-        <MKTypography sx={{ pb: 2 }} variant="h4" >
+      <MKBox textAlign="center" height="14rem" width="100%" borderRadius="lg">
+        <MKTypography sx={{ pb: 2 }} variant="h4">
           Nhập biển số xe
         </MKTypography>
+        <FormControl
+          sx={{ m: 1, p: 1, width: "60%", height: "5vh" }}
+          size="large"
+        >
+          <InputLabel>Loại xe</InputLabel>
+          <Select
+            value={vehicleTypeID}
+            onChange={handleChangeSelectedVehicle}
+            label="Loại xe"
+            sx={{ height: "100%" }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {getAllVehiclesType().map((vehicle) => (
+              <MenuItem
+                key={vehicle.id.toString()}
+                value={vehicle.id}
+              >
+                {vehicle.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <MKInput
           disabled={false}
           variant="outlined"
           label="Biển số"
-          sx={{ width: "60%",  }}
-          value={licencePlate}
-          textTransform="uppercase"
-          onChange={(e) => setLicencePlate(e.target.value.toString().toUpperCase())}
+          sx={{ width: "60%" }}
+          value={licensePlate}
+          onChange={(e) =>
+            setLicencePlate(e.target.value.toString().toUpperCase())
+          }
         />
         <MKBox
           direction="row"

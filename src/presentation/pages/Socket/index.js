@@ -4,8 +4,8 @@ import SockJS from 'sockjs-client';
 import Socket from "../../../services/socket";
 
 
-function SocketTestPage(params) {
-  const { connect, messages, setMessages } = Socket(1);
+function SocketTestPage() {
+  const { connect, messages } = Socket(1);
   
   return (
     <div>

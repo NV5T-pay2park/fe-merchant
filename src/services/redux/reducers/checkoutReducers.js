@@ -1,9 +1,9 @@
 import { CHECKOUT_SET_LICENCE_PLATE } from "shared/constants/constants";
 
-const licencePlate = localStorage.getItem('licencePlate');
-const initialState = licencePlate && licencePlate !== "null"
-  ? {licencePlate: licencePlate}
-  : {licencePlate: ''}
+const licensePlate = localStorage.getItem('licensePlate');
+const initialState = licensePlate && licensePlate !== "null"
+  ? {licensePlate: licensePlate}
+  : {licensePlate: ''}
 console.log(initialState)
 export default function checkoutReducer(state = initialState, action) {
   switch (action.type) {
