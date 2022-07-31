@@ -1,3 +1,4 @@
+import { uploadParkInformation } from "services/park.service";
 import { uploadImagesByParkId } from "services/park.service";
 import { convertRowsToJSON } from "services/price.service";
 
@@ -28,16 +29,24 @@ const useParkDetail = (parkId) => {
     // TODO: load info
   }, [parkId]);
 
+  const getJSONFormat = () => {
+    //TODO: add merchant id
+    return ({
+      "parkingLotName": name,
+      street, ward, district, city,
+      ...position,
+      timeOpen: openTime + ':00',
+      timeClose: closeTime + ':00',
+      numberSlot, 
+      phoneNumber: phone,
+      priceTable: convertRowsToJSON(rows, vehicles),
+    })
+  }
 
   const submitForm = () => {
-    console.log(position)
-    console.log(street)
-    console.log(phone);
-    console.log(openTime + " " + closeTime);
-    console.log(rows);
-    console.log(images);
-    console.log(convertRowsToJSON(rows, vehicles))
-    uploadImagesByParkId(parkId, images);
+    console.log(JSON.stringify(getJSONFormat()));
+    // uploadParkInformation(parkId, )
+    // uploadImagesByParkId(parkId, images);
   }
 
   return {

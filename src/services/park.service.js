@@ -18,3 +18,7 @@ export const deleteParkById = (id) => {
 export const uploadImagesByParkId = (parkId, images) => {
   parkAPI.uploadImagesByParkId(parkId, images);
 } 
+
+export const uploadParkInformation = (parkId, data) => {
+  
+} 
