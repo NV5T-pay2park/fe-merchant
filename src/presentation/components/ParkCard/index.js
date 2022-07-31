@@ -27,7 +27,7 @@ export default function ParkCard({
           action === "edit" ? (
             <EditParkDetail
               key={action}
-              parkID={id}
+              parkId={id}
               action={ACTION_BUTTON_STYLE[action]}
             />
           ) : action === "delete" ? (
@@ -58,7 +58,7 @@ export default function ParkCard({
     <Card>
       <MKBox 
         position="relative" 
-        borderRadius="lg" very
+        borderRadius="lg"
         mx={2} 
         mt={-3}
         component={Link}

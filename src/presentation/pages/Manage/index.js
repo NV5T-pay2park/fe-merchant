@@ -59,7 +59,7 @@ export default function ManagePage() {
       component="section"
       sx={{ overflow: "hidden" }}
     >
-      <EditParkDetail size="medium" parkID={-1} action={ACTION_BUTTON_STYLE['create']}/>
+      <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>
     </MKBox>
   );
 

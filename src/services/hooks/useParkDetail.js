@@ -1,3 +1,4 @@
+import manageAPI from "data/manageAPI";
 import { uploadParkInformation } from "services/park.service";
 import { uploadImagesByParkId } from "services/park.service";
 import { convertRowsToJSON } from "services/price.service";
@@ -26,6 +27,7 @@ const useParkDetail = (parkId) => {
     if (parkId === -1) {
       return;
     }
+    manageAPI.getParkDetailById(parkId);
     // TODO: load info
   }, [parkId]);
 
