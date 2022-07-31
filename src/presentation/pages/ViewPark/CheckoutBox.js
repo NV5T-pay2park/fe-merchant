@@ -12,11 +12,11 @@ export default function CheckoutBox({ parkId }) {
   const {
     licensePlate: currentLicencePlate,
     ticketData,
-    licensePlate,
+    parkingLotID,
   } = useSelector((state) => state.checkout);
 
   const handleConfirmCheckout = () => {
-    if (currentLicencePlate === parkId) {
+    if (parkingLotID?.toString() === parkId) {
       checkOut(ticketData);
     }
   };
@@ -26,7 +26,7 @@ export default function CheckoutBox({ parkId }) {
   };
 
   const renderLicensePlate = () => {
-    if (currentLicencePlate === parkId) {
+    if (parkingLotID?.toString() === parkId) {
       return currentLicencePlate;
     }
     return "Hiện không có xe checkout";
