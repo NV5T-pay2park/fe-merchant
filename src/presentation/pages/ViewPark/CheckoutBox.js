@@ -4,8 +4,9 @@ import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checkOut } from "services/manage.service";
+import { setAlertMessage } from "services/redux/actions/alertActions";
 import store from "services/redux/store";
 
 export default function CheckoutBox({ parkId, setTickets }) {
@@ -15,11 +16,13 @@ export default function CheckoutBox({ parkId, setTickets }) {
     parkingLotID,
   } = useSelector((state) => state.checkout);
 
+  const dispatch = useDispatch()
+
   const handleConfirmCheckout = () => {
     if (parkingLotID?.toString() === parkId) {
     console.log(parkId, parkingLotID);
 
-      checkOut(ticketData, setTickets);
+      checkOut(ticketData, setTickets, dispatch);
     }
   };
 

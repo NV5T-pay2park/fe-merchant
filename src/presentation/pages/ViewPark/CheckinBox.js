@@ -4,6 +4,7 @@ import MKButton from "presentation/components/MKButton";
 import MKInput from "presentation/components/MKInput";
 import MKTypography from "presentation/components/MKTypography";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { sendInformationCheckIn } from "services/manage.service";
 import { getAllVehiclesType } from "services/park.service";
 
@@ -11,8 +12,10 @@ export default function CheckinBox({ checkInData, setTickets }) {
   const [licensePlate, setLicencePlate] = useState("");
   const [vehicleTypeID, setVehicleType] = useState(1);
 
+  const dispatch = useDispatch()
+
   const handleConfirm = () => {
-    sendInformationCheckIn(checkInData, vehicleTypeID, licensePlate, setTickets);
+    sendInformationCheckIn(checkInData, vehicleTypeID, licensePlate, setTickets, dispatch);
   };
 
   const handleClear = () => {

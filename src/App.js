@@ -12,6 +12,7 @@ import routes from "routes";
 import HomePage from "presentation/pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
+import InfoSnackbar from "presentation/components/InfoSnackbar";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/home" element={<HomePage /> } />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
+      <InfoSnackbar/>
     </ThemeProvider>
   );
 }

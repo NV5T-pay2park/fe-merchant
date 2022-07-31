@@ -1,4 +1,5 @@
 import manageAPI from "data/manageAPI";
+import { setAlertMessage } from "./redux/actions/alertActions";
 import { setCheckoutLicencePlate } from "./redux/actions/checkoutAction";
 
 export const getAllAvailableStatus = () => {
@@ -36,6 +37,7 @@ export const sendInformationCheckIn = (
   vehicleTypeID,
   licensePlate,
   setTickets,
+  dispatch
 ) => {
   manageAPI.sendInformationCheckIn(checkInData, {
     vehicleTypeID,
@@ -43,12 +45,13 @@ export const sendInformationCheckIn = (
   }).then((result) => {
     if (result.data.status === "OK") {
       getCurrentTicketsByParkingLotId(checkInData.parkingLotID, setTickets)
+      dispatch(setAlertMessage('Gửi thông tin thành công', 'success'))
     } else {
-      //TODO: show alert error
+      dispatch(setAlertMessage(`Lỗi ${result.data.message}`))
     }
-    setTickets()
   },
   error => {
+    dispatch(setAlertMessage(`Lỗi`))
 
   });
 };
@@ -100,25 +103,30 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
     });
 };
 
-export const checkOut = (ticketData, setTickets) => {
+export const checkOut = (ticketData, setTickets, dispatch) => {
   console.log(`?> ${ticketData}`);
   manageAPI.checkOut(ticketData).then((result) => {
     if (result.data.status === "OK") {
       // TODO: show alert successful
       localStorage.removeItem("licensePlate");
       getCurrentTicketsByParkingLotId(ticketData.getParkingLotID, setTickets)
-      
+      dispatch(setAlertMessage('Checkout thành công', 'success'))
     } else {
       console.log("error");
+      dispatch(setAlertMessage('Checkout thất bại', 'error'))
+
     }
-  }, error => {
+  }, (error) => {
     console.log('error')
+    dispatch(setAlertMessage('Checkout thất bại', 'error'))
+
   });
 };
 
 export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
   manageAPI.getCurrentTicketsByParkingLotId(parkId).then((result) => {
     if (result.data?.status === "OK") {
+      console.warn(result.data.data);
       setTickets(result.data.data.map((ticket) => ({
         id: ticket.ticketID,
         ticketID: ticket.ticketID,
