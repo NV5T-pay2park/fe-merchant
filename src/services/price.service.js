@@ -1,5 +1,3 @@
-import flatpickr from "assets/theme/components/flatpickr";
-
 export const createColumns = (vehicles) => {
   return [
     {

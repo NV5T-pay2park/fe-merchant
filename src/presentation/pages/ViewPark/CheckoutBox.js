@@ -8,19 +8,29 @@ import { useSelector } from "react-redux";
 import { checkOut } from "services/manage.service";
 import store from "services/redux/store";
 
-export default function CheckoutBox() {
-  const {licensePlate: currentLicencePlate, ticketData} = useSelector((state) => state.checkout);
+export default function CheckoutBox({ parkId }) {
+  const {
+    licensePlate: currentLicencePlate,
+    ticketData,
+    licensePlate,
+  } = useSelector((state) => state.checkout);
 
   const handleConfirmCheckout = () => {
-    // TODO: call checkout API
-    console.log(ticketData);
-    checkOut(ticketData);
-    
-  }
+    if (currentLicencePlate === parkId) {
+      checkOut(ticketData);
+    }
+  };
 
   const handleErrorCheckout = () => {
     // TODO: handle error
-  }
+  };
+
+  const renderLicensePlate = () => {
+    if (currentLicencePlate === parkId) {
+      return currentLicencePlate;
+    }
+    return "Hiện không có xe checkout";
+  };
 
   return (
     <Card
@@ -35,7 +45,7 @@ export default function CheckoutBox() {
         <MKTypography sx={{ pb: 2 }} variant="h4">
           Biển số xe đang checkout
         </MKTypography>
-        <MKTypography variant="body">{currentLicencePlate || "Hiện không có xe checkout"}</MKTypography>
+        <MKTypography variant="body">{renderLicensePlate()}</MKTypography>
         <MKBox
           direction="row"
           sx={{ py: 2 }}
@@ -45,10 +55,18 @@ export default function CheckoutBox() {
           p={2}
           alignItems="center"
         >
-          <MKButton variant="gradient" color="success" onClick={handleConfirmCheckout}>
+          <MKButton
+            variant="gradient"
+            color="success"
+            onClick={handleConfirmCheckout}
+          >
             Xác nhận
           </MKButton>
-          <MKButton variant="gradient" color="error" onClick={handleErrorCheckout}>
+          <MKButton
+            variant="gradient"
+            color="error"
+            onClick={handleErrorCheckout}
+          >
             Báo lỗi
           </MKButton>
         </MKBox>

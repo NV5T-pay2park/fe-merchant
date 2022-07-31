@@ -132,7 +132,7 @@ export default function ViewPark({ title }) {
           </Grid>
           <Grid container item xs={12} lg={6} direction="column">
             {isEnableCheckin && <CheckinBox checkInData={currentCheckInData}/>}
-            <CheckoutBox />
+            <CheckoutBox parkId = {parkId}/>
           </Grid>
         </Grid>
       </Container>

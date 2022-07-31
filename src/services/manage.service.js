@@ -75,13 +75,14 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
             JSON.stringify({
               ticketData: {...endUserTicketData},
               licensePlate: result.data.data,
+              parkingLotID
             })
           )
         );
       } else {
         dispatch(
           setCheckoutLicencePlate(
-            JSON.stringify({ licensePlate: result.data.message})
+            JSON.stringify({ licensePlate: result.data.message, parkingLotID })
           )
         );
       }
