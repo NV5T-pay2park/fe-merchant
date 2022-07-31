@@ -90,7 +90,6 @@ export const deleteRow = (rows, deletedRow) => {
     }
     return true;
   });
-  console.log(newRows.length);
   // if only remain one
   if (newRows.length === 1) {
     newRows[0].description = "Đồng giá";

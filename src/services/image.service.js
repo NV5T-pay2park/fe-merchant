@@ -25,7 +25,6 @@ export const reduceImageSize = (file) => {
       100,
       0,
       (uri) => {
-        console.log(uri);
         resolve(uri);
       },
       "base64",

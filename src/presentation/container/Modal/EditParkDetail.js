@@ -12,9 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
-import {
-  Icon,
-} from "@mui/material";
+import { Icon } from "@mui/material";
 import ParkInformation from "./components/ParkInformation";
 import useParkDetail from "services/hooks/useParkDetail";
 
@@ -23,11 +21,11 @@ export default function EditParkDetail({ action }) {
 
   const toggleModal = () => setShow(!show);
 
-  const {submitForm, ...details} = useParkDetail(-1);
+  const { submitForm, ...details } = useParkDetail(-1);
 
   const onCreateNewPark = () => {
     submitForm();
-  }
+  };
 
   return (
     <>
@@ -79,7 +77,11 @@ export default function EditParkDetail({ action }) {
               <MKButton variant="gradient" color="dark" onClick={toggleModal}>
                 Đóng
               </MKButton>
-              <MKButton variant="gradient" color="info" onClick={onCreateNewPark}>
+              <MKButton
+                variant="gradient"
+                color="info"
+                onClick={onCreateNewPark}
+              >
                 Tạo mới nhà xe
               </MKButton>
             </MKBox>

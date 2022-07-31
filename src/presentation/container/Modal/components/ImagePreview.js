@@ -22,9 +22,9 @@ export default function ImagePreview({
         const img = await reduceImageSize(e.target.files[i]);
         newPreviewImages.push(img);
         newImages.push(dataURIToBlob(img));
+        setPreviewImages(newPreviewImages);
       }
       setImages(newImages);
-      setPreviewImages(newPreviewImages);
     }
   };
   return (

@@ -39,8 +39,6 @@ const uploadImagesByParkId = (parkId, images) => {
   images.forEach((element) => {
     data.append("multipartFiles", element);
   });
-  console.log(data.getAll("multipartFile"));
-  console.log(data.get('parkingLotID'))
   Axios.post(`uploadImage`, data, {
     headers: {
       "content-type": "multipart/form-data",
