@@ -13,6 +13,8 @@ import { getParks } from "services/park.service";
 import { useSelector } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import MKTypography from "presentation/components/MKTypography";
+import EditParkDetail from "presentation/container/Modal/EditParkDetail";
+import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
 
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -43,6 +45,10 @@ export default function ManagePage() {
     }
   }
 
+  const handleCreateNewPark = () => {
+
+  }
+
   const createNewParkButton = (
     <MKBox
       width="100%"
@@ -52,10 +58,7 @@ export default function ManagePage() {
       component="section"
       sx={{ overflow: "hidden" }}
     >
-      <MKButton variant="gradient" size="medium" color="success">
-        <Icon sx={{ mr: 1 }}>add_circle_round</Icon>
-        Thêm nhà xe
-      </MKButton>
+      <EditParkDetail size="medium" parkID={-1} action={ACTION_BUTTON_STYLE['create']}/>
     </MKBox>
   );
 

@@ -16,12 +16,12 @@ import { Icon } from "@mui/material";
 import ParkInformation from "./components/ParkInformation";
 import useParkDetail from "services/hooks/useParkDetail";
 
-export default function EditParkDetail({ action }) {
+export default function EditParkDetail({ action, parkId }) {
   const [show, setShow] = useState(false);
 
   const toggleModal = () => setShow(!show);
 
-  const { submitForm, ...details } = useParkDetail(-1);
+  const { submitForm, ...details } = useParkDetail(parkId);
 
   const onCreateNewPark = () => {
     submitForm();
@@ -32,7 +32,7 @@ export default function EditParkDetail({ action }) {
       <MKButton
         variant="gradient"
         color={action.color ? action.color : "dark"}
-        size="small"
+        size={action.size ? action.size : "small"}
         onClick={toggleModal}
       >
         {action.icon && <Icon sx={{ mr: 1 }}>{action.icon}</Icon>}
@@ -82,7 +82,7 @@ export default function EditParkDetail({ action }) {
                 color="info"
                 onClick={onCreateNewPark}
               >
-                Tạo mới nhà xe
+                {action.label}
               </MKButton>
             </MKBox>
           </MKBox>
