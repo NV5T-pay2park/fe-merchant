@@ -4,14 +4,9 @@ import Axios from "./Axios";
 const parks = require("./mock/parks.json");
 const vehicles = require("./mock/vehicles.json");
 
-const getParks = async (user, from, limit) => {
-  let response;
-  if (!limit) {
-    response = parks;
-  } else {
-    response = parks.slice(from, from + limit);
-  }
-  return response;
+const getParks = async (userId, from, limit) => {
+  // TODO: security by send token
+  return Axios.get(`merchant/parkingLot/${userId}/list`);
 };
 
 const getAllVehiclesType = () => {

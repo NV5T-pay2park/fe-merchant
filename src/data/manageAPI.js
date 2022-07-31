@@ -1,5 +1,9 @@
 import Axios from "./Axios";
 
+const getParkDetailById = (parkId) => {
+  Axios.get(`merchant/parkingLot/get/${parkId}`)
+}
+
 const sendInformationCheckIn = async (checkInData, vehicleData) => {
   const information = {
     checkInData,

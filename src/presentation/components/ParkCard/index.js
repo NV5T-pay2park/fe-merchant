@@ -58,7 +58,7 @@ export default function ParkCard({
     <Card>
       <MKBox 
         position="relative" 
-        borderRadius="lg" 
+        borderRadius="lg" very
         mx={2} 
         mt={-3}
         component={Link}

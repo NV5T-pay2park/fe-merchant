@@ -3,8 +3,11 @@
 import parkAPI from "data/parkAPI"
 
 // get `limit` park item index `from`
-export const getParks = (user, from, limit) => {
-  return parkAPI.getParks(user, from, limit) || []
+export const getParks = async (user, from, limit) => {
+  console.log(user);
+  const response = await parkAPI.getParks(user.userId, from, limit);
+  const { data : parks} = response.data || [];
+  return parks;
 }
 
 export const getAllVehiclesType = () => {

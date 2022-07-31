@@ -27,6 +27,7 @@ export default function ManagePage() {
     getParks(currentUser, 0).then((parks) => {
       setIsFetching(false);
       setParks(parks);
+      console.log(parks);
     });
   }, [setIsFetching, setParks, currentUser]);
 
