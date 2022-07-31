@@ -1,6 +1,8 @@
 import manageAPI from "data/manageAPI";
 import { uploadParkInformation } from "services/park.service";
 import { uploadImagesByParkId } from "services/park.service";
+import { convertJSONToRows } from "services/price.service";
+import { getAllVehciles } from "services/price.service";
 import { convertRowsToJSON } from "services/price.service";
 
 const { useState, useEffect } = require("react");
@@ -23,12 +25,40 @@ const useParkDetail = (parkId) => {
     { id: 1, duration: "", description: "Đồng giá" },
   ]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const setupParkDetail = (data) => {
+    setPosition({lat: data.lat, lng: data.lng});
+    setStreet(data.street);
+    setWard(data.ward);
+    setDistrict(data.district);
+    setCity(data.city)
+    setName(data.name);
+    setOpenTime(data.timeOpen.slice(0, -3));
+    setCloseTime(data.timeClose.slice(0, -3));
+    setPhone(data.phoneNumber);
+    setNumberSlot(data.numberSlot);
+    setVehicles(getAllVehciles(data.priceTable));
+    setRows(convertJSONToRows(data.priceTable));
+  }
+
   useEffect(() => {
     if (parkId === -1) {
       return;
     }
-    manageAPI.getParkDetailById(parkId);
-    // TODO: load info
+    (async () => {
+      try {
+        setIsLoading(true);
+        const {data} = await manageAPI.getParkDetailById(parkId);
+        if (data.status === "OK") {
+          setupParkDetail(data.data);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        setIsLoading(false);
+        console.log(err)
+      }
+    })();
   }, [parkId]);
 
   const getJSONFormat = () => {

@@ -1,3 +1,5 @@
+import { getAllVehiclesType } from "./park.service";
+
 export const createColumns = (vehicles) => {
   return [
     {
@@ -114,3 +116,22 @@ export const convertRowsToJSON = (rows, vehicles) => {
   });
   return result;
 };
+
+export const convertJSONToRows = (priceTable) => {
+  // console.log(priceTable[0].prices)
+  // return priceTable[0].prices.map((duration, idx) => {
+  //   const price = priceTable.map(data => ({[data.vehicleTypeId]: data.prices[idx]}));
+  //   console.log(price);
+  //   return {
+  //     duration,
+
+  //   }
+  // })
+  return [];
+}
+
+
+export const getAllVehciles = (data) => {
+  const allVehiclesType = getAllVehiclesType();
+  return data.map(x => allVehiclesType.find((vehicleType) => vehicleType.id === x.vehicleTypeId));
+}
