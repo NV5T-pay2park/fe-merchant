@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { checkOut } from "services/manage.service";
 import store from "services/redux/store";
 
-export default function CheckoutBox({ parkId }) {
+export default function CheckoutBox({ parkId, setTickets }) {
   const {
     licensePlate: currentLicencePlate,
     ticketData,
@@ -17,7 +17,9 @@ export default function CheckoutBox({ parkId }) {
 
   const handleConfirmCheckout = () => {
     if (parkingLotID?.toString() === parkId) {
-      checkOut(ticketData);
+    console.log(parkId, parkingLotID);
+
+      checkOut(ticketData, setTickets);
     }
   };
 

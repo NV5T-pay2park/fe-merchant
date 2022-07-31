@@ -9,9 +9,7 @@ const sendInformationCheckIn = async (checkInData, vehicleData) => {
     checkInData,
     vehicleData,
   };
-  Axios.post(`sendInformationCheckIn`, information).then((res) => {
-    console.log(res);
-  });
+  return Axios.post(`sendInformationCheckIn`, information);
 };
 
 const preCheckOut = (ticketData) => {
@@ -19,7 +17,6 @@ const preCheckOut = (ticketData) => {
 };
 
 const checkOut = (ticketData) => {
-  console.log(ticketData);
   return Axios.post(`checkOut`, ticketData);
 };
 

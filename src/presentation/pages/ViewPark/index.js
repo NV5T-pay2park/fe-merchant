@@ -14,16 +14,21 @@ import { handleReceiveMessage } from "services/manage.service";
 
 import { getAllAvailableStatus } from "services/manage.service";
 import { changeParkStatus } from "services/manage.service";
-import Socket from "services/socket";
+
 import CheckinBox from "./CheckinBox";
 import CheckoutBox from "./CheckoutBox";
 import TicketTable from "./TicketTable";
+import Socket from "services/socket";
+
+import { getCurrentTicketsByParkingLotId } from "services/manage.service";
+
 
 export default function ViewPark({ title }) {
   const { parkId } = useParams();
   const [parkStatus, setParkStatus] = useState(0);
   const [isEnableCheckin, setIsEnableCheckin] = useState(false);
   const [currentCheckInData, setCurrentCheckInData] = useState();
+  const [tickets, setTickets] = useState([]);
 
   const { connect, messages } = Socket(parkId);
   // reconnect every re-render or connect change
@@ -35,6 +40,10 @@ export default function ViewPark({ title }) {
     handleReceiveMessage(messages, setIsEnableCheckin, setCurrentCheckInData);
   }, [messages]);
 
+  useEffect(() => {
+    getCurrentTicketsByParkingLotId(parkId, setTickets);
+  }, [parkId]);
+
   const handleChangeStatus = (e) => {
     setParkStatus(e.target.value);
   };
@@ -42,6 +51,8 @@ export default function ViewPark({ title }) {
   const handleSaveStatus = () => {
     changeParkStatus(parkStatus);
   };
+
+  // render component
 
   const renderStatusConfig = () => {
     const renderSelection = (
@@ -128,11 +139,11 @@ export default function ViewPark({ title }) {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={7}>
-            <TicketTable parkId={parkId} />
+            <TicketTable tickets={tickets} />
           </Grid>
           <Grid container item xs={12} lg={5} direction="column">
-            {isEnableCheckin && <CheckinBox checkInData={currentCheckInData}/>}
-            <CheckoutBox parkId = {parkId}/>
+            {isEnableCheckin && <CheckinBox checkInData={currentCheckInData} setTickets={setTickets}/>}
+            <CheckoutBox parkId = {parkId} setTickets={setTickets}/>
           </Grid>
         </Grid>
       </Container>

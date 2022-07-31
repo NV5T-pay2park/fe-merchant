@@ -7,12 +7,12 @@ import { useState } from "react";
 import { sendInformationCheckIn } from "services/manage.service";
 import { getAllVehiclesType } from "services/park.service";
 
-export default function CheckinBox({ checkInData }) {
+export default function CheckinBox({ checkInData, setTickets }) {
   const [licensePlate, setLicencePlate] = useState("");
   const [vehicleTypeID, setVehicleType] = useState(1);
 
   const handleConfirm = () => {
-    sendInformationCheckIn(checkInData, vehicleTypeID, licensePlate);
+    sendInformationCheckIn(checkInData, vehicleTypeID, licensePlate, setTickets);
   };
 
   const handleClear = () => {

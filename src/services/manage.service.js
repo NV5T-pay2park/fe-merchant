@@ -34,11 +34,22 @@ export const handleReceiveMessage = (
 export const sendInformationCheckIn = (
   checkInData,
   vehicleTypeID,
-  licensePlate
+  licensePlate,
+  setTickets,
 ) => {
   manageAPI.sendInformationCheckIn(checkInData, {
     vehicleTypeID,
     licensePlate,
+  }).then((result) => {
+    if (result.data.status === "OK") {
+      getCurrentTicketsByParkingLotId(checkInData.parkingLotID, setTickets)
+    } else {
+      //TODO: show alert error
+    }
+    setTickets()
+  },
+  error => {
+
   });
 };
 
@@ -89,15 +100,19 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
     });
 };
 
-export const checkOut = (ticketData) => {
+export const checkOut = (ticketData, setTickets) => {
+  console.log(`?> ${ticketData}`);
   manageAPI.checkOut(ticketData).then((result) => {
-    console.log(result);
     if (result.data.status === "OK") {
       // TODO: show alert successful
       localStorage.removeItem("licensePlate");
+      getCurrentTicketsByParkingLotId(ticketData.getParkingLotID, setTickets)
+      
     } else {
       console.log("error");
     }
+  }, error => {
+    console.log('error')
   });
 };
 
