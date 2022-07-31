@@ -24,6 +24,7 @@ import { useState } from "react";
 import { getAllVehiclesType } from "services/park.service";
 import MKButton from "presentation/components/MKButton";
 import PriceTable from "./PriceTable";
+import ImagePreview from "./ImagePreview";
 
 export default function ParkInformation({ useParkDetail }) {
   const allVehiclesType = getAllVehiclesType();
@@ -36,6 +37,8 @@ export default function ParkInformation({ useParkDetail }) {
     setVehicles,
     images,
     setImages,
+    previewImages,
+    setPreviewImages,
     position,
     setPosition,
     street,
@@ -232,38 +235,12 @@ export default function ParkInformation({ useParkDetail }) {
   );
 
   const renderPreviewImages = (
-    <Container>
-      <MKTypography variant="body">Hình ảnh minh họa</MKTypography>
-      <Grid
-        item
-        container
-        md={12}
-        lg={12}
-        xs={12}
-        sx={{ mx: 3 }}
-        align="center"
-      >
-        <Grid
-          item
-          md={6}
-          lg={3}
-          xs={12}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <MKBox sx={{ cursor: "pointer" }}>
-            <AddAPhoto fontSize="large" />
-            <MKTypography variant="body2">Thêm ảnh</MKTypography>
-          </MKBox>
-        </Grid>
-        {images.map((image) => (
-          <Grid item md={6} lg={3} xs={12} key={image.toString()}>
-            <MKAvatar src={`${image}`} size="xxl" variant="square" />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <ImagePreview
+      images={images}
+      setImages={setImages}
+      previewImages={previewImages}
+      setPreviewImages={setPreviewImages}
+    />
   );
 
   const renderAvailableVehicles = (

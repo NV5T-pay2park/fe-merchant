@@ -14,3 +14,7 @@ export const getAllVehiclesType = () => {
 export const deleteParkById = (id) => {
   parkAPI.deleteParkById(id);
 }
+
+export const uploadImagesByParkId = (parkId, images) => {
+  parkAPI.uploadImagesByParkId(parkId, images);
+} 

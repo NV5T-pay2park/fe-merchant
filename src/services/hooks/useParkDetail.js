@@ -1,15 +1,12 @@
+import { uploadImagesByParkId } from "services/park.service";
 import { convertRowsToJSON } from "services/price.service";
 
 const { useState, useEffect } = require("react");
 
 const useParkDetail = (parkId) => {
   const [vehicles, setVehicles] = useState([]);
-  const [images, setImages] = useState([
-    "https://thumbs.dreamstime.com/b/parking-lot-856838.jpg",
-    "https://media.istockphoto.com/photos/dealer-new-cars-stock-picture-id480652712?k=20&m=480652712&s=612x612&w=0&h=dbyTkQ3-PJJMAlNAR2hGxPWX1ODvSJspuDsdvQmOKlI=",
-    "https://www.ledgerinsights.com/wp-content/uploads/2020/05/parking-lot-cars.jpg",
-    "https://images.unsplash.com/photo-1589018057745-8c699b3f361c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZW1wdHklMjBwYXJraW5nJTIwbG90fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-  ]);
+  const [images, setImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([])
   const [position, setPosition] = useState();
   const [street, setStreet] = useState("");
   const [ward, setWard] = useState("");
@@ -31,6 +28,7 @@ const useParkDetail = (parkId) => {
     // TODO: load info
   }, [parkId]);
 
+
   const submitForm = () => {
     console.log(position)
     console.log(street)
@@ -39,6 +37,7 @@ const useParkDetail = (parkId) => {
     console.log(rows);
     console.log(images);
     console.log(convertRowsToJSON(rows, vehicles))
+    uploadImagesByParkId(parkId, images);
   }
 
   return {
@@ -46,6 +45,8 @@ const useParkDetail = (parkId) => {
     setVehicles,
     images,
     setImages,
+    previewImages,
+    setPreviewImages,
     position,
     setPosition,
     street,

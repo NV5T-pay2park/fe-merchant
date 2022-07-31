@@ -133,7 +133,7 @@ export default function MapModal({ location, confirmPosition }) {
 
               <Divider sx={{ my: 0 }} />
 
-              {renderMap}
+              {isLoaded && renderMap}
 
               <Divider sx={{ my: 0 }} />
               <MKBox display="flex" justifyContent="flex-end" p={1.5} gap={1}>
