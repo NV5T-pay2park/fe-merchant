@@ -25,3 +25,9 @@ export const uploadImagesByParkId = (parkId, images) => {
 export const uploadParkInformation = (parkId, data) => {
   
 } 
+
+export const createNewPark = (data) => {
+  parkAPI.createNewPark(data).then((result) => {
+    console.log(result);
+  });
+}

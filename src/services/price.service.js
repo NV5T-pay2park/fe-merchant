@@ -109,8 +109,8 @@ export const convertRowsToJSON = (rows, vehicles) => {
     const vehicleTypeId = vehicle.id;
     const prices = rows.map((row, index) => {
       const [price, unit = 1] = row[vehicleTypeId] ? row[vehicleTypeId].toString().split('/').map(x => +x) : [0, 0];
-      const duration = index > 0 ? rows[index - 1].duration : 0;
-      return { price, unit, duration };
+      const periodTime = index > 0 ? rows[index - 1].duration : 0;
+      return { price, unit, periodTime };
     });
     return {vehicleTypeId, prices};
   });

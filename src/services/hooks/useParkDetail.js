@@ -1,5 +1,7 @@
 import manageAPI from "data/manageAPI";
+import { useSelector } from "react-redux";
 import { uploadParkInformation } from "services/park.service";
+import { createNewPark } from "services/park.service";
 import { uploadImagesByParkId } from "services/park.service";
 import { convertJSONToRows } from "services/price.service";
 import { getAllVehciles } from "services/price.service";
@@ -8,6 +10,8 @@ import { convertRowsToJSON } from "services/price.service";
 const { useState, useEffect } = require("react");
 
 const useParkDetail = (parkId) => {
+  const { user: currentUser } = useSelector((state) => state.auth);
+  console.log(currentUser);
   const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([])
@@ -64,19 +68,23 @@ const useParkDetail = (parkId) => {
   const getJSONFormat = () => {
     //TODO: add merchant id
     return ({
-      "parkingLotName": name,
+      merchantId: currentUser.merchantId,
+      parkingLotName: name,
       street, ward, district, city,
       ...position,
       timeOpen: openTime + ':00',
       timeClose: closeTime + ':00',
-      numberSlot, 
+      numberSlot: parseInt(numberSlot), 
       phoneNumber: phone,
       priceTable: convertRowsToJSON(rows, vehicles),
     })
   }
 
   const submitForm = () => {
-    console.log(JSON.stringify(getJSONFormat()));
+    if (parkId === -1) {
+      createNewPark(getJSONFormat())
+    }
+    // console.log(JSON.stringify(getJSONFormat()));
     // uploadParkInformation(parkId, )
     // uploadImagesByParkId(parkId, images);
   }

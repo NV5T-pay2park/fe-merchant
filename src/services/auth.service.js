@@ -9,6 +9,7 @@ const mockAccount = {
   status: "success",
   expried: "2022/08/30",
   tokenId: "ahihidongok",
+  merchantId: 1
 }
 
 const authentication = () => {

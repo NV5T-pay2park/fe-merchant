@@ -20,6 +20,11 @@ const deleteParkById = (id) => {
   }
 };
 
+const createNewPark = (data) => {
+  console.log(data)
+  return Axios.post(`merchant/parkingLot/create`, data);
+}
+
 const uploadParkById = (id) => {
   if (id === -1) {
     // new park
@@ -53,6 +58,7 @@ const parkAPI = {
   getAllVehiclesType,
   deleteParkById,
   uploadImagesByParkId,
+  createNewPark
 };
 
 export default parkAPI;
