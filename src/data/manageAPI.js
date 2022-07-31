@@ -20,6 +20,7 @@ const preCheckOut = (ticketData) => {
 }
 
 const checkOut = (ticketData) => {
+  console.log(ticketData);
   return Axios.post(`checkOut`, ticketData);
 }
 

@@ -90,8 +90,6 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
 };
 
 export const checkOut = (ticketData) => {
-  localStorage.removeItem('licensePlate');
-  return;
   manageAPI.checkOut(ticketData)
   .then((result) => {
     console.log(result)
