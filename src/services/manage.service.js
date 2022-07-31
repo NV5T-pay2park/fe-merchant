@@ -73,9 +73,9 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
         dispatch(
           setCheckoutLicencePlate(
             JSON.stringify({
-              ticketData: {...endUserTicketData},
+              ticketData: { ...endUserTicketData },
               licensePlate: result.data.data,
-              parkingLotID
+              parkingLotID,
             })
           )
         );
@@ -90,14 +90,27 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
 };
 
 export const checkOut = (ticketData) => {
-  manageAPI.checkOut(ticketData)
-  .then((result) => {
-    console.log(result)
+  manageAPI.checkOut(ticketData).then((result) => {
+    console.log(result);
     if (result.data.status === "OK") {
       // TODO: show alert successful
-      localStorage.removeItem('licensePlate');
+      localStorage.removeItem("licensePlate");
     } else {
-      console.log('error');
+      console.log("error");
+    }
+  });
+};
+
+export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
+  manageAPI.getCurrentTicketsByParkingLotId(parkId).then((result) => {
+    if (result.data?.status === "OK") {
+      setTickets(result.data.data.map((ticket) => ({
+        id: ticket.ticketID,
+        ticketID: ticket.ticketID,
+        checkInTime: ticket.checkInTime,
+        licensePlate: ticket.licensePlate,
+        endUserName: ticket.endUserName,
+      })));
     }
   });
 };

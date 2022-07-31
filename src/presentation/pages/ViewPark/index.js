@@ -127,10 +127,10 @@ export default function ViewPark({ title }) {
     <MKBox component="section">
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={12} lg={6}>
-            <TicketTable data={[]} />
+          <Grid item xs={12} lg={7}>
+            <TicketTable parkId={parkId} />
           </Grid>
-          <Grid container item xs={12} lg={6} direction="column">
+          <Grid container item xs={12} lg={5} direction="column">
             {isEnableCheckin && <CheckinBox checkInData={currentCheckInData}/>}
             <CheckoutBox parkId = {parkId}/>
           </Grid>
