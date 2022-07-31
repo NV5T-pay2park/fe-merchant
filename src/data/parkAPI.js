@@ -37,7 +37,7 @@ const uploadImagesByParkId = (parkId, images) => {
   const data = new FormData();
   data.append("parkingLotID", 1);
   images.forEach((element) => {
-    data.append("multipartFile", element);
+    data.append("multipartFiles", element);
   });
   console.log(data.getAll("multipartFile"));
   console.log(data.get('parkingLotID'))

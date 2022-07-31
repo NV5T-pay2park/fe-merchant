@@ -4,20 +4,29 @@ import { Container } from "@mui/system";
 import MKAvatar from "presentation/components/MKAvatar";
 import MKBox from "presentation/components/MKBox";
 import MKTypography from "presentation/components/MKTypography";
+import { dataURIToBlob } from "services/image.service";
+import { reduceImageSize } from "services/image.service";
 
-export default function ImagePreview({ images, setImages, previewImages, setPreviewImages }) {
-  const addSelectedImages = (e) => {
+export default function ImagePreview({
+  images,
+  setImages,
+  previewImages,
+  setPreviewImages,
+}) {
+  
+  const addSelectedImages = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const newImages = [...images];
       const newPreviewImages = [...previewImages];
       for (let i = 0; i < e.target.files.length; ++i) {
-        newImages.push(e.target.files[i]);
-        newPreviewImages.push(URL.createObjectURL(e.target.files[i]))
+        const img = await reduceImageSize(e.target.files[i]);
+        newPreviewImages.push(img);
+        newImages.push(dataURIToBlob(img));
       }
       setImages(newImages);
       setPreviewImages(newPreviewImages);
     }
-  }
+  };
   return (
     <Container>
       <MKTypography variant="body">Hình ảnh minh họa</MKTypography>
