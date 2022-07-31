@@ -137,3 +137,11 @@ export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
     }
   });
 };
+
+export const getParkingLotInformation = (parkId, setTitle) => {
+  manageAPI.getParkDetailById(parkId).then((result) => {
+    if (result.data.status === "OK") {
+      setTitle(result.data.data.name);
+    }
+  })
+}

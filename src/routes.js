@@ -30,7 +30,7 @@ const routes = [
     hide: true,
     requireLoggedIn: true,
     route: "/manage/:parkId",
-    component: <ViewPark title="test"/>
+    component: <ViewPark />
   },
   {
     hide: true,

@@ -21,15 +21,16 @@ import TicketTable from "./TicketTable";
 import Socket from "services/socket";
 
 import { getCurrentTicketsByParkingLotId } from "services/manage.service";
+import { getParkingLotInformation } from "services/manage.service";
 
 
-export default function ViewPark({ title }) {
+export default function ViewPark() {
   const { parkId } = useParams();
   const [parkStatus, setParkStatus] = useState(0);
   const [isEnableCheckin, setIsEnableCheckin] = useState(false);
   const [currentCheckInData, setCurrentCheckInData] = useState();
   const [tickets, setTickets] = useState([]);
-
+  const [title, setTitle] = useState(''); 
   const { connect, messages } = Socket(parkId);
   // reconnect every re-render or connect change
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function ViewPark({ title }) {
   }, [messages]);
 
   useEffect(() => {
+    getParkingLotInformation(parkId, setTitle);
     getCurrentTicketsByParkingLotId(parkId, setTickets);
   }, [parkId]);
 

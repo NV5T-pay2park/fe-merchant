@@ -11,7 +11,6 @@ const { useState, useEffect } = require("react");
 
 const useParkDetail = (parkId) => {
   const { user: currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
   const [vehicles, setVehicles] = useState([]);
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([])
