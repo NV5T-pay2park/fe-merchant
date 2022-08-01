@@ -108,30 +108,45 @@ export const convertRowsToJSON = (rows, vehicles) => {
   const result = vehicles.map((vehicle) => {
     const vehicleTypeId = vehicle.id;
     const prices = rows.map((row, index) => {
-      const [price, unit = 1] = row[vehicleTypeId] ? row[vehicleTypeId].toString().split('/').map(x => +x) : [0, 0];
+      const [price, unit = 1] = row[vehicleTypeId]
+        ? row[vehicleTypeId]
+            .toString()
+            .split("/")
+            .map((x) => +x)
+        : [0, 0];
       const periodTime = index > 0 ? rows[index - 1].duration : 0;
       return { price, unit, periodTime };
     });
-    return {vehicleTypeId, prices};
+    return { vehicleTypeId, prices };
   });
   return result;
 };
 
 export const convertJSONToRows = (priceTable) => {
-  // console.log(priceTable[0].prices)
-  // return priceTable[0].prices.map((duration, idx) => {
-  //   const price = priceTable.map(data => ({[data.vehicleTypeId]: data.prices[idx]}));
-  //   console.log(price);
-  //   return {
-  //     duration,
-
-  //   }
-  // })
-  return [];
-}
-
+  const result =  priceTable[0].prices.map((price, idx) => {
+    const eachPrice = priceTable.reduce(
+      (res, vehicle) => ({
+        ...res,
+        [`${vehicle.vehicleTypeId}`]: `${vehicle.prices[idx].price}/${vehicle.prices[idx].unit}`,
+      }),
+      {}
+    );
+    return {id: idx, duration: price.periodTime, ...eachPrice};
+  });
+  console.log(result);
+  for (let i = 0; i < result.length - 1; ++i) {
+    result[i].duration = result[i + 1].duration;
+  }
+  result.at(-1).duration = '';
+  for (let i = 0; i < result.length; ++i) {
+    result[i].description = editRowDescription(result, i);
+  }
+  return result;
+};
 
 export const getAllVehciles = (data) => {
   const allVehiclesType = getAllVehiclesType();
-  return data.map(x => allVehiclesType.find((vehicleType) => vehicleType.id === x.vehicleTypeId));
-}
+  return data.map((x) =>
+    allVehiclesType.find((vehicleType) => vehicleType.id === x.vehicleTypeId)
+  );
+};

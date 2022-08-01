@@ -14,7 +14,6 @@ import MKBox from "presentation/components/MKBox";
 
 export default function EditParkDetail({ action, parkId }) {
   const [show, setShow] = useState(false);
-  console.log(parkId);
   const toggleModal = () => setShow(!show);
   return (
     <>

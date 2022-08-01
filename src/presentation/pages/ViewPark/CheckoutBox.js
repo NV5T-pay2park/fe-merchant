@@ -20,7 +20,6 @@ export default function CheckoutBox({ parkId, setTickets }) {
 
   const handleConfirmCheckout = () => {
     if (parkingLotID?.toString() === parkId) {
-    console.log(parkId, parkingLotID);
 
       checkOut(ticketData, setTickets, dispatch);
     }
