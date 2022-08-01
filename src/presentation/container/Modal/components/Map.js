@@ -76,7 +76,6 @@ export default function MapModal({ location, confirmPosition }) {
           const service = new window.google.maps.places.PlacesService(map);
           service.findPlaceFromQuery(
             request, (results, status) => {
-              console.log(status)
               if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
                 map.setCenter(results[0].geometry.location);
               }

@@ -62,7 +62,6 @@ const useParkDetail = (parkId) => {
         const {data: imageData} = await parkAPI.getAllImagesByParkId(parkId);
         if (imageData.status === "OK") {
           setPreviewImages(imageData.data.map(image => image.url));
-          console.log(previewImages);
           setIsLoading(false);
         }
       } catch (err) {
@@ -127,7 +126,6 @@ const useParkDetail = (parkId) => {
       dispatch(setAlertMessage('Số điện thoại không chính xác', 'warning'))
       return false;
     }
-    console.log(numberSlot);
     if (numberSlot <= 0) {
       dispatch(setAlertMessage('Vui lòng nhập số chỗ giữ xe', 'warning'))
       return false;

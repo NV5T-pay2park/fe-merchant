@@ -29,14 +29,6 @@ export const handleReceiveMessage = (
     case 1:
       break;
     case 2:
-      console.log(JSON.stringify({
-        ticketData: {
-          endUserID: messages.checkOutData.endUserID,
-          ticketID: messages.checkOutData.ticketID
-        },
-        licensePlate: messages.licensePlate,
-        parkingLotID: messages.checkOutData.parkingLotID
-      }));
       dispatch(setCheckoutLicencePlate(JSON.stringify({
         ticketData: {
           endUserID: messages.checkOutData.endUserID,
@@ -102,7 +94,6 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
     .preCheckOut({ ...endUserTicketData, parkingLotID })
     .then((result) => {
       // TODO: show error
-      console.log(result);
       if (result.data.status === "OK") {
         dispatch(
           setCheckoutLicencePlate(
