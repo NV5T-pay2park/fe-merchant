@@ -14,12 +14,12 @@ const mockAccount = {
   merchantId: 1
 }
 
+
 const authentication = () => {
   return true;
 }
 
 const login = (phone, username, password) => {
-  console.log(phone, username, password)
   return authAPI.loginMerchant(phone, username, password).then((result) => {
     if (result.data.status === "OK") {
       const userData = {
@@ -27,7 +27,7 @@ const login = (phone, username, password) => {
         username: result.data.data.userName,
       };
       localStorage.setItem("user", JSON.stringify(userData));
-      return result.data.data;
+      return userData;
     } else {
       return result.data;
     }

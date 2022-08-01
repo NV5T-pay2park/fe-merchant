@@ -15,6 +15,7 @@ import { useState, useCallback, useEffect } from "react";
 import MKTypography from "presentation/components/MKTypography";
 import EditParkDetail from "presentation/container/Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
+import { current } from "@reduxjs/toolkit";
 
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -58,7 +59,7 @@ export default function ManagePage() {
       component="section"
       sx={{ overflow: "hidden" }}
     >
-      <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>
+      {currentUser?.permissions.allowAdd && <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>}
     </MKBox>
   );
 
@@ -72,7 +73,7 @@ export default function ManagePage() {
           address={park.address}
           time={formatWorkingTime(park.timeOpen, park.timeClose)}
           information={formatInformation(park.currentServing, park.status)}
-          actions={["edit", "delete"]}
+          actions={[currentUser?.permissions.allowEdit ? "edit" : null, currentUser?.permissions.allowDelete ? "delete" : null].filter(x => x)}
         />
       </Grid>
     ))

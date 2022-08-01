@@ -5,8 +5,7 @@ import { setAlertMessage } from "./redux/actions/alertActions";
 
 // get `limit` park item index `from`
 export const getParks = async (user, from, limit) => {
-  console.log(user);
-  const response = await parkAPI.getParks(user.userId, from, limit);
+  const response = await parkAPI.getParks(user.merchantId, from, limit);
   const { data : parks} = response.data || [];
   return parks;
 }
