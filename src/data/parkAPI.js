@@ -29,7 +29,7 @@ const createNewPark = (data) => {
 
 const uploadImagesByParkId = async (parkId, images) => {
   const data = new FormData();
-  data.append("parkingLotID", 1);
+  data.append("parkingLotID", parkId);
   images.forEach((element) => {
     data.append("multipartFiles", element);
   });
