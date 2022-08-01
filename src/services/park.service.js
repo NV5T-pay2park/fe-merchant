@@ -29,7 +29,7 @@ export const deleteParkById = (id, dispatch) => {
 
 export const uploadImagesByParkId = (parkId, images) => {
   parkAPI.uploadImagesByParkId(parkId, images);
-} 
+}
 
 export const uploadParkInformation = (parkId, data) => {
   
@@ -42,5 +42,7 @@ export const createNewPark = (data, dispatch) => {
     } else {
       dispatch(setAlertMessage('Tạo mới thất bại', 'error'))
     }
+  }, error => {
+    dispatch(setAlertMessage(error.message, 'error'))
   });
 }

@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import { login } from "services/redux/actions/authActions";
+import { setAlertMessage } from "services/redux/actions/alertActions";
 
 export default function Login() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -48,9 +49,27 @@ export default function Login() {
     setPassword(e.target.value);
   }
 
+  const validateInput = () => {
+    if (!phone || phone.length === 0) {
+      dispatch(setAlertMessage('Vui lòng nhập Số điện thoại', 'error'));
+      return false;
+    }
+    if (!username || username.length === 0) {
+      dispatch(setAlertMessage('Vui lòng nhập Tên đăng nhập', 'error'));
+      return false;
+    }
+    if (!username || password.length === 0) {
+      dispatch(setAlertMessage('Vui lòng nhập Mật khẩu', 'error'));
+      return false;
+    }
+    return true;
+  }
+
   const handleLogin = () => {
+    if (!validateInput()) {
+      return;
+    }
     setLoading(true);
-    //TODO: validate input
     dispatch(login({ phone, username, password }))
       .then(() => {
         navigate("/home");
