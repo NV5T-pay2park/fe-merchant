@@ -25,14 +25,14 @@ export default function App() {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
-  useEffect(() => {
-    function changeData(e) {
-      const value = localStorage.getItem("licensePlate");
-      dispatch(setCheckoutLicencePlate(value));
-    }
-    window.addEventListener("storage", changeData);
-    return () => window.removeEventListener("storage", changeData);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   function changeData(e) {
+  //     const value = localStorage.getItem("licensePlate");
+  //     dispatch(setCheckoutLicencePlate(value));
+  //   }
+  //   window.addEventListener("storage", changeData);
+  //   return () => window.removeEventListener("storage", changeData);
+  // }, [dispatch]);
 
   // recusion all nested row (but current only have non-nested)
   const getRoutes = (allRoutes) =>

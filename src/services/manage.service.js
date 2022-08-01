@@ -14,7 +14,8 @@ export const changeParkStatus = (newStatus) => {};
 export const handleReceiveMessage = (
   messages,
   setIsEnableCheckin,
-  setCurrentCheckInData
+  setCurrentCheckInData,
+  dispatch
 ) => {
   switch (messages.code) {
     case -1:
@@ -26,6 +27,24 @@ export const handleReceiveMessage = (
       // TODO: show message
       break;
     case 1:
+      break;
+    case 2:
+      console.log(JSON.stringify({
+        ticketData: {
+          endUserID: messages.checkOutData.endUserID,
+          ticketID: messages.checkOutData.ticketID
+        },
+        licensePlate: messages.licensePlate,
+        parkingLotID: messages.checkOutData.parkingLotID
+      }));
+      dispatch(setCheckoutLicencePlate(JSON.stringify({
+        ticketData: {
+          endUserID: messages.checkOutData.endUserID,
+          ticketID: messages.checkOutData.ticketID
+        },
+        licensePlate: messages.licensePlate,
+        parkingLotID: messages.checkOutData.parkingLotID
+      })))
       break;
     default:
       return;
@@ -105,21 +124,17 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
 };
 
 export const checkOut = (ticketData, setTickets, dispatch) => {
-  console.log(`?> ${ticketData}`);
-  dispatch(setAlertMessage('Đang thực hiện checkin'))
+  dispatch(setAlertMessage('Đang thực hiện checkout'))
   manageAPI.checkOut(ticketData).then((result) => {
     if (result.data.status === "OK") {
-      // TODO: show alert successful
-      localStorage.removeItem("licensePlate");
+      dispatch(setCheckoutLicencePlate(null))
       getCurrentTicketsByParkingLotId(ticketData.getParkingLotID, setTickets)
       dispatch(setAlertMessage('Checkout thành công', 'success'))
     } else {
-      console.log("error");
       dispatch(setAlertMessage(`Checkout thất bại: ${result.data.data}`, 'error'))
 
     }
   }, (error) => {
-    console.log(error)
     dispatch(setAlertMessage('Checkout thất bại', 'error'))
 
   });
@@ -128,7 +143,6 @@ export const checkOut = (ticketData, setTickets, dispatch) => {
 export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
   manageAPI.getCurrentTicketsByParkingLotId(parkId).then((result) => {
     if (result.data?.status === "OK") {
-      console.warn(result.data.data);
       setTickets(result.data.data.map((ticket) => ({
         id: ticket.ticketID,
         ticketID: ticket.ticketID,

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkOut } from "services/manage.service";
 import { setAlertMessage } from "services/redux/actions/alertActions";
+import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
 import store from "services/redux/store";
 
 export default function CheckoutBox({ parkId, setTickets }) {
@@ -15,7 +16,6 @@ export default function CheckoutBox({ parkId, setTickets }) {
     ticketData,
     parkingLotID,
   } = useSelector((state) => state.checkout);
-
   const dispatch = useDispatch()
 
   const handleConfirmCheckout = () => {
@@ -27,6 +27,8 @@ export default function CheckoutBox({ parkId, setTickets }) {
 
   const handleErrorCheckout = () => {
     // TODO: handle error
+    dispatch(setCheckoutLicencePlate(null))
+    dispatch(setAlertMessage('Đã hủy checkout cho xe'))
   };
 
   const renderLicensePlate = () => {

@@ -1,13 +1,6 @@
 import { CHECKOUT_SET_LICENCE_PLATE } from "shared/constants/constants";
 
-let licensePlate;
-try {
-  licensePlate = JSON.parse(localStorage.getItem('licensePlate')) || {};
-} catch (e) {
-  licensePlate = {};
-}
-
-const initialState = licensePlate || {};
+const initialState = {};
 
 console.log(initialState)
 

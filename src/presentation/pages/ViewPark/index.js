@@ -22,6 +22,7 @@ import Socket from "services/socket";
 
 import { getCurrentTicketsByParkingLotId } from "services/manage.service";
 import { getParkingLotInformation } from "services/manage.service";
+import { useDispatch } from "react-redux";
 
 
 export default function ViewPark() {
@@ -32,16 +33,15 @@ export default function ViewPark() {
   const [tickets, setTickets] = useState([]);
   const [title, setTitle] = useState(''); 
   const { connect, messages } = Socket(parkId);
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    handleReceiveMessage(messages, setIsEnableCheckin, setCurrentCheckInData, dispatch);
+  }, [messages]);
+
   // reconnect every re-render or connect change
   useEffect(() => {
     connect();
-  }, [connect])
-
-  useEffect(() => {
-    handleReceiveMessage(messages, setIsEnableCheckin, setCurrentCheckInData);
-  }, [messages]);
-
-  useEffect(() => {
     getParkingLotInformation(parkId, setTitle);
     getCurrentTicketsByParkingLotId(parkId, setTickets);
   }, [parkId]);

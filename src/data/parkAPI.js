@@ -22,7 +22,6 @@ const deleteParkById = (id) => {
 };
 
 const createNewPark = (data) => {
-  console.log(data)
   return Axios.post(`merchant/parkingLot/create`, data);
 }
 

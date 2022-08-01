@@ -9,7 +9,6 @@ export default function InfoSnackbar() {
     if (message) {
       setOpen(true);
     }
-    console.log(message);
   }, [message]);
 
   const closeSnackbar = (event, reason) => {

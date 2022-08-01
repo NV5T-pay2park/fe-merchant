@@ -10,8 +10,6 @@ export default function TicketTable({ tickets }) {
     { field: "checkInTime", headerName: "Giờ vào", width: 180 },
     { field: "endUserName", headerName: "Khách hàng", width: 250}
   ];
-  console.log('ahuhu')
-  console.log(tickets)
   return (
     <Grid container sx={{mx: "auto"}} height="40rem">
       <DataGrid
