@@ -68,7 +68,7 @@ export default function ManagePage() {
         <ParkCard
           id={park.id}
           image={park.image}
-          title={park.name}
+          title={`Nhà xe ${park.name}`}
           address={park.address}
           time={formatWorkingTime(park.timeOpen, park.timeClose)}
           information={formatInformation(park.currentServing, park.status)}

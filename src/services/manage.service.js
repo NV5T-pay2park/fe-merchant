@@ -51,7 +51,7 @@ export const sendInformationCheckIn = (
     }
   },
   error => {
-    dispatch(setAlertMessage(`Lỗi`))
+    dispatch(setAlertMessage(`Lỗi ${error.error}`))
 
   });
 };

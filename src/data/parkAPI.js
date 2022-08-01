@@ -14,10 +14,7 @@ const getAllVehiclesType = () => {
 };
 
 const deleteParkById = (id) => {
-  const index = parks.findIndex((x) => x.id === id);
-  if (index > -1) {
-    parks.splice(index, 1);
-  }
+  return Axios.get(`merchant/parkingLot/delete/${id}`);
 };
 
 const createNewPark = (data) => {
@@ -25,15 +22,8 @@ const createNewPark = (data) => {
   return Axios.post(`merchant/parkingLot/create`, data);
 }
 
-const uploadParkById = (id) => {
-  if (id === -1) {
-    // new park
-  } else {
-    // edit exists park
-  }
-};
 
-const uploadImagesByParkId = (parkId, images) => {
+const uploadImagesByParkId = async (parkId, images) => {
   const data = new FormData();
   data.append("parkingLotID", 1);
   images.forEach((element) => {
@@ -53,12 +43,21 @@ const uploadImagesByParkId = (parkId, images) => {
   );
 };
 
+const getAllImagesByParkId = async (parkId) => {
+  return Axios.get(`getAllImageByParkingLot`, {
+    params: {
+      parkingLotID: parkId
+    }
+  });
+}
+
 const parkAPI = {
   getParks,
   getAllVehiclesType,
   deleteParkById,
   uploadImagesByParkId,
-  createNewPark
+  createNewPark,
+  getAllImagesByParkId
 };
 
 export default parkAPI;

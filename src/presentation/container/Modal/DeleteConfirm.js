@@ -15,15 +15,16 @@ import MKTypography from "presentation/components/MKTypography";
 import { Icon } from "@mui/material";
 import ParkInformation from "./components/ParkInformation";
 import { deleteParkById } from "services/park.service";
+import { useDispatch } from "react-redux";
 
 export default function DeleteConfirm({ action, title, parkId }) {
   const [show, setShow] = useState(false);
-
+  const dispatch = useDispatch()
   const toggleModal = () => setShow(!show);
 
   const handleDeletePark = () => {
     toggleModal();
-    deleteParkById(parkId)
+    deleteParkById(parkId, dispatch)
     //TODO: delete query on server
   };
 
