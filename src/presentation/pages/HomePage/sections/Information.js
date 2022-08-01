@@ -18,7 +18,7 @@ export default function Information() {
                   <DefaultInfoCard
                     icon="schedule"
                     title="Nhanh chóng"
-                    description="We get insulted by others, lose trust for those We get back freezes"
+                    description="Thanh toán nhanh bằng Zalopay không cần tiền mặt"
                   />
                 </MKBox>
               </Grid>
@@ -27,7 +27,7 @@ export default function Information() {
                   <DefaultInfoCard
                     icon="payments"
                     title="Tiện lợi"
-                    description="We get insulted by others, lose trust for those We get back freezes"
+                    description="Không cần thẻ xe, chỉ cần chiếc điện thoại của bạn"
                   />
                 </MKBox>
               </Grid>
@@ -36,7 +36,7 @@ export default function Information() {
                   <DefaultInfoCard
                     icon="qr_code_2"
                     title="Đơn giản"
-                    description="We get insulted by others, lose trust for those We get back freezes"
+                    description="Sử dụng QR để checkin và checkout"
                   />
                 </MKBox>
               </Grid>
@@ -45,7 +45,7 @@ export default function Information() {
                   <DefaultInfoCard
                     icon="security"
                     title="An toàn"
-                    description="We get insulted by others, lose trust for those We get back freezes"
+                    description="Không sợ bị mất vé giữ xe gây nhiều phiền toái"
                   />
                 </MKBox>
               </Grid>
@@ -59,7 +59,7 @@ export default function Information() {
             <CenteredBlogCard
               image="https://mc.zalopay.vn/assets/imgs/home/right-banner.png"
               title="Lợi ích khi trở thành đối tác"
-              description="Chém gió một câu gì đó hay ho ở đây"
+              description="Sử dụng phương pháp thanh toán cho các bãi giữ xe nhanh chóng, tiện lợ"
               action={{
                 type: "external",
                 route: "https://mc.zalopay.vn/mso-v3/register",

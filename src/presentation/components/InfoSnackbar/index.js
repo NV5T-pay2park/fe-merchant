@@ -18,7 +18,7 @@ export default function InfoSnackbar() {
   }
 
   return (
-    <Snackbar open={open} autoHideDuration={4000} onClose={closeSnackbar}>
+    <Snackbar open={open} autoHideDuration={6000} onClose={closeSnackbar}>
       <Alert severity={type} sx={{ width: "100%" }}>
         {message}
       </Alert>

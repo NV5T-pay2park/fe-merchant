@@ -83,6 +83,7 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
     .preCheckOut({ ...endUserTicketData, parkingLotID })
     .then((result) => {
       // TODO: show error
+      console.log(result);
       if (result.data.status === "OK") {
         dispatch(
           setCheckoutLicencePlate(
@@ -105,6 +106,7 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
 
 export const checkOut = (ticketData, setTickets, dispatch) => {
   console.log(`?> ${ticketData}`);
+  dispatch(setAlertMessage('Đang thực hiện checkin'))
   manageAPI.checkOut(ticketData).then((result) => {
     if (result.data.status === "OK") {
       // TODO: show alert successful
@@ -113,11 +115,11 @@ export const checkOut = (ticketData, setTickets, dispatch) => {
       dispatch(setAlertMessage('Checkout thành công', 'success'))
     } else {
       console.log("error");
-      dispatch(setAlertMessage('Checkout thất bại', 'error'))
+      dispatch(setAlertMessage(`Checkout thất bại: ${result.data.data}`, 'error'))
 
     }
   }, (error) => {
-    console.log('error')
+    console.log(error)
     dispatch(setAlertMessage('Checkout thất bại', 'error'))
 
   });
