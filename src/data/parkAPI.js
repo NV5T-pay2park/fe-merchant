@@ -9,6 +9,10 @@ const getParks = async (userId, from, limit) => {
   return Axios.get(`merchant/parkingLot/${userId}/list`);
 };
 
+const getParkByEmployeeId = (userId) => {
+  return Axios.get(`merchant/merchant/getByEmployeeId/${userId}`);
+}
+
 const getAllVehiclesType = () => {
   return vehicles;
 };
@@ -57,7 +61,8 @@ const parkAPI = {
   deleteParkById,
   uploadImagesByParkId,
   createNewPark,
-  getAllImagesByParkId
+  getAllImagesByParkId,
+  getParkByEmployeeId
 };
 
 export default parkAPI;

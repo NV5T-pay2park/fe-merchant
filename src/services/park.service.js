@@ -7,6 +7,9 @@ import { setAlertMessage } from "./redux/actions/alertActions";
 export const getParks = async (user, from, limit) => {
   const response = await parkAPI.getParks(user.merchantId, from, limit);
   const { data : parks} = response.data || [];
+  if (user.userId !== user.merchantId) {
+    return parks.filter(park => park.id === user.userId);
+  }
   return parks;
 }
 
