@@ -5,12 +5,16 @@ import { setAlertMessage } from "./redux/actions/alertActions";
 
 // get `limit` park item index `from`
 export const getParks = async (user, from, limit) => {
-  const response = await parkAPI.getParks(user.merchantId, from, limit);
-  const { data : parks} = response.data || [];
-  if (user.userId !== user.merchantId) {
-    return parks.filter(park => park.id === user.userId);
+  try {
+    const response = await parkAPI.getParks(user.merchantId, from, limit);
+    const { data : parks} = response.data || [];
+    if (user.userId !== user.merchantId) {
+      return parks.filter(park => park.id === user.userId);
+    }
+    return parks;
+  } catch (error) {
+    return [];
   }
-  return parks;
 }
 
 export const getAllVehiclesType = () => {

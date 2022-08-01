@@ -59,7 +59,7 @@ export default function ManagePage() {
       component="section"
       sx={{ overflow: "hidden" }}
     >
-      {currentUser?.permissions.allowAdd && <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>}
+      {currentUser?.permissions?.allowAdd && <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>}
     </MKBox>
   );
 
@@ -73,7 +73,7 @@ export default function ManagePage() {
           address={park.address}
           time={formatWorkingTime(park.timeOpen, park.timeClose)}
           information={formatInformation(park.currentServing, park.status)}
-          actions={[currentUser?.permissions.allowEdit ? "edit" : null, currentUser?.permissions.allowDelete ? "delete" : null].filter(x => x)}
+          actions={[currentUser?.permissions?.allowEdit ? "edit" : null, currentUser?.permissions.allowDelete ? "delete" : null].filter(x => x)}
         />
       </Grid>
     ))
