@@ -1,4 +1,3 @@
-import Axios from "data/Axios";
 import Resizer from "react-image-file-resizer";
 
 export const dataURIToBlob = (dataURI) => {

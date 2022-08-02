@@ -13,7 +13,6 @@ import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
 import MKTypography from "presentation/components/MKTypography";
 import { Icon } from "@mui/material";
-import ParkInformation from "./components/ParkInformation";
 import { deleteParkById } from "services/park.service";
 import { useDispatch } from "react-redux";
 

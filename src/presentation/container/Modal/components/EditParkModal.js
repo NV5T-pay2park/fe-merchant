@@ -1,6 +1,5 @@
 import MKBox from "presentation/components/MKBox";
 import Divider from "@mui/material/Divider";
-import Slide from "@mui/material/Slide";
 
 // @mui icons
 import CloseIcon from "@mui/icons-material/Close";

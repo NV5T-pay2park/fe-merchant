@@ -1,8 +1,6 @@
 // https://github.dev/jeffersonRibeiro/react-shopping-cart/blob/main/src/services/products.ts
 // https://github1s.com/jgudo/ecommerce-react/blob/HEAD/src/views/admin/products/index.jsx#L17
-import { Icon } from "@mui/material";
 import MKBox from "presentation/components/MKBox";
-import MKButton from "presentation/components/MKButton";
 import BaseLayout from "presentation/container/BaseLayout";
 
 import { Grid, Container } from "@mui/material";
@@ -15,7 +13,6 @@ import { useState, useCallback, useEffect } from "react";
 import MKTypography from "presentation/components/MKTypography";
 import EditParkDetail from "presentation/container/Modal/EditParkDetail";
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
-import { current } from "@reduxjs/toolkit";
 
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -44,10 +41,6 @@ export default function ManagePage() {
       label: `Đang phục vụ ${currentServing} xe`,
       color: status === 0 ? "success" : "warning"
     }
-  }
-
-  const handleCreateNewPark = () => {
-
   }
 
   const createNewParkButton = (

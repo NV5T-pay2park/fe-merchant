@@ -2,7 +2,6 @@ import { Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import MKBox from "presentation/components/MKBox";
 import MKButton from "presentation/components/MKButton";
-import MKTypography from "presentation/components/MKTypography";
 import { useCallback, useState } from "react";
 import { deleteRow } from "services/price.service";
 import { createColumns, editRow, createNewRow } from "services/price.service";
@@ -13,7 +12,6 @@ export default function PriceTable({ vehicles, data, rows, setRows }) {
   const columns = createColumns(vehicles);
 
   const handleAddNewRow = () => {
-    // TODO: set description
     setRows(createNewRow(rows));
   };
 

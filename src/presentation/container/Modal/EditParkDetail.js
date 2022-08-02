@@ -8,7 +8,7 @@ import Slide from "@mui/material/Slide";
 
 // Material Kit 2 React components
 import MKButton from "presentation/components/MKButton";
-import { Container, Icon } from "@mui/material";
+import { Icon } from "@mui/material";
 import EditParkModal from "./components/EditParkModal";
 import MKBox from "presentation/components/MKBox";
 

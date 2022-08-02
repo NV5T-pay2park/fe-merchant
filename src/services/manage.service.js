@@ -93,7 +93,6 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
   manageAPI
     .preCheckOut({ ...endUserTicketData, parkingLotID })
     .then((result) => {
-      // TODO: show error
       if (result.data.status === "OK") {
         dispatch(setAlertMessage("Quét QR ticket thành công"));
         dispatch(

@@ -1,7 +1,5 @@
 import Axios from "./Axios";
 
-// TODO: using Axios to get data from backend restful api
-const parks = require("./mock/parks.json");
 const vehicles = require("./mock/vehicles.json");
 
 const getParks = async (userId, from, limit) => {

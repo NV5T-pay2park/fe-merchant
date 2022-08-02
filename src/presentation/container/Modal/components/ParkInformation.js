@@ -3,7 +3,6 @@ import MKTypography from "../../../components/MKTypography";
 import MKInput from "../../../components/MKInput";
 import MapModal from "./Map";
 
-import MKAvatar from "../../../components/MKAvatar";
 
 import {
   Chip,
@@ -17,7 +16,6 @@ import {
   MenuItem,
 } from "@mui/material";
 
-import { AddAPhoto } from "@mui/icons-material";
 
 import { useState } from "react";
 

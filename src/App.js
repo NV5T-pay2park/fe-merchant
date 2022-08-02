@@ -10,14 +10,12 @@ import { useEffect } from "react";
 import routes from "routes";
 
 import HomePage from "presentation/pages/HomePage";
-import { useDispatch, useSelector } from "react-redux";
-import { setCheckoutLicencePlate } from "services/redux/actions/checkoutAction";
+import { useSelector } from "react-redux";
 import InfoSnackbar from "presentation/components/InfoSnackbar";
 
 export default function App() {
   const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {

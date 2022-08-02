@@ -5,28 +5,12 @@ import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT } from "shared/constants/constants";
 export const login =
   ({ phone, username, password }) =>
   (dispatch) => {
-    // try {
-    //   const data = authService.login(phone, username, password);
-    //   if (data === null)
-    //     throw Error("error");
-    //   dispatch({
-    //     type: LOGIN_SUCCESS,
-    //     payload: { user: data }
-    //   })
-    //   return Promise.resolve();
-    // } catch (error) {
-    //   dispatch({
-    //     type: LOGIN_FAIL
-    //   })
-    //   return Promise.reject();
-    // }
     return authService.login(phone, username, password).then(
       (data) => {
         dispatch({
           type: LOGIN_SUCCESS,
           payload: { user: data },
         });
-        console.log(data);
         dispatch({
           type: ALERT_SET_MESSAGE,
           payload: { message: "Đăng nhập thanh công", type: "success" },

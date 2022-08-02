@@ -72,7 +72,6 @@ const useParkDetail = (parkId) => {
   }, [parkId]);
 
   const getJSONFormat = () => {
-    //TODO: add merchant id
     const data = {
       parkingLotName: name,
       street,

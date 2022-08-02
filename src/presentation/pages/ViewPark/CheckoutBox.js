@@ -26,7 +26,6 @@ export default function CheckoutBox({ parkId, setTickets }) {
   };
 
   const handleErrorCheckout = () => {
-    // TODO: handle error
     dispatch(setCheckoutLicencePlate(null))
     dispatch(setAlertMessage('Đã hủy checkout cho xe'))
   };
