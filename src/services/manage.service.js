@@ -131,6 +131,9 @@ export const checkOut = (ticketData, setTickets, dispatch) => {
   });
 };
 
+const usernameMock = require('data/mock/username.json');
+
+
 export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
   manageAPI.getCurrentTicketsByParkingLotId(parkId).then((result) => {
     if (result.data?.status === "OK") {
@@ -139,7 +142,7 @@ export const getCurrentTicketsByParkingLotId = (parkId, setTickets) => {
         ticketID: ticket.ticketID,
         checkInTime: ticket.checkInTime,
         licensePlate: ticket.licensePlate,
-        endUserName: ticket.endUserName,
+        endUserName: usernameMock[ticket.endUserID],
       })));
     }
   });
