@@ -133,7 +133,6 @@ export const convertJSONToRows = (priceTable) => {
     );
     return {id: idx, duration: price.periodTime, ...eachPrice};
   });
-  console.log(result);
   for (let i = 0; i < result.length - 1; ++i) {
     result[i].duration = result[i + 1].duration;
   }

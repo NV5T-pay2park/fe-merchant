@@ -25,6 +25,9 @@ const createNewPark = (data) => {
   return Axios.post(`merchant/parkingLot/create`, data);
 }
 
+const uploadParkInformation = (data) => {
+  return Axios.post(`merchant/parkingLot/update`, data);
+}
 
 const uploadImagesByParkId = async (parkId, images) => {
   const data = new FormData();
@@ -54,6 +57,7 @@ const getAllImagesByParkId = async (parkId) => {
   });
 }
 
+
 const parkAPI = {
   getParks,
   getAllVehiclesType,
@@ -61,7 +65,8 @@ const parkAPI = {
   uploadImagesByParkId,
   createNewPark,
   getAllImagesByParkId,
-  getParkByEmployeeId
+  getParkByEmployeeId,
+  uploadParkInformation
 };
 
 export default parkAPI;

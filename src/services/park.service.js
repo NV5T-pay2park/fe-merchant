@@ -9,9 +9,9 @@ export const getParks = async (user, from, limit) => {
     const response = await parkAPI.getParks(user.merchantId, from, limit);
     const { data : parks} = response.data || [];
     if (user.userId !== user.merchantId) {
-      return parks.filter(park => park.id === user.userId);
+      return parks.filter(park => park.id === user.userId && park.status === 0);
     }
-    return parks;
+    return parks.filter(park => park.status === 0);
   } catch (error) {
     return [];
   }
@@ -37,8 +37,8 @@ export const uploadImagesByParkId = (parkId, images) => {
   parkAPI.uploadImagesByParkId(parkId, images);
 }
 
-export const uploadParkInformation = (parkId, data) => {
-  
+export const uploadParkInformation = (data, dispatch) => {
+  parkAPI.uploadParkInformation(data);
 } 
 
 export const createNewPark = (data, dispatch) => {
@@ -48,7 +48,9 @@ export const createNewPark = (data, dispatch) => {
     } else {
       dispatch(setAlertMessage('Tạo mới thất bại', 'error'))
     }
+    return result.data.data;
   }, error => {
     dispatch(setAlertMessage(error.message, 'error'))
+    return null;
   });
 }

@@ -13,7 +13,7 @@ const Socket = (parkingLotID) => {
       return;
     }
 
-    console.log("Connecting to http://localhost:8080/ws");
+    console.log(`Connecting to ${process.env.REACT_APP_SOCKET_BASE_URL}`);
     let Sock = new SockJS(process.env.REACT_APP_SOCKET_BASE_URL);
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);

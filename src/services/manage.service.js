@@ -95,6 +95,7 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
     .then((result) => {
       // TODO: show error
       if (result.data.status === "OK") {
+        dispatch(setAlertMessage("Quét QR ticket thành công"));
         dispatch(
           setCheckoutLicencePlate(
             JSON.stringify({
@@ -105,12 +106,15 @@ export const preCheckOut = (endUserTicketData, parkingLotID, dispatch) => {
           )
         );
       } else {
+        dispatch(setAlertMessage(result.data.message));
         dispatch(
           setCheckoutLicencePlate(
             JSON.stringify({ licensePlate: result.data.message, parkingLotID })
           )
         );
       }
+    }, error => {
+      dispatch(setAlertMessage(error.message))
     });
 };
 
