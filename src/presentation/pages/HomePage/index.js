@@ -10,7 +10,7 @@ import Card from "@mui/material/Card";
 
 import routes from "routes"
 
-import bgImage from "assets/images/bg3.jpg";
+import bgImage from "assets/images/bg3.webp";
 import Information from "./sections/Information";
 
 
