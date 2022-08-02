@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 // @mui material components
 import Modal from "@mui/material/Modal";
@@ -8,9 +8,10 @@ import Slide from "@mui/material/Slide";
 
 // Material Kit 2 React components
 import MKButton from "presentation/components/MKButton";
-import { Icon } from "@mui/material";
-import EditParkModal from "./components/EditParkModal";
 import MKBox from "presentation/components/MKBox";
+import { Icon, Skeleton } from "@mui/material";
+
+const EditParkModal = React.lazy(() => import("./components/EditParkModal"));
 
 export default function EditParkDetail({ action, parkId }) {
   const [show, setShow] = useState(false);
@@ -43,7 +44,9 @@ export default function EditParkDetail({ action, parkId }) {
             bgColor="white"
             shadow="xl"
           >
-            <EditParkModal parkId={parkId} toggleModal={toggleModal} />
+            <React.Suspense fallback={ <Skeleton variant="rectangular"/> }>
+              <EditParkModal parkId={parkId} toggleModal={toggleModal} />
+            </React.Suspense>
           </MKBox>
         </Slide>
       </Modal>

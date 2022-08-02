@@ -1,43 +1,45 @@
-import Icon from "@mui/material/Icon";
-import Checkout from "presentation/pages/Checkout";
-import HomePage from "presentation/pages/HomePage";
-import Login from "presentation/pages/Login";
-import ManagePage from "presentation/pages/Manage";
-import ViewPark from "presentation/pages/ViewPark";
+import React from "react";
+
+const Icon = React.lazy(() => import("@mui/material/Icon"));
+const Checkout = React.lazy(() => import("presentation/pages/Checkout"));
+const HomePage = React.lazy(() => import("presentation/pages/HomePage"));
+const Login = React.lazy(() => import("presentation/pages/Login"));
+const ManagePage = React.lazy(() => import("presentation/pages/Manage"));
+const ViewPark = React.lazy(() => import("presentation/pages/ViewPark"));
 
 const routes = [
   {
     name: "Trang chủ",
     icon: <Icon>home</Icon>,
     route: "/home",
-    component: <HomePage />
+    component: <HomePage />,
   },
   {
     name: "Đăng nhập",
     icon: <Icon>login</Icon>,
     route: "/login",
     component: <Login />,
-    hide: true
+    hide: true,
   },
   {
     name: "Quản lý nhà xe",
     icon: <Icon>emoji_transportation_sharp</Icon>,
     route: "/manage",
     component: <ManagePage />,
-    requireLoggedIn: true
+    requireLoggedIn: true,
   },
   {
     hide: true,
     requireLoggedIn: true,
     route: "/manage/:parkId",
-    component: <ViewPark />
+    component: <ViewPark />,
   },
   {
     hide: true,
     requireLoggedIn: true,
     route: "/manage/checkout/:parkId",
-    component: <Checkout />
-  }
-]
+    component: <Checkout />,
+  },
+];
 
 export default routes;

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid/DataGrid";
 
 export default function TicketTable({ tickets }) {
   const columns = [

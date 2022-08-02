@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import MKBox from "presentation/components/MKBox";
 import { useDispatch } from "react-redux";
 import { preCheckOut } from "services/manage.service";
+import { setAlertMessage } from "services/redux/actions/alertActions";
 
 const Checkout = () => {
   const { parkId } = useParams();
@@ -23,6 +24,7 @@ const Checkout = () => {
   const handleScanCam = async (result) => {
     if (result && result !== data) {
       setData(result);
+      dispatch(setAlertMessage('Quét thành công'))
       preCheckOut(result, parseInt(parkId), dispatch)
     }
   };

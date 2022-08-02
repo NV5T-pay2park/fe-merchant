@@ -35,8 +35,8 @@ function Breadcrumbs({ routes, ...rest }) {
           // alway show an icon
           if (label === "home") {
             return (
+            <MKBox key={label}>
               <Icon
-                key={label}
                 fontSize="small"
                 sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
                 component={Link}
@@ -44,6 +44,7 @@ function Breadcrumbs({ routes, ...rest }) {
               >
                 home
               </Icon>
+            </MKBox>
             )
           }
           // normal case return link to internal

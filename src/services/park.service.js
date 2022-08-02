@@ -7,7 +7,11 @@ import { setAlertMessage } from "./redux/actions/alertActions";
 export const getParks = async (user, from, limit) => {
   try {
     const response = await parkAPI.getParks(user.merchantId, from, limit);
-    const { data : parks} = response.data || [];
+    const { data : parks} = (response.data || [])
+    for (let park of parks) {
+      // change http to https
+      park.image = park.image.replace('http://', 'https://');
+    }
     if (user.userId !== user.merchantId) {
       return parks.filter(park => park.id === user.userId && park.status === 0);
     }

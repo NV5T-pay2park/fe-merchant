@@ -5,7 +5,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Material Kit 2 React themes
 import theme from "assets/theme";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import routes from "routes";
 
@@ -37,7 +37,11 @@ export default function App() {
           <Route
             exact
             path={route.route}
-            element={route.component}
+            element={
+              <React.Suspense fallback={<>...</>}>
+                {route.component}
+              </React.Suspense>
+            }
             key={route.route}
           />
         );

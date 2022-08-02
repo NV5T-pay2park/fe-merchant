@@ -1,7 +1,6 @@
 import MKBox from "../../../components/MKBox";
 import MKTypography from "../../../components/MKTypography";
 import MKInput from "../../../components/MKInput";
-import MapModal from "./Map";
 
 
 import {
@@ -14,15 +13,18 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Skeleton,
 } from "@mui/material";
 
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { getAllVehiclesType } from "services/park.service";
 import MKButton from "presentation/components/MKButton";
 import PriceTable from "./PriceTable";
 import ImagePreview from "./ImagePreview";
+
+const MapModal = React.lazy(() => import("./Map"));
 
 export default function ParkInformation({ useParkDetail }) {
   const allVehiclesType = getAllVehiclesType();
@@ -157,7 +159,9 @@ export default function ParkInformation({ useParkDetail }) {
               </Grid>
 
               <Grid item xs={12} md={4}>
-                <MapModal confirmPosition={handleConfirmPosition} />
+                <React.Suspense fallback={<Skeleton variant="rectangular"/>}>
+                  <MapModal confirmPosition={handleConfirmPosition} />
+                </React.Suspense>
               </Grid>
               <Grid item xs={12} md={8}>
                 {/* <MKInput

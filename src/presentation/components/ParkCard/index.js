@@ -8,6 +8,9 @@ import DeleteConfirm from "../../container/Modal/DeleteConfirm";
 
 import noImage from "assets/images/no-image-park.png";
 import { Link } from "react-router-dom";
+import React from "react";
+
+// const EditParkDetail = React.lazy(() => import("../../container/Modal/EditParkDetail"))
 
 export default function ParkCard({
   image,
@@ -56,6 +59,7 @@ export default function ParkCard({
 
   return (
     <Card>
+    
       <MKBox 
         position="relative" 
         borderRadius="lg"
@@ -73,8 +77,9 @@ export default function ParkCard({
           width="100%"
           position="relative"
           zIndex={1}
-          minHeight="20vh"
-          maxHeight="25vh"
+          // minHeight="20vh"
+          // maxHeight="25vh"
+          // height="25vh"
         />
         {/* just for decorator */}
         <MKBox

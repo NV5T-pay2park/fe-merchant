@@ -81,7 +81,7 @@ function HomePage() {
             >
               trở thành đối tác ngay
             </MKButton>
-            <MKTypography variant="h6" color="white" mt={8} mb={1}>
+            {/* <MKTypography variant="h6" color="white" mt={8} mb={1}>
               Find us on
             </MKTypography>
             <MKBox display="flex" justifyContent="center" alignItems="center">
@@ -120,7 +120,7 @@ function HomePage() {
               >
                 <i className="fab fa-google-plus" />
               </MKTypography>
-            </MKBox>
+            </MKBox> */}
           </Grid>
         </Container>
       </MKBox>

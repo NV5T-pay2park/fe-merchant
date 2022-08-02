@@ -112,7 +112,7 @@ export default styled(Box)(({ theme, ownerState }) => {
     boxShadowValue = colored[coloredShadow] ? colored[coloredShadow] : "none";
   }
 
-  return {
+  return {  
     opacity,
     background: backgroundValue,
     color: colorValue,

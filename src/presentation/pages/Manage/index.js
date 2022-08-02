@@ -1,18 +1,20 @@
 // https://github.dev/jeffersonRibeiro/react-shopping-cart/blob/main/src/services/products.ts
 // https://github1s.com/jgudo/ecommerce-react/blob/HEAD/src/views/admin/products/index.jsx#L17
-import MKBox from "presentation/components/MKBox";
 import BaseLayout from "presentation/container/BaseLayout";
 
-import { Grid, Container } from "@mui/material";
-import ParkCard from "presentation/components/ParkCard";
-
-import { getParks } from "services/park.service";
+import { Grid, Container, Skeleton } from "@mui/material";
 
 import { useSelector } from "react-redux";
-import { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+
+import MKBox from "presentation/components/MKBox";
 import MKTypography from "presentation/components/MKTypography";
-import EditParkDetail from "presentation/container/Modal/EditParkDetail";
+
 import { ACTION_BUTTON_STYLE } from "shared/constants/styles";
+import { getParks } from "services/park.service";
+// import ParkCard from "presentation/components/ParkCard";
+const ParkCard = React.lazy(() => import("presentation/components/ParkCard"));
+const EditParkDetail = React.lazy(() => import("presentation/container/Modal/EditParkDetail"));
 
 export default function ManagePage() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -23,8 +25,14 @@ export default function ManagePage() {
   const fetchParks = useCallback(() => {
     setIsFetching(true);
     getParks(currentUser, 0).then((parks) => {
+      // load 6 every
+      let currentRenderedIndex = 0;
+      while (currentRenderedIndex < parks.length) {
+        currentRenderedIndex += 16;
+        setParks(parks.slice(0, currentRenderedIndex));
+      }
+      // setParks(parks);
       setIsFetching(false);
-      setParks(parks);
     });
   }, [setIsFetching, setParks, currentUser]);
 
@@ -52,13 +60,14 @@ export default function ManagePage() {
       component="section"
       sx={{ overflow: "hidden" }}
     >
-      {currentUser?.permissions?.allowAdd && <EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/>}
+      {currentUser?.permissions?.allowAdd && (<React.Suspense><EditParkDetail parkId={-1} action={ACTION_BUTTON_STYLE["create"]}/></React.Suspense>)}
     </MKBox>
   );
 
   const renderParkCardList = (parks) => (
     parks.map((park) => (
-      <Grid key={park.id} item xs={12} md={6} lg={4} sx={{ mb: 6 }}>
+      <Grid key={park.id.toString()} item xs={12} md={6} lg={4} sx={{ mb: 6 }}>
+      <React.Suspense fallback={<Skeleton variant="rectangular" width={300} height={200} />}>
         <ParkCard
           id={park.id}
           image={park.image}
@@ -68,6 +77,8 @@ export default function ManagePage() {
           information={formatInformation(park.currentServing, park.status)}
           actions={[currentUser?.permissions?.allowEdit ? "edit" : null, currentUser?.permissions.allowDelete ? "delete" : null].filter(x => x)}
         />
+
+      </React.Suspense>
       </Grid>
     ))
   );
@@ -88,8 +99,6 @@ export default function ManagePage() {
       position="relative"
       mx={-2}
       px={{ xs: 2, lg: 0 }}
-      // bgColor="dark"
-      
     >
       <Container>
         <Grid container spacing={3} sx={{ mb: 12 }}>

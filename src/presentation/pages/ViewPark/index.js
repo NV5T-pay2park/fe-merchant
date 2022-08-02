@@ -37,7 +37,7 @@ export default function ViewPark() {
   
   useEffect(() => {
     handleReceiveMessage(messages, setIsEnableCheckin, setCurrentCheckInData, dispatch);
-  }, [messages]);
+  }, [dispatch, messages]);
 
   // reconnect every re-render or connect change
   useEffect(() => {
