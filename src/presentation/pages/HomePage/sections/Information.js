@@ -36,7 +36,7 @@ export default function Information() {
                   <DefaultInfoCard
                     icon="qr_code_2"
                     title="Đơn giản"
-                    description="Sử dụng QR để checkin và checkout"
+                    description="Sử dụng QR code để checkin và checkout"
                   />
                 </MKBox>
               </Grid>
@@ -59,7 +59,7 @@ export default function Information() {
             <CenteredBlogCard
               image="https://mc.zalopay.vn/assets/imgs/home/right-banner.png"
               title="Lợi ích khi trở thành đối tác"
-              description="Sử dụng phương pháp thanh toán cho các bãi giữ xe nhanh chóng, tiện lợ"
+              description="Pay2Park là một ứng dụng được thiết kế tinh chỉnh, thân thiện, hiện đại. Cho phép người dùng làm thủ tục gửi xe và thanh toán một cách nhanh chóng, an toàn và tiện lợi. Chủ nhà xe có thể chia sẻ nhà xe để tiếp cận với người dùng một cách dễ dàng."
               action={{
                 type: "external",
                 route: "https://mc.zalopay.vn/mso-v3/register",

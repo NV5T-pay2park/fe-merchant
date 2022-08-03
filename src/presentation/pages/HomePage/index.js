@@ -55,6 +55,7 @@ function HomePage() {
             sx={{ mx: "auto", textAlign: "center" }}
           >
             <MKTypography
+              mb={3}
               variant="h1"
               color="white"
               sx={({ breakpoints, typography: { size } }) => ({
@@ -63,7 +64,9 @@ function HomePage() {
                 },
               })}
             >
-              Giải pháp thanh toán đỗ xe thông minh
+              Giải pháp thanh toán đỗ xe 
+              <br/>
+              thông minh
             </MKTypography>
 
             <MKTypography
