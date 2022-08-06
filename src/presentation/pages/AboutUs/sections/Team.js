@@ -1,36 +1,20 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
+import thanh from "assets/images/thanh.jpg";
+import toan from "assets/images/toan.jpg";
+import nhu from "assets/images/nhu.jpg"
+import vu from "assets/images/vu.jpg";
+import tan from "assets/images/tan.jpg";
+import truc from "assets/images/truc.jpg";
+import truong from "assets/images/truong.jpg";
 
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+import { Container, Grid } from "@mui/material";
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-
-// Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-
-// Material Kit 2 React examples
+import MKBox from "presentation/components/MKBox";
+import MKTypography from "presentation/components/MKTypography";
 import HorizontalTeamCard from "examples/Cards/TeamCards/HorizontalTeamCard";
 
-// Images
-import team1 from "assets/images/team-5.jpg";
-import team2 from "assets/images/bruce-mars.jpg";
-import team3 from "assets/images/ivana-squares.jpg";
-import team4 from "assets/images/ivana-square.jpg";
 
-function Team() {
+export default function Team() {
   return (
     <MKBox
       component="section"
@@ -40,64 +24,121 @@ function Team() {
       py={6}
       px={{ xs: 2, lg: 0 }}
       mx={-2}
+      sx={{
+        backgroundImage: ({
+          palette: { gradients },
+          functions: { linearGradient, rgba },
+        }) =>
+          `${linearGradient(
+            rgba(gradients.dark.main, 0.6),
+            rgba(gradients.dark.state, 0.6)
+          )}, url(https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        display: "grid",
+        placeItems: "center",
+      }}
     >
       <Container>
         <Grid container>
-          <Grid item xs={12} md={8} sx={{ mb: 6 }}>
-            <MKTypography variant="h3" color="white">
-              The Executive Team
+          <Grid item xs={0} md={2}> <></> </Grid>
+          <Grid item xs={12} md={8} sx={{ mb: 6 }} textAlign="center">
+            <MKTypography variant="h2" color="white" mb={3}>
+              Team members
             </MKTypography>
-            <MKTypography variant="body2" color="white" opacity={0.8}>
-              There&apos;s nothing I really wanted to do in life that I wasn&apos;t able to get good
-              at. That&apos;s my skill.
+            <MKTypography variant="body1" color="white" opacity={0.8}>
+              Những con người đến từ những ngôi trường khác nhau trên Thành phố
+              Hồ Chí Minh. <br/> Cùng hội tụ tại đây, ngày đêm làm nên ứng dụng này.
+            </MKTypography>
+            <MKTypography variant="h5" color="white" pt={3}>
+              01/07/2022 - 04/08/2022
             </MKTypography>
           </Grid>
+          <Grid item xs={0} md={2}> <></> </Grid>
         </Grid>
+
         <Grid container spacing={3}>
+          <Grid item xs={0} lg={3}><></></Grid>
           <Grid item xs={12} lg={6}>
             <MKBox mb={1}>
               <HorizontalTeamCard
-                image={team1}
-                name="Emma Roberts"
-                position={{ color: "info", label: "UI Designer" }}
-                description="Artist is a term applied to a person who engages in an activity deemed to be an art."
+                image={thanh}
+                name="Tiến Thành"
+                position={{color:"primary", label: "Team Leader - Fullstack Deveoper"}}
+                description="K19 Honors Program - VNUHCM University of Science"
               />
             </MKBox>
           </Grid>
+          <Grid item xs={0} lg={3}></Grid>
+
           <Grid item xs={12} lg={6}>
             <MKBox mb={1}>
               <HorizontalTeamCard
-                image={team2}
-                name="William Pearce"
-                position={{ color: "info", label: "Boss" }}
-                description="Artist is a term applied to a person who engages in an activity deemed to be an art."
+                image={toan}
+                name="Thiện Toàn"
+                position={{color: "success", label: "Frontend Leader - Deadliner"}}
+                description="K19 IT - VNUHCM University of Science"
               />
             </MKBox>
           </Grid>
+
           <Grid item xs={12} lg={6}>
-            <MKBox mb={{ xs: 1, lg: 0 }}>
+            <MKBox mb={1}>
               <HorizontalTeamCard
-                image={team3}
-                name="Ivana Flow"
-                position={{ color: "info", label: "Athlete" }}
-                description="Artist is a term applied to a person who engages in an activity deemed to be an art."
+                image={nhu}
+                name="Huế Như"
+                position={{color: "success", label: "Backend Leader - Business Analyst"}}
+                description="K19 IT - VNUHCM University of Science"
               />
             </MKBox>
           </Grid>
+
           <Grid item xs={12} lg={6}>
-            <MKBox mb={{ xs: 1, lg: 0 }}>
+            <MKBox mb={1}>
               <HorizontalTeamCard
-                image={team4}
-                name="Marquez Garcia"
-                position={{ color: "info", label: "JS Developer" }}
-                description="Artist is a term applied to a person who engages in an activity deemed to be an art."
+                image={tan}
+                name="Thanh Tân"
+                position={{color: "info", label: "Frontend Developer"}}
+                description="K19 IT - University of Information Technology"
               />
             </MKBox>
           </Grid>
+
+          <Grid item xs={12} lg={6}>
+            <MKBox mb={1}>
+              <HorizontalTeamCard
+                image={vu}
+                name="Xuân Vũ"
+                position={{color: "info", label: "Backend Developer"}}
+                description="K19 - VNUHCM University of Technology"
+              />
+            </MKBox>
+          </Grid>
+
+          <Grid item xs={12} lg={6}>
+            <MKBox mb={1}>
+              <HorizontalTeamCard
+                image={truc}
+                name="Trung Trực"
+                position={{color: "info", label: "Backend Developer"}}
+                description="K19 Honors Program - VNUHCM University of Science"
+              />
+            </MKBox>
+          </Grid>
+
+          <Grid item xs={12} lg={6}>
+            <MKBox mb={1}>
+              <HorizontalTeamCard
+                image={truong}
+                name="Hữu Trưởng"
+                position={{color: "info", label: "Backend Developer - Database Designer"}}
+                description="D19 - Posts and Telecommunications Institute of Technology"
+              />
+            </MKBox>
+          </Grid>
+
         </Grid>
       </Container>
     </MKBox>
   );
 }
-
-export default Team;

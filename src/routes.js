@@ -1,3 +1,4 @@
+import AboutUs from "presentation/pages/AboutUs";
 import React from "react";
 
 const Icon = React.lazy(() => import("@mui/material/Icon"));
@@ -13,6 +14,12 @@ const routes = [
     icon: <Icon>home</Icon>,
     route: "/home",
     component: <HomePage />,
+  },
+  {
+    name: "Tác giả",
+    icon: <Icon>people</Icon>,
+    route: "/about-us",
+    component: <AboutUs />
   },
   {
     name: "Đăng nhập",

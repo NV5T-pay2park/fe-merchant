@@ -5,17 +5,13 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 // Material Kit 2 React components
-import MKTypography from "components/MKTypography";
-
-// Images
-import logoCT from "assets/images/logo-ct-dark.png";
+import MKTypography from "presentation/components/MKTypography";
 
 const date = new Date().getFullYear();
 
-export default {
+const footer = {
   brand: {
     name: "Material Kit 2",
-    image: logoCT,
     route: "/",
   },
   socials: [
@@ -89,3 +85,5 @@ export default {
     </MKTypography>
   ),
 };
+
+export default footer;

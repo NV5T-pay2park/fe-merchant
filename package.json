@@ -31,6 +31,7 @@
     "redux-thunk": "^2.4.1",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
+    "typed.js": "^2.0.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -1,62 +1,46 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
+import Navbar from "presentation/container/NavBar";
 
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import MKBox from "presentation/components/MKBox"
+import MKTypography from "presentation/components/MKTypography";
 
-Coded by www.creative-tim.com
+import * as Typed from "typed.js";
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
-// Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import routes from "routes"
 
-// Material Kit 2 React examples
-// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import Navbar from "shared/components/NavBar";
-// import DefaultFooter from "examples/Footers/DefaultFooter";
-
-// About Us page sections
-import Information from "pages/AboutUs/sections/Information";
-
-// Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
-
-// Images
-import bgImage from "assets/images/bg3.jpg";
-
+import Team from "./sections/Team";
+import { useEffect, useRef } from "react";
 
 function AboutUs() {
+  const typedJSRef = useRef(null);
+  useEffect(() => {
+    const typedJS = new Typed(typedJSRef.current, {
+      strings: ["NV5T", "Nhân viên 5 tốt", "Pay2Park"],
+      typeSpeed: 70,
+      backSpeed: 70,
+      backDelay: 1000,
+      startDelay: 500,
+      loop: true,
+    });
+
+    return () => typedJS.destroy();
+  }, []);
+
+
   return (
     <>
       <Navbar
         routes={routes}
-        action={{
-          type: "internal",
-          route: "",
-          label: "login",
-          color: "default",
-        }}
         transparent
         light
         brand="Pay2Park"
       />
+
       <MKBox
-        minHeight="70vh"
-        maxHeight="80vh"
+        minHeight="25rem"
         width="100%"
         sx={{
           backgroundImage: ({
@@ -66,7 +50,7 @@ function AboutUs() {
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
               rgba(gradients.dark.state, 0.6)
-            )}, url(${bgImage})`,
+            )}, url(https://images.unsplash.com/photo-1545100760-db63cbae42b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "grid",
@@ -85,6 +69,7 @@ function AboutUs() {
             sx={{ mx: "auto", textAlign: "center" }}
           >
             <MKTypography
+              mb={3}
               variant="h1"
               color="white"
               sx={({ breakpoints, typography: { size } }) => ({
@@ -93,7 +78,7 @@ function AboutUs() {
                 },
               })}
             >
-              Giải pháp đỗ xe thông minh
+              <span ref={typedJSRef} />
             </MKTypography>
 
             <MKTypography
@@ -103,54 +88,10 @@ function AboutUs() {
               mt={1}
               mb={3}
             >
-              Nhanh chóng - Đơn giản - Tiện lợi - An toàn
+              Làm việc tốt - Thể lực tốt - Đoàn kết tốt - Kỷ luật tốt - Tinh thần đi nhậu thật tốt
             </MKTypography>
-            <MKButton
-              color="default"
-              sx={{ color: ({ palette: { dark } }) => dark.main }}
-            >
-              trở thành đối tác ngay
-            </MKButton>
-            <MKTypography variant="h6" color="white" mt={8} mb={1}>
-              Find us on
-            </MKTypography>
-            <MKBox display="flex" justifyContent="center" alignItems="center">
-              <MKTypography
-                component="a"
-                variant="body1"
-                color="white"
-                href="#"
-                mr={3}
-              >
-                <i className="fab fa-facebook" />
-              </MKTypography>
-              <MKTypography
-                component="a"
-                variant="body1"
-                color="white"
-                href="#"
-                mr={3}
-              >
-                <i className="fab fa-instagram" />
-              </MKTypography>
-              <MKTypography
-                component="a"
-                variant="body1"
-                color="white"
-                href="#"
-                mr={3}
-              >
-                <i className="fab fa-twitter" />
-              </MKTypography>
-              <MKTypography
-                component="a"
-                variant="body1"
-                color="white"
-                href="#"
-              >
-                <i className="fab fa-google-plus" />
-              </MKTypography>
-            </MKBox>
+
+              
           </Grid>
         </Container>
       </MKBox>
@@ -163,16 +104,11 @@ function AboutUs() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-        <Information />
-        {/* <Team /> */}
-        {/* <Featuring /> */}
-        {/* <Newsletter /> */}
+        <Team />
       </Card>
-      {/* <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox> */}
+
     </>
-  );
+  )
 }
 
 export default AboutUs;
