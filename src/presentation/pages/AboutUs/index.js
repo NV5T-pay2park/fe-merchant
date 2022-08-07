@@ -91,7 +91,17 @@ function AboutUs() {
               Làm việc tốt - Thể lực tốt - Đoàn kết tốt - Kỷ luật tốt - Tinh thần đi nhậu thật tốt
             </MKTypography>
 
-              
+            <MKTypography variant="h6" color="white" mt={2} mb={1}>
+              DEMO
+            </MKTypography>
+            <MKBox display="flex" justifyContent="center" alignItems="center">
+              <MKTypography component="a" variant="body1" color="white" href="https://www.youtube.com/watch?v=QJV5pYDVd3Q&t=102s" mr={3}>
+                <i className="fab fa-youtube"/>
+              </MKTypography>
+              <MKTypography component="a" variant="body1" color="white" href="https://github.com/NV5T-pay2park">
+                <i className="fab fa-github"/>
+              </MKTypography>
+            </MKBox>
           </Grid>
         </Container>
       </MKBox>
